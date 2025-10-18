@@ -13,26 +13,26 @@ namespace Racing_Game_CW
 {
     public partial class Login : Form
     {
+        private UserManager manager = new UserManager();   
         public Login()
         {
             InitializeComponent();
         }
 
-        private void Login_Load(object sender, EventArgs e)
+        private void btn_login_Click(object sender, EventArgs e)
         {
+            string username = tbx_username.Text;
+            string password = tbx_password.Text;
 
-        }
-
-        private List<User> ReturnUsers()
-        {
-            List<User> users = new List<User>();
-            using (StreamReader sr = new StreamReader("Users.txt"))
+            if(manager.Login(username, password))
             {
-
+                //Login successful
             }
-
-
-            return users;
+            else
+            {
+                //Login failed
+                //Don't display message, this is handled in user manager
+            }
         }
     }
 }
