@@ -10,7 +10,7 @@ namespace Racing_Game_CW
 {
     internal class MenuUI
     {
-        private static readonly Color PrimaryColour = Color.FromArgb(13,19,33);
+        private static readonly Color PrimaryColour = Color.FromArgb(13, 19, 33);
         private static readonly Color SecondaryColour = Color.FromArgb(29, 45, 68);
         private static readonly Color TertiaryColour = Color.FromArgb(116, 140, 171);
         private static readonly Color AlternateColour = Color.FromArgb(62, 92, 118);
@@ -45,10 +45,18 @@ namespace Racing_Game_CW
             lbl.Font = HeadingFont;
             lbl.ForeColor = TextColour;
         }
+
         public static void BodyLabel(Label lbl)
         {
             lbl.Font = BodyFont;
             lbl.ForeColor = TextColour;
+        }
+
+        public static void LinkLabel(Label lbl)
+        {
+            lbl.Font = BodyFont;
+            lbl.ForeColor = AlternateColour;
+            lbl.Cursor = Cursors.Hand;
         }
 
         //TextBox Styles:
@@ -58,6 +66,7 @@ namespace Racing_Game_CW
             txt.ForeColor = Color.Black;
             txt.Font = BodyFont;
             txt.BorderStyle = BorderStyle.FixedSingle;
+            txt.Cursor = Cursors.IBeam;
         }
 
         //Button Styles:
@@ -69,6 +78,7 @@ namespace Racing_Game_CW
             btn.ForeColor = TextColour;
             btn.Font = HeadingFont;
             btn.TextAlign = ContentAlignment.MiddleCenter;
+            btn.Cursor = Cursors.Hand;
         }
 
         public static void UnselectedButton(Button btn)

@@ -43,15 +43,15 @@ namespace Racing_Game_CW
             {
                 //Sign in failed
                 //Don't display message, this is handled in user manager
+                tbx_password.Clear();
             }
         }
 
         private void btn_register_Click(object sender, EventArgs e)
         {
-        }
-
-        private void btn_signIn_Click_1(object sender, EventArgs e)
-        {
+            Register regForm = new Register();
+            this.Hide();
+            regForm.Show();
         }
     }
 }

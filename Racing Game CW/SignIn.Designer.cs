@@ -55,7 +55,7 @@
             this.pnl_bar.Controls.Add(this.btn_register);
             this.pnl_bar.Location = new System.Drawing.Point(0, 170);
             this.pnl_bar.Name = "pnl_bar";
-            this.pnl_bar.Size = new System.Drawing.Size(1774, 100);
+            this.pnl_bar.Size = new System.Drawing.Size(1800, 100);
             this.pnl_bar.TabIndex = 5;
             // 
             // btn_disabledSignIn
@@ -75,6 +75,7 @@
             this.btn_register.TabIndex = 3;
             this.btn_register.Text = "Register";
             this.btn_register.UseVisualStyleBackColor = true;
+            this.btn_register.Click += new System.EventHandler(this.btn_register_Click);
             // 
             // lbl_username
             // 
@@ -112,7 +113,7 @@
             // 
             // btn_signIn
             // 
-            this.btn_signIn.Location = new System.Drawing.Point(800, 680);
+            this.btn_signIn.Location = new System.Drawing.Point(800, 750);
             this.btn_signIn.Name = "btn_signIn";
             this.btn_signIn.Size = new System.Drawing.Size(200, 50);
             this.btn_signIn.TabIndex = 2;
