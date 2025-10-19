@@ -36,17 +36,17 @@ namespace Racing_Game_CW
             }
         }
 
-        //Used when logging in:
-        public bool Login(string username, string password)
+        //Used when signing in:
+        public bool SignIn(string username, string password)
         {
             if (!userDict.ContainsKey(username))
             {
-                Message.ShowError("Login Failed", "Account does not exist");
+                Message.ShowError("Sign In Failed", "Account does not exist");
                 return false;
             }
             else if (userDict[username].Password != password)
             {
-                Message.ShowError("Login Failed", "Username and password do not match");
+                Message.ShowError("Sign In Failed", "Username and password do not match");
                 return false;
             }
             return true;

@@ -11,28 +11,33 @@ using System.Windows.Forms;
 
 namespace Racing_Game_CW
 {
-    public partial class Login : Form
+    public partial class SignIn : Form
     {
         private UserManager manager = new UserManager();   
-        public Login()
+        public SignIn()
         {
             InitializeComponent();
         }
 
-        private void btn_login_Click(object sender, EventArgs e)
+        private void btn_signIn_Click(object sender, EventArgs e)
         {
             string username = tbx_username.Text;
             string password = tbx_password.Text;
 
-            if(manager.Login(username, password))
+            if(manager.SignIn(username, password))
             {
-                //Login successful
+                //Sign in successful
             }
             else
             {
-                //Login failed
+                //Sign in failed
                 //Don't display message, this is handled in user manager
             }
+        }
+
+        private void btn_register_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
