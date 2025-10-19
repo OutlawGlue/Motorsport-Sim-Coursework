@@ -16,5 +16,9 @@ namespace Racing_Game_CW
         {
             InitializeComponent();
         }
+
+        private void Register_Load(object sender, EventArgs e)
+        {
+        }
     }
 }

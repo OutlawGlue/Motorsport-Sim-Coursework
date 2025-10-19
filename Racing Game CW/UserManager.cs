@@ -10,7 +10,7 @@ namespace Racing_Game_CW
     internal class UserManager
     {
         private const string FILEPATH = "users.txt";
-        Dictionary<string, User> userDict = new Dictionary<string, User>();
+        private Dictionary<string, User> userDict = new Dictionary<string, User>();
 
         public UserManager()
         {
@@ -49,6 +49,7 @@ namespace Racing_Game_CW
                 Message.ShowError("Sign In Failed", "Username and password do not match");
                 return false;
             }
+            Message.ShowInfo("Success", "Signed in");
             return true;
         }
 
@@ -63,6 +64,7 @@ namespace Racing_Game_CW
                 "Usernames must be between 5 and 15 characters");
             return false;
         }
+
         public static bool ValidatePassword(string password)
         {
             if (password.Length >= 8 && password.Length <= 30)

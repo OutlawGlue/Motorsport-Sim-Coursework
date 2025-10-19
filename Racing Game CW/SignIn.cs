@@ -13,7 +13,8 @@ namespace Racing_Game_CW
 {
     public partial class SignIn : Form
     {
-        private UserManager manager = new UserManager();   
+        private UserManager manager = new UserManager();
+
         public SignIn()
         {
             InitializeComponent();
@@ -34,7 +35,7 @@ namespace Racing_Game_CW
             string username = tbx_username.Text;
             string password = tbx_password.Text;
 
-            if(manager.SignIn(username, password))
+            if (manager.SignIn(username, password))
             {
                 //Sign in successful
             }
@@ -47,7 +48,10 @@ namespace Racing_Game_CW
 
         private void btn_register_Click(object sender, EventArgs e)
         {
+        }
 
+        private void btn_signIn_Click_1(object sender, EventArgs e)
+        {
         }
     }
 }
