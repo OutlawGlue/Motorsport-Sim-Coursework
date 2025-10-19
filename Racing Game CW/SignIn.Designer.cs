@@ -67,7 +67,7 @@
             this.btn_signIn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(92)))), ((int)(((byte)(118)))));
             this.btn_signIn.FlatAppearance.BorderSize = 0;
             this.btn_signIn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_signIn.Font = new System.Drawing.Font("Audiowide", 10.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_signIn.Font = new System.Drawing.Font("Audiowide", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_signIn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(235)))), ((int)(((byte)(216)))));
             this.btn_signIn.Location = new System.Drawing.Point(800, 680);
             this.btn_signIn.Name = "btn_signIn";
@@ -82,7 +82,7 @@
             this.pnl_top.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(19)))), ((int)(((byte)(33)))));
             this.pnl_top.Location = new System.Drawing.Point(0, 0);
             this.pnl_top.Name = "pnl_top";
-            this.pnl_top.Size = new System.Drawing.Size(1774, 170);
+            this.pnl_top.Size = new System.Drawing.Size(1800, 170);
             this.pnl_top.TabIndex = 4;
             // 
             // pnl_bar

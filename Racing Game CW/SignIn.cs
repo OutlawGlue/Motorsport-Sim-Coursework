@@ -17,6 +17,16 @@ namespace Racing_Game_CW
         public SignIn()
         {
             InitializeComponent();
+            MenuUI.Form(this);
+            MenuUI.Panel(pnl_top);
+            MenuUI.SecondaryPanel(pnl_bar);
+            MenuUI.Button(btn_disabledSignIn);
+            MenuUI.UnselectedButton(btn_register);
+            MenuUI.BodyButton(btn_signIn);
+            MenuUI.BodyLabel(lbl_username);
+            MenuUI.BodyLabel(lbl_password);
+            MenuUI.TextBox(tbx_username);
+            MenuUI.TextBox(tbx_password);
         }
 
         private void btn_signIn_Click(object sender, EventArgs e)
