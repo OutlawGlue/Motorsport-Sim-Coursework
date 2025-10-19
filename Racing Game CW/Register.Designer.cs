@@ -91,7 +91,7 @@
             this.btn_signIn.Location = new System.Drawing.Point(700, 0);
             this.btn_signIn.Name = "btn_signIn";
             this.btn_signIn.Size = new System.Drawing.Size(200, 100);
-            this.btn_signIn.TabIndex = 4;
+            this.btn_signIn.TabIndex = 3;
             this.btn_signIn.Text = "Sign In";
             this.btn_signIn.UseVisualStyleBackColor = true;
             this.btn_signIn.Click += new System.EventHandler(this.btn_signIn_Click);
@@ -101,7 +101,7 @@
             this.btn_disabledRegister.Location = new System.Drawing.Point(900, 0);
             this.btn_disabledRegister.Name = "btn_disabledRegister";
             this.btn_disabledRegister.Size = new System.Drawing.Size(200, 100);
-            this.btn_disabledRegister.TabIndex = 3;
+            this.btn_disabledRegister.TabIndex = 20;
             this.btn_disabledRegister.Text = "Register";
             this.btn_disabledRegister.UseVisualStyleBackColor = true;
             // 
@@ -138,6 +138,7 @@
             this.btn_register.TabIndex = 3;
             this.btn_register.Text = "Register";
             this.btn_register.UseVisualStyleBackColor = true;
+            this.btn_register.Click += new System.EventHandler(this.btn_register_Click);
             // 
             // Register
             // 

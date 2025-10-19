@@ -1,17 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Racing_Game_CW
 {
     public partial class Register : Form
     {
+        private UserManager _manager = new UserManager();
+
         public Register()
         {
             InitializeComponent();
@@ -34,6 +29,27 @@ namespace Racing_Game_CW
             SignIn signIn = new SignIn();
             this.Hide();
             signIn.Show();
+        }
+
+        private void btn_register_Click(object sender, EventArgs e)
+        {
+            string username = tbx_username.Text;
+            string password = tbx_password.Text;
+            string confirmPassword = tbx_confirmPassword.Text;
+
+            if (_manager.CreateAccount(username, password, confirmPassword))
+            {
+                //Account successfully created, message already handled in user manager
+                tbx_username.Clear();
+                tbx_password.Clear();
+                tbx_confirmPassword.Clear();
+
+                //Open menu
+            }
+            else
+            {
+                //Account creation failed
+            }
         }
     }
 }

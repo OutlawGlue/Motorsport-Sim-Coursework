@@ -1,19 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO;
 using System.Windows.Forms;
 
 namespace Racing_Game_CW
 {
     public partial class SignIn : Form
     {
-        private UserManager manager = new UserManager();
+        private readonly UserManager _manager = new UserManager();
 
         public SignIn()
         {
@@ -35,9 +27,11 @@ namespace Racing_Game_CW
             string username = tbx_username.Text;
             string password = tbx_password.Text;
 
-            if (manager.SignIn(username, password))
+            if (_manager.SignIn(username, password))
             {
                 //Sign in successful
+                tbx_username.Clear();
+                tbx_password.Clear();
             }
             else
             {

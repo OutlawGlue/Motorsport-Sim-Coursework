@@ -54,26 +54,45 @@ namespace Racing_Game_CW
         }
 
         //Used when creating account:
-        public static bool ValidateUsername(string username)
+        public bool CreateAccount(string username, string password, string confirmPassword)
         {
-            if (username.Length >= 5 && username.Length <= 15)
+            if (!(username.Length >= 5 && username.Length <= 15))
             {
-                return true;
+                Message.ShowError("Invalid Username",
+                    "Usernames must be between 5 and 15 characters");
+                return false;
             }
-            Message.ShowError("Invalid Username",
-                "Usernames must be between 5 and 15 characters");
-            return false;
+            else if (!(password.Length >= 8 && password.Length <= 30))
+            {
+                Message.ShowError("Invalid Password",
+                    "Passwords must be between 8 and 30 characters");
+                return false;
+            }
+            else if (password != confirmPassword)
+            {
+                Message.ShowError("Invalid Password",
+                    "Passwords do not match");
+                return false;
+            }
+            else if (userDict.ContainsKey(username))
+            {
+                Message.ShowError("Username Unavailable",
+                    "This username is already in use");
+            }
+            CreateUser(username, password);
+            Message.ShowInfo("Success", "Account successfully created");
+            return true;
         }
 
-        public static bool ValidatePassword(string password)
+        private void CreateUser(string username, string password)
         {
-            if (password.Length >= 8 && password.Length <= 30)
+            User newUser = new User(username, password);
+            userDict.Add(username, newUser);
+
+            using (StreamWriter sw = File.AppendText(FILEPATH))
             {
-                return true;
+                sw.WriteLine($"{username},{password}");
             }
-            Message.ShowError("Invalid Password",
-                "Passwords must be between 8 and 30 characters");
-            return false;
         }
     }
 }
