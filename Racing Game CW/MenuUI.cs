@@ -20,7 +20,8 @@ namespace Racing_Game_CW
             frm.ForeColor = TextColour;
             frm.Font = BodyFont;
             frm.StartPosition = FormStartPosition.CenterScreen;
-            frm.Size = new Size(1800, 1000);
+            frm.WindowState = FormWindowState.Maximized;
+            frm.Size = new Size(1300, 800);
         }
 
         //Panel Styles:
