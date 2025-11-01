@@ -10,6 +10,7 @@ namespace Racing_Game_CW
         private static readonly Color TertiaryColour = Color.FromArgb(116, 140, 171);
         private static readonly Color AlternateColour = Color.FromArgb(62, 92, 118);
         private static readonly Color TextColour = Color.FromArgb(240, 235, 216);
+        private static readonly Color Transparent = Color.Transparent;
         private static readonly Font HeadingFont = new Font("Audiowide", 12, FontStyle.Bold);
         private static readonly Font BodyFont = new Font("Audiowide", 10);
 
@@ -19,9 +20,9 @@ namespace Racing_Game_CW
             frm.BackColor = TertiaryColour;
             frm.ForeColor = TextColour;
             frm.Font = BodyFont;
+            frm.Size = new Size(1800, 800);
             frm.StartPosition = FormStartPosition.CenterScreen;
-            //frm.WindowState = FormWindowState.Maximized;
-            frm.Size = new Size(1200, 800);
+            frm.WindowState = FormWindowState.Maximized;
         }
 
         //Panel Styles:
@@ -39,6 +40,7 @@ namespace Racing_Game_CW
         public static void HeadingLabel(Label lbl)
         {
             lbl.Font = HeadingFont;
+            lbl.BackColor = Transparent;
             lbl.ForeColor = TextColour;
         }
 
@@ -70,7 +72,7 @@ namespace Racing_Game_CW
         {
             btn.FlatStyle = FlatStyle.Flat;
             btn.FlatAppearance.BorderSize = 0;
-            btn.BackColor = SecondaryColour;
+            btn.BackColor = Transparent;
             btn.ForeColor = TextColour;
             btn.Font = HeadingFont;
             btn.TextAlign = ContentAlignment.MiddleCenter;
@@ -87,6 +89,15 @@ namespace Racing_Game_CW
         {
             Button(btn);
             btn.BackColor = AlternateColour;
+        }
+
+        public static void ComboBox(ComboBox cbx)
+        {
+            cbx.BackColor = TextColour;
+            cbx.ForeColor = Color.Black;
+            cbx.Font = BodyFont;
+            cbx.FlatStyle = FlatStyle.Flat;
+            cbx.Cursor = Cursors.Hand;
         }
     }
 }

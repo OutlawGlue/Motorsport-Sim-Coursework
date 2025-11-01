@@ -42,22 +42,22 @@
             // 
             // pnl_top
             // 
-            this.pnl_top.BackColor = System.Drawing.Color.White;
+            this.pnl_top.BackColor = System.Drawing.SystemColors.Control;
             this.pnl_top.Location = new System.Drawing.Point(0, 0);
             this.pnl_top.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pnl_top.Name = "pnl_top";
-            this.pnl_top.Size = new System.Drawing.Size(900, 88);
+            this.pnl_top.Size = new System.Drawing.Size(900, 90);
             this.pnl_top.TabIndex = 4;
             // 
             // pnl_bar
             // 
-            this.pnl_bar.BackColor = System.Drawing.Color.White;
+            this.pnl_bar.BackColor = System.Drawing.SystemColors.Control;
             this.pnl_bar.Controls.Add(this.btn_disabledSignIn);
             this.pnl_bar.Controls.Add(this.btn_register);
-            this.pnl_bar.Location = new System.Drawing.Point(0, 88);
+            this.pnl_bar.Location = new System.Drawing.Point(0, 90);
             this.pnl_bar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pnl_bar.Name = "pnl_bar";
-            this.pnl_bar.Size = new System.Drawing.Size(900, 52);
+            this.pnl_bar.Size = new System.Drawing.Size(900, 50);
             this.pnl_bar.TabIndex = 5;
             // 
             // btn_disabledSignIn
@@ -65,7 +65,7 @@
             this.btn_disabledSignIn.Location = new System.Drawing.Point(350, 0);
             this.btn_disabledSignIn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn_disabledSignIn.Name = "btn_disabledSignIn";
-            this.btn_disabledSignIn.Size = new System.Drawing.Size(100, 52);
+            this.btn_disabledSignIn.Size = new System.Drawing.Size(100, 50);
             this.btn_disabledSignIn.TabIndex = 11;
             this.btn_disabledSignIn.Text = "Sign In";
             this.btn_disabledSignIn.UseVisualStyleBackColor = true;
@@ -75,7 +75,7 @@
             this.btn_register.Location = new System.Drawing.Point(450, 0);
             this.btn_register.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn_register.Name = "btn_register";
-            this.btn_register.Size = new System.Drawing.Size(100, 52);
+            this.btn_register.Size = new System.Drawing.Size(100, 50);
             this.btn_register.TabIndex = 3;
             this.btn_register.Text = "Register";
             this.btn_register.UseVisualStyleBackColor = true;
@@ -134,7 +134,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(884, 461);
             this.Controls.Add(this.btn_signIn);
             this.Controls.Add(this.tbx_password);
