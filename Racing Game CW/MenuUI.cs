@@ -17,12 +17,18 @@ namespace Racing_Game_CW
         //Form Styles:
         public static void Form(Form frm)
         {
+            //Visual Styles:
             frm.BackColor = TertiaryColour;
             frm.ForeColor = TextColour;
             frm.Font = BodyFont;
-            frm.Size = new Size(1800, 800);
+
+            //Use DPI scaling so forms scale correctly on different displays:
+            frm.AutoScaleMode = AutoScaleMode.Dpi;
+
+            //Form Size and Positioning: (not forced, just using a minimum)
+            frm.MinimumSize = new Size(685, 400);
             frm.StartPosition = FormStartPosition.CenterScreen;
-            frm.WindowState = FormWindowState.Maximized;
+            //frm.WindowState = FormWindowState.Maximized;
         }
 
         //Panel Styles:

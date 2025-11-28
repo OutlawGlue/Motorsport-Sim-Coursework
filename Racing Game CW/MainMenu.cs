@@ -19,34 +19,48 @@ namespace Racing_Game_CW
         {
             InitializeComponent();
             MenuUI.Form(this);
-            MenuUI.Panel(pnl_top);
-            MenuUI.SecondaryPanel(pnl_sideBar);
-            MenuUI.BodyButton(btn_newSave);
-            MenuUI.Button(btn_loadSave);
-            MenuUI.Button(btn_settings);
-            MenuUI.ComboBox(cbx_loadSave);
-            MenuUI.HeadingLabel(lbl_newSave);
+            MenuUI.Panel(Pnl_top);
+            MenuUI.SecondaryPanel(Pnl_sideBar);
+            MenuUI.BodyButton(Btn_newSave);
+            MenuUI.Button(Btn_loadSave);
+            MenuUI.Button(Btn_settings);
+            MenuUI.ComboBox(Cbx_loadSave);
+            MenuUI.HeadingLabel(Lbl_newSave);
+        }
 
-            //cbx_loadSave.Items = _saveManager.LoadSaveList();
+        private void MainMenu_Load(object sender, EventArgs e)
+        {
+            Cbx_loadSave.Items.Clear();
+            string[] files = _saveManager.LoadSaveList();
+            foreach (string file in files)
+            {
+                Cbx_loadSave.Items.Add(Path.GetFileNameWithoutExtension(file));
+            }
         }
 
         //For creating a new save:
-        private void btn_newSave_Click(object sender, EventArgs e)
+        private void Btn_newSave_Click(object sender, EventArgs e)
         {
             //Validate the save name first (could do all these processes in saveManager)
-            
+
             //Make sure there is a folder to save files in:
             _saveManager.SaveLocationAvailable(true);
 
-            string saveName = tbx_saveName.Text;
+            bool created;
+            do
+            {
+                string saveName = tbx_saveName.Text;
+                created = _saveManager.CreateNewSave(saveName);
+                tbx_saveName.Clear();
+            } while (!created);
         }
 
         //For loading a current save:
-        private void btn_loadSave_Click(object sender, EventArgs e)
+        private void Btn_loadSave_Click(object sender, EventArgs e)
         {
             _saveManager.SaveLocationAvailable(false);
-            
-            int saveValue = cbx_loadSave.SelectedIndex; //Could change to .selectedItem, if using a "save" object
+
+            int saveValue = Cbx_loadSave.SelectedIndex; //Could change to .selectedItem, if using a "save" object/class
         }
     }
 }

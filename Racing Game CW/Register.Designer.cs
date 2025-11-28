@@ -28,150 +28,138 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tbx_password = new System.Windows.Forms.TextBox();
-            this.tbx_username = new System.Windows.Forms.TextBox();
-            this.lbl_password = new System.Windows.Forms.Label();
-            this.lbl_username = new System.Windows.Forms.Label();
-            this.pnl_bar = new System.Windows.Forms.Panel();
-            this.btn_signIn = new System.Windows.Forms.Button();
-            this.btn_disabledRegister = new System.Windows.Forms.Button();
-            this.pnl_top = new System.Windows.Forms.Panel();
-            this.lbl_confirmPassword = new System.Windows.Forms.Label();
-            this.tbx_confirmPassword = new System.Windows.Forms.TextBox();
-            this.btn_register = new System.Windows.Forms.Button();
-            this.pnl_bar.SuspendLayout();
+            this.Tbx_password = new System.Windows.Forms.TextBox();
+            this.Tbx_username = new System.Windows.Forms.TextBox();
+            this.Lbl_password = new System.Windows.Forms.Label();
+            this.Lbl_username = new System.Windows.Forms.Label();
+            this.Pnl_bar = new System.Windows.Forms.Panel();
+            this.Btn_signIn = new System.Windows.Forms.Button();
+            this.Btn_disabledRegister = new System.Windows.Forms.Button();
+            this.Pnl_top = new System.Windows.Forms.Panel();
+            this.Lbl_confirmPassword = new System.Windows.Forms.Label();
+            this.Tbx_confirmPassword = new System.Windows.Forms.TextBox();
+            this.Btn_register = new System.Windows.Forms.Button();
+            this.Pnl_bar.SuspendLayout();
             this.SuspendLayout();
             // 
             // tbx_password
             // 
-            this.tbx_password.Location = new System.Drawing.Point(350, 286);
-            this.tbx_password.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.tbx_password.MaxLength = 30;
-            this.tbx_password.Name = "tbx_password";
-            this.tbx_password.Size = new System.Drawing.Size(202, 20);
-            this.tbx_password.TabIndex = 1;
+            this.Tbx_password.Location = new System.Drawing.Point(530, 440);
+            this.Tbx_password.MaxLength = 30;
+            this.Tbx_password.Name = "tbx_password";
+            this.Tbx_password.Size = new System.Drawing.Size(300, 26);
+            this.Tbx_password.TabIndex = 1;
             // 
             // tbx_username
             // 
-            this.tbx_username.Location = new System.Drawing.Point(350, 208);
-            this.tbx_username.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.tbx_username.MaxLength = 15;
-            this.tbx_username.Name = "tbx_username";
-            this.tbx_username.Size = new System.Drawing.Size(202, 20);
-            this.tbx_username.TabIndex = 0;
+            this.Tbx_username.Location = new System.Drawing.Point(530, 320);
+            this.Tbx_username.MaxLength = 15;
+            this.Tbx_username.Name = "tbx_username";
+            this.Tbx_username.Size = new System.Drawing.Size(300, 26);
+            this.Tbx_username.TabIndex = 0;
             // 
             // lbl_password
             // 
-            this.lbl_password.AutoSize = true;
-            this.lbl_password.Location = new System.Drawing.Point(355, 260);
-            this.lbl_password.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lbl_password.Name = "lbl_password";
-            this.lbl_password.Size = new System.Drawing.Size(53, 13);
-            this.lbl_password.TabIndex = 19;
-            this.lbl_password.Text = "Password";
+            this.Lbl_password.AutoSize = true;
+            this.Lbl_password.Location = new System.Drawing.Point(530, 400);
+            this.Lbl_password.Name = "lbl_password";
+            this.Lbl_password.Size = new System.Drawing.Size(78, 20);
+            this.Lbl_password.TabIndex = 19;
+            this.Lbl_password.Text = "Password";
             // 
             // lbl_username
             // 
-            this.lbl_username.AutoSize = true;
-            this.lbl_username.Location = new System.Drawing.Point(355, 182);
-            this.lbl_username.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lbl_username.Name = "lbl_username";
-            this.lbl_username.Size = new System.Drawing.Size(55, 13);
-            this.lbl_username.TabIndex = 16;
-            this.lbl_username.Text = "Username";
+            this.Lbl_username.AutoSize = true;
+            this.Lbl_username.Location = new System.Drawing.Point(530, 280);
+            this.Lbl_username.Name = "lbl_username";
+            this.Lbl_username.Size = new System.Drawing.Size(83, 20);
+            this.Lbl_username.TabIndex = 16;
+            this.Lbl_username.Text = "Username";
             // 
             // pnl_bar
             // 
-            this.pnl_bar.BackColor = System.Drawing.SystemColors.Control;
-            this.pnl_bar.Controls.Add(this.btn_signIn);
-            this.pnl_bar.Controls.Add(this.btn_disabledRegister);
-            this.pnl_bar.Location = new System.Drawing.Point(0, 88);
-            this.pnl_bar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.pnl_bar.Name = "pnl_bar";
-            this.pnl_bar.Size = new System.Drawing.Size(900, 52);
-            this.pnl_bar.TabIndex = 18;
+            this.Pnl_bar.BackColor = System.Drawing.SystemColors.Control;
+            this.Pnl_bar.Controls.Add(this.Btn_signIn);
+            this.Pnl_bar.Controls.Add(this.Btn_disabledRegister);
+            this.Pnl_bar.Location = new System.Drawing.Point(0, 135);
+            this.Pnl_bar.Name = "pnl_bar";
+            this.Pnl_bar.Size = new System.Drawing.Size(1380, 80);
+            this.Pnl_bar.TabIndex = 18;
             // 
             // btn_signIn
             // 
-            this.btn_signIn.Location = new System.Drawing.Point(350, 0);
-            this.btn_signIn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.btn_signIn.Name = "btn_signIn";
-            this.btn_signIn.Size = new System.Drawing.Size(100, 52);
-            this.btn_signIn.TabIndex = 3;
-            this.btn_signIn.Text = "Sign In";
-            this.btn_signIn.UseVisualStyleBackColor = true;
-            this.btn_signIn.Click += new System.EventHandler(this.btn_signIn_Click);
+            this.Btn_signIn.Location = new System.Drawing.Point(530, 0);
+            this.Btn_signIn.Name = "btn_signIn";
+            this.Btn_signIn.Size = new System.Drawing.Size(150, 80);
+            this.Btn_signIn.TabIndex = 3;
+            this.Btn_signIn.Text = "Sign In";
+            this.Btn_signIn.UseVisualStyleBackColor = true;
+            this.Btn_signIn.Click += new System.EventHandler(this.Btn_signIn_Click);
             // 
             // btn_disabledRegister
             // 
-            this.btn_disabledRegister.Location = new System.Drawing.Point(450, 0);
-            this.btn_disabledRegister.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.btn_disabledRegister.Name = "btn_disabledRegister";
-            this.btn_disabledRegister.Size = new System.Drawing.Size(100, 52);
-            this.btn_disabledRegister.TabIndex = 20;
-            this.btn_disabledRegister.Text = "Register";
-            this.btn_disabledRegister.UseVisualStyleBackColor = true;
+            this.Btn_disabledRegister.Location = new System.Drawing.Point(700, 0);
+            this.Btn_disabledRegister.Name = "btn_disabledRegister";
+            this.Btn_disabledRegister.Size = new System.Drawing.Size(150, 80);
+            this.Btn_disabledRegister.TabIndex = 20;
+            this.Btn_disabledRegister.Text = "Register";
+            this.Btn_disabledRegister.UseVisualStyleBackColor = true;
             // 
             // pnl_top
             // 
-            this.pnl_top.BackColor = System.Drawing.SystemColors.Control;
-            this.pnl_top.Location = new System.Drawing.Point(0, 0);
-            this.pnl_top.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.pnl_top.Name = "pnl_top";
-            this.pnl_top.Size = new System.Drawing.Size(900, 88);
-            this.pnl_top.TabIndex = 17;
+            this.Pnl_top.BackColor = System.Drawing.SystemColors.Control;
+            this.Pnl_top.Location = new System.Drawing.Point(0, 0);
+            this.Pnl_top.Name = "pnl_top";
+            this.Pnl_top.Size = new System.Drawing.Size(1380, 135);
+            this.Pnl_top.TabIndex = 17;
             // 
             // lbl_confirmPassword
             // 
-            this.lbl_confirmPassword.AutoSize = true;
-            this.lbl_confirmPassword.Location = new System.Drawing.Point(355, 317);
-            this.lbl_confirmPassword.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lbl_confirmPassword.Name = "lbl_confirmPassword";
-            this.lbl_confirmPassword.Size = new System.Drawing.Size(91, 13);
-            this.lbl_confirmPassword.TabIndex = 20;
-            this.lbl_confirmPassword.Text = "Confirm Password";
+            this.Lbl_confirmPassword.AutoSize = true;
+            this.Lbl_confirmPassword.Location = new System.Drawing.Point(530, 500);
+            this.Lbl_confirmPassword.Name = "lbl_confirmPassword";
+            this.Lbl_confirmPassword.Size = new System.Drawing.Size(137, 20);
+            this.Lbl_confirmPassword.TabIndex = 20;
+            this.Lbl_confirmPassword.Text = "Confirm Password";
             // 
             // tbx_confirmPassword
             // 
-            this.tbx_confirmPassword.Location = new System.Drawing.Point(350, 343);
-            this.tbx_confirmPassword.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.tbx_confirmPassword.MaxLength = 30;
-            this.tbx_confirmPassword.Name = "tbx_confirmPassword";
-            this.tbx_confirmPassword.Size = new System.Drawing.Size(202, 20);
-            this.tbx_confirmPassword.TabIndex = 2;
+            this.Tbx_confirmPassword.Location = new System.Drawing.Point(530, 540);
+            this.Tbx_confirmPassword.MaxLength = 30;
+            this.Tbx_confirmPassword.Name = "tbx_confirmPassword";
+            this.Tbx_confirmPassword.Size = new System.Drawing.Size(300, 26);
+            this.Tbx_confirmPassword.TabIndex = 2;
             // 
             // btn_register
             // 
-            this.btn_register.Location = new System.Drawing.Point(400, 416);
-            this.btn_register.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.btn_register.Name = "btn_register";
-            this.btn_register.Size = new System.Drawing.Size(100, 26);
-            this.btn_register.TabIndex = 3;
-            this.btn_register.Text = "Register";
-            this.btn_register.UseVisualStyleBackColor = true;
-            this.btn_register.Click += new System.EventHandler(this.btn_register_Click);
+            this.Btn_register.Location = new System.Drawing.Point(600, 640);
+            this.Btn_register.Name = "btn_register";
+            this.Btn_register.Size = new System.Drawing.Size(150, 40);
+            this.Btn_register.TabIndex = 3;
+            this.Btn_register.Text = "Register";
+            this.Btn_register.UseVisualStyleBackColor = true;
+            this.Btn_register.Click += new System.EventHandler(this.Btn_register_Click);
             // 
             // Register
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(887, 483);
-            this.Controls.Add(this.btn_register);
-            this.Controls.Add(this.tbx_confirmPassword);
-            this.Controls.Add(this.lbl_confirmPassword);
-            this.Controls.Add(this.tbx_password);
-            this.Controls.Add(this.tbx_username);
-            this.Controls.Add(this.lbl_password);
-            this.Controls.Add(this.lbl_username);
-            this.Controls.Add(this.pnl_bar);
-            this.Controls.Add(this.pnl_top);
+            this.ClientSize = new System.Drawing.Size(1378, 744);
+            this.Controls.Add(this.Btn_register);
+            this.Controls.Add(this.Tbx_confirmPassword);
+            this.Controls.Add(this.Lbl_confirmPassword);
+            this.Controls.Add(this.Tbx_password);
+            this.Controls.Add(this.Tbx_username);
+            this.Controls.Add(this.Lbl_password);
+            this.Controls.Add(this.Lbl_username);
+            this.Controls.Add(this.Pnl_bar);
+            this.Controls.Add(this.Pnl_top);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Register";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Register";
-            this.pnl_bar.ResumeLayout(false);
+            this.Pnl_bar.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -179,16 +167,16 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox tbx_password;
-        private System.Windows.Forms.TextBox tbx_username;
-        private System.Windows.Forms.Label lbl_password;
-        private System.Windows.Forms.Label lbl_username;
-        private System.Windows.Forms.Panel pnl_bar;
-        private System.Windows.Forms.Button btn_signIn;
-        private System.Windows.Forms.Button btn_disabledRegister;
-        private System.Windows.Forms.Panel pnl_top;
-        private System.Windows.Forms.Label lbl_confirmPassword;
-        private System.Windows.Forms.TextBox tbx_confirmPassword;
-        private System.Windows.Forms.Button btn_register;
+        private System.Windows.Forms.TextBox Tbx_password;
+        private System.Windows.Forms.TextBox Tbx_username;
+        private System.Windows.Forms.Label Lbl_password;
+        private System.Windows.Forms.Label Lbl_username;
+        private System.Windows.Forms.Panel Pnl_bar;
+        private System.Windows.Forms.Button Btn_signIn;
+        private System.Windows.Forms.Button Btn_disabledRegister;
+        private System.Windows.Forms.Panel Pnl_top;
+        private System.Windows.Forms.Label Lbl_confirmPassword;
+        private System.Windows.Forms.TextBox Tbx_confirmPassword;
+        private System.Windows.Forms.Button Btn_register;
     }
 }

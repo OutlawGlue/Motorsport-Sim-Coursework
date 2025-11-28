@@ -11,27 +11,27 @@ namespace Racing_Game_CW
         {
             InitializeComponent();
             MenuUI.Form(this);
-            MenuUI.Panel(pnl_top);
-            MenuUI.SecondaryPanel(pnl_bar);
-            MenuUI.Button(btn_disabledSignIn);
-            MenuUI.UnselectedButton(btn_register);
-            MenuUI.BodyButton(btn_signIn);
-            MenuUI.BodyLabel(lbl_username);
-            MenuUI.BodyLabel(lbl_password);
-            MenuUI.TextBox(tbx_username);
-            MenuUI.TextBox(tbx_password);
+            MenuUI.Panel(Pnl_top);
+            MenuUI.SecondaryPanel(Pnl_bar);
+            MenuUI.Button(Btn_disabledSignIn);
+            MenuUI.UnselectedButton(Btn_register);
+            MenuUI.BodyButton(Btn_signIn);
+            MenuUI.BodyLabel(Lbl_username);
+            MenuUI.BodyLabel(Lbl_password);
+            MenuUI.TextBox(Tbx_username);
+            MenuUI.TextBox(Tbx_password);
         }
 
-        private void btn_signIn_Click(object sender, EventArgs e)
+        private void Btn_signIn_Click(object sender, EventArgs e)
         {
-            string username = tbx_username.Text;
-            string password = tbx_password.Text;
+            string username = Tbx_username.Text;
+            string password = Tbx_password.Text;
 
             if (_manager.SignIn(username, password))
             {
                 //Sign in successful
-                tbx_username.Clear();
-                tbx_password.Clear();
+                Tbx_username.Clear();
+                Tbx_password.Clear();
 
                 MainMenu menu = new MainMenu();
                 this.Hide();
@@ -41,11 +41,11 @@ namespace Racing_Game_CW
             {
                 //Sign in failed
                 //Don't display message, this is handled in user manager
-                tbx_password.Clear();
+                Tbx_password.Clear();
             }
         }
 
-        private void btn_register_Click(object sender, EventArgs e)
+        private void Btn_register_Click(object sender, EventArgs e)
         {
             Register regForm = new Register();
             this.Hide();
