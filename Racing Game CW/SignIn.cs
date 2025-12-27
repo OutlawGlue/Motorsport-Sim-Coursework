@@ -32,6 +32,10 @@ namespace Racing_Game_CW
                 //Sign in successful
                 tbx_username.Clear();
                 tbx_password.Clear();
+
+                MainMenu menu = new MainMenu();
+                this.Hide();
+                menu.Show();
             }
             else
             {
