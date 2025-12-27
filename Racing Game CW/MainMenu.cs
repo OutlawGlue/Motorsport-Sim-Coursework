@@ -60,7 +60,19 @@ namespace Racing_Game_CW
         {
             _saveManager.SaveLocationAvailable(false);
 
-            int saveValue = Cbx_loadSave.SelectedIndex; //Could change to .selectedItem, if using a "save" object/class
+            var saveValue = Cbx_loadSave.SelectedItem; //Outputs an object, but itll just be eg."save"
+            Message.ShowInfo("Load Save", "Loading save: " + saveValue);
+
+            GameMenu gameMenu = new GameMenu();
+            this.Hide();
+            gameMenu.Show();
+        }
+
+        private void Btn_settings_Click(object sender, EventArgs e)
+        {
+            //Does this change menu settings? Currently selected save settings?
+            //Probably menu settings, as save settings would be in-game
+            //If so, this should be accessible in all menus (once logged in)
         }
     }
 }

@@ -51,6 +51,7 @@ namespace Racing_Game_CW
             else
             {
                 //Account creation failed
+                //Message already comes from user manager
             }
         }
     }

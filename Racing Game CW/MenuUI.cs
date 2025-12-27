@@ -105,5 +105,24 @@ namespace Racing_Game_CW
             cbx.FlatStyle = FlatStyle.Flat;
             cbx.Cursor = Cursors.Hand;
         }
+
+        public static void DataGridView(DataGridView dgv)
+        {
+            dgv.BackgroundColor = SecondaryColour;
+            dgv.ForeColor = TextColour;
+            dgv.Font = BodyFont;
+            dgv.EnableHeadersVisualStyles = false;
+            dgv.ColumnHeadersDefaultCellStyle.BackColor = PrimaryColour;
+            dgv.ColumnHeadersDefaultCellStyle.ForeColor = TextColour;
+            dgv.RowHeadersDefaultCellStyle.BackColor = PrimaryColour;
+            dgv.RowHeadersDefaultCellStyle.ForeColor = TextColour;
+            dgv.GridColor = TertiaryColour;
+            dgv.BorderStyle = BorderStyle.None;
+            dgv.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgv.RowTemplate.Height = 30;
+            dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgv.MultiSelect = false;
+            dgv.ReadOnly = true;
+        }
     }
 }

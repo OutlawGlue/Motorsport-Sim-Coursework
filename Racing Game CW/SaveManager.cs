@@ -43,7 +43,7 @@ namespace Racing_Game_CW
         public string[] LoadSaveList()
         {
             string[] saves = Directory.GetFiles(FOLDER);
-            return saves; //Add this to the combo box
+            return saves;
         }
 
         public bool CreateNewSave(string saveName)

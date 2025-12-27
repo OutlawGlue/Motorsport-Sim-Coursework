@@ -41,72 +41,73 @@ namespace Racing_Game_CW
             this.Pnl_sideBar.SuspendLayout();
             this.SuspendLayout();
             // 
-            // pnl_top
+            // Pnl_top
             // 
             this.Pnl_top.BackColor = System.Drawing.SystemColors.Control;
             this.Pnl_top.Location = new System.Drawing.Point(0, 0);
-            this.Pnl_top.Name = "pnl_top";
+            this.Pnl_top.Name = "Pnl_top";
             this.Pnl_top.Size = new System.Drawing.Size(1380, 135);
             this.Pnl_top.TabIndex = 18;
             // 
-            // pnl_sideBar
+            // Pnl_sideBar
             // 
             this.Pnl_sideBar.Controls.Add(this.Cbx_loadSave);
             this.Pnl_sideBar.Controls.Add(this.Btn_settings);
             this.Pnl_sideBar.Controls.Add(this.Btn_loadSave);
             this.Pnl_sideBar.Location = new System.Drawing.Point(0, 135);
             this.Pnl_sideBar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Pnl_sideBar.Name = "pnl_sideBar";
+            this.Pnl_sideBar.Name = "Pnl_sideBar";
             this.Pnl_sideBar.Size = new System.Drawing.Size(240, 650);
             this.Pnl_sideBar.TabIndex = 6;
             // 
-            // cbx_loadSave
+            // Cbx_loadSave
             // 
             this.Cbx_loadSave.FormattingEnabled = true;
             this.Cbx_loadSave.Location = new System.Drawing.Point(20, 120);
             this.Cbx_loadSave.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.Cbx_loadSave.Name = "cbx_loadSave";
+            this.Cbx_loadSave.Name = "Cbx_loadSave";
             this.Cbx_loadSave.Size = new System.Drawing.Size(200, 28);
             this.Cbx_loadSave.TabIndex = 19;
             // 
-            // btn_settings
+            // Btn_settings
             // 
             this.Btn_settings.Location = new System.Drawing.Point(20, 560);
             this.Btn_settings.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Btn_settings.Name = "btn_settings";
+            this.Btn_settings.Name = "Btn_settings";
             this.Btn_settings.Size = new System.Drawing.Size(200, 40);
             this.Btn_settings.TabIndex = 9;
             this.Btn_settings.Text = "Settings";
             this.Btn_settings.UseVisualStyleBackColor = true;
+            this.Btn_settings.Click += new System.EventHandler(this.Btn_settings_Click);
             // 
-            // btn_loadSave
+            // Btn_loadSave
             // 
             this.Btn_loadSave.Location = new System.Drawing.Point(20, 80);
             this.Btn_loadSave.Margin = new System.Windows.Forms.Padding(4, 5, 4, 0);
-            this.Btn_loadSave.Name = "btn_loadSave";
+            this.Btn_loadSave.Name = "Btn_loadSave";
             this.Btn_loadSave.Size = new System.Drawing.Size(200, 40);
             this.Btn_loadSave.TabIndex = 8;
             this.Btn_loadSave.Text = "Load Selected Save";
             this.Btn_loadSave.UseVisualStyleBackColor = true;
             this.Btn_loadSave.Click += new System.EventHandler(this.Btn_loadSave_Click);
             // 
-            // btn_newSave
+            // Btn_newSave
             // 
             this.Btn_newSave.Location = new System.Drawing.Point(695, 650);
             this.Btn_newSave.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Btn_newSave.Name = "btn_newSave";
+            this.Btn_newSave.Name = "Btn_newSave";
             this.Btn_newSave.Size = new System.Drawing.Size(250, 50);
             this.Btn_newSave.TabIndex = 7;
             this.Btn_newSave.Text = "Create New Save";
             this.Btn_newSave.UseVisualStyleBackColor = true;
             this.Btn_newSave.Click += new System.EventHandler(this.Btn_newSave_Click);
             // 
-            // lbl_newSave
+            // Lbl_newSave
             // 
             this.Lbl_newSave.AutoSize = true;
             this.Lbl_newSave.Location = new System.Drawing.Point(780, 230);
             this.Lbl_newSave.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.Lbl_newSave.Name = "lbl_newSave";
+            this.Lbl_newSave.Name = "Lbl_newSave";
             this.Lbl_newSave.Size = new System.Drawing.Size(80, 20);
             this.Lbl_newSave.TabIndex = 19;
             this.Lbl_newSave.Text = "New Save";
