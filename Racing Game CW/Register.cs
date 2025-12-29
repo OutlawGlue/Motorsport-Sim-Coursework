@@ -44,7 +44,7 @@ namespace Racing_Game_CW
                 Tbx_password.Clear();
                 Tbx_confirmPassword.Clear();
 
-                MainMenu menu = new MainMenu();
+                NewGame menu = new NewGame();
                 this.Hide();
                 menu.Show();
             }

@@ -3,9 +3,9 @@ using System.Windows.Forms;
 
 namespace Racing_Game_CW
 {
-    public partial class GameMenu : Form
+    public partial class CareerMenu : Form
     {
-        public GameMenu()
+        public CareerMenu()
         {
             InitializeComponent();
             MenuUI.Form(this);
@@ -35,6 +35,14 @@ namespace Racing_Game_CW
                     Dgv_drivers.Rows.Add(team, points);
                 }
             }
+        }
+
+        private void Btn_nextRace_Click(object sender, System.EventArgs e)
+        {
+            Race race = new Race();
+            this.Hide();
+            race.Show();
+            //Later it should go to race setup then actual race
         }
     }
 }

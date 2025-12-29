@@ -22,5 +22,7 @@
             get { return password; }
             set { password = value; }
         }
+
+        //Validation is done in userManager
     }
 }

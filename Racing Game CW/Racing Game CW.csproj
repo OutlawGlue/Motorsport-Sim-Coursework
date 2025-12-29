@@ -46,19 +46,39 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GameMenu.cs">
+    <Compile Include="Car.cs" />
+    <Compile Include="Career.cs" />
+    <Compile Include="Race.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GameMenu.Designer.cs">
-      <DependentUpon>GameMenu.cs</DependentUpon>
+    <Compile Include="Race.Designer.cs">
+      <DependentUpon>Race.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainMenu.cs">
+    <Compile Include="NewGame.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainMenu.Designer.cs">
-      <DependentUpon>MainMenu.cs</DependentUpon>
+    <Compile Include="NewGame.Designer.cs">
+      <DependentUpon>NewGame.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CareerMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CareerMenu.Designer.cs">
+      <DependentUpon>CareerMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CareerManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CareerManager.Designer.cs">
+      <DependentUpon>CareerManager.cs</DependentUpon>
     </Compile>
     <Compile Include="MenuUI.cs" />
+    <Compile Include="QuickRaceSetup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuickRaceSetup.Designer.cs">
+      <DependentUpon>QuickRaceSetup.cs</DependentUpon>
+    </Compile>
     <Compile Include="Register.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,13 +95,24 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Track.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserManager.cs" />
-    <EmbeddedResource Include="GameMenu.resx">
-      <DependentUpon>GameMenu.cs</DependentUpon>
+    <Compile Include="Vector.cs" />
+    <EmbeddedResource Include="NewGame.resx">
+      <DependentUpon>NewGame.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainMenu.resx">
-      <DependentUpon>MainMenu.cs</DependentUpon>
+    <EmbeddedResource Include="CareerMenu.resx">
+      <DependentUpon>CareerMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CareerManager.resx">
+      <DependentUpon>CareerManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuickRaceSetup.resx">
+      <DependentUpon>QuickRaceSetup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Race.resx">
+      <DependentUpon>Race.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Register.resx">
       <DependentUpon>Register.cs</DependentUpon>

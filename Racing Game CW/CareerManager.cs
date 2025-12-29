@@ -11,30 +11,31 @@ using System.Windows.Forms;
 
 namespace Racing_Game_CW
 {
-    public partial class MainMenu : Form
+    public partial class CareerManager : Form
     {
         private readonly SaveManager _saveManager = new SaveManager();
 
-        public MainMenu()
+        public CareerManager()
         {
             InitializeComponent();
             MenuUI.Form(this);
             MenuUI.Panel(Pnl_top);
             MenuUI.SecondaryPanel(Pnl_sideBar);
-            MenuUI.BodyButton(Btn_newSave);
-            MenuUI.Button(Btn_loadSave);
+            MenuUI.BodyButton(Btn_newCareer);
+            MenuUI.Button(Btn_loadCareer);
             MenuUI.Button(Btn_settings);
-            MenuUI.ComboBox(Cbx_loadSave);
-            MenuUI.HeadingLabel(Lbl_newSave);
+            MenuUI.Button(Btn_back);
+            MenuUI.ComboBox(Cbx_loadCareer);
+            MenuUI.HeadingLabel(Lbl_newCareer);
         }
 
         private void MainMenu_Load(object sender, EventArgs e)
         {
-            Cbx_loadSave.Items.Clear();
+            Cbx_loadCareer.Items.Clear();
             string[] files = _saveManager.LoadSaveList();
             foreach (string file in files)
             {
-                Cbx_loadSave.Items.Add(Path.GetFileNameWithoutExtension(file));
+                Cbx_loadCareer.Items.Add(Path.GetFileNameWithoutExtension(file));
             }
         }
 
@@ -60,10 +61,10 @@ namespace Racing_Game_CW
         {
             _saveManager.SaveLocationAvailable(false);
 
-            var saveValue = Cbx_loadSave.SelectedItem; //Outputs an object, but itll just be eg."save"
+            var saveValue = Cbx_loadCareer.SelectedItem; //Outputs an object, but itll just be eg."save"
             Message.ShowInfo("Load Save", "Loading save: " + saveValue);
 
-            GameMenu gameMenu = new GameMenu();
+            CareerMenu gameMenu = new CareerMenu();
             this.Hide();
             gameMenu.Show();
         }
@@ -73,6 +74,13 @@ namespace Racing_Game_CW
             //Does this change menu settings? Currently selected save settings?
             //Probably menu settings, as save settings would be in-game
             //If so, this should be accessible in all menus (once logged in)
+        }
+
+        private void Btn_back_Click(object sender, EventArgs e)
+        {
+            NewGame newGame = new NewGame();
+            this.Hide();
+            newGame.Show();
         }
     }
 }

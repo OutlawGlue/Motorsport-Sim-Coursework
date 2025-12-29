@@ -1,6 +1,6 @@
 ﻿namespace Racing_Game_CW
 {
-    partial class GameMenu
+    partial class CareerMenu
     {
         /// <summary>
         /// Required designer variable.
@@ -30,6 +30,7 @@
         {
             this.Dgv_drivers = new System.Windows.Forms.DataGridView();
             this.Dgv_constructors = new System.Windows.Forms.DataGridView();
+            this.Btn_nextRace = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Dgv_drivers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Dgv_constructors)).BeginInit();
             this.SuspendLayout();
@@ -44,24 +45,35 @@
             this.Dgv_drivers.Size = new System.Drawing.Size(425, 300);
             this.Dgv_drivers.TabIndex = 0;
             // 
-            // dgv_constructors
+            // Dgv_constructors
             // 
             this.Dgv_constructors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.Dgv_constructors.Location = new System.Drawing.Point(900, 397);
-            this.Dgv_constructors.Name = "dgv_constructors";
+            this.Dgv_constructors.Name = "Dgv_constructors";
             this.Dgv_constructors.RowHeadersWidth = 62;
             this.Dgv_constructors.RowTemplate.Height = 28;
             this.Dgv_constructors.Size = new System.Drawing.Size(425, 300);
             this.Dgv_constructors.TabIndex = 1;
             // 
-            // GameMenu
+            // Btn_nextRace
+            // 
+            this.Btn_nextRace.Location = new System.Drawing.Point(50, 50);
+            this.Btn_nextRace.Name = "Btn_nextRace";
+            this.Btn_nextRace.Size = new System.Drawing.Size(400, 300);
+            this.Btn_nextRace.TabIndex = 2;
+            this.Btn_nextRace.Text = "Next Race";
+            this.Btn_nextRace.UseVisualStyleBackColor = true;
+            this.Btn_nextRace.Click += new System.EventHandler(this.Btn_nextRace_Click);
+            // 
+            // CareerMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1378, 744);
+            this.Controls.Add(this.Btn_nextRace);
             this.Controls.Add(this.Dgv_constructors);
             this.Controls.Add(this.Dgv_drivers);
-            this.Name = "GameMenu";
+            this.Name = "CareerMenu";
             this.Text = "GameMenu";
             ((System.ComponentModel.ISupportInitialize)(this.Dgv_drivers)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Dgv_constructors)).EndInit();
@@ -73,5 +85,6 @@
 
         private System.Windows.Forms.DataGridView Dgv_drivers;
         private System.Windows.Forms.DataGridView Dgv_constructors;
+        private System.Windows.Forms.Button Btn_nextRace;
     }
 }
