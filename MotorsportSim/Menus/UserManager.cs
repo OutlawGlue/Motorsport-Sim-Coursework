@@ -1,11 +1,8 @@
-﻿using System;
+﻿using MotorsportSim.General;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 
-namespace Racing_Game_CW
+namespace MotorsportSim.Menus
 {
     internal class UserManager
     {
@@ -22,12 +19,12 @@ namespace Racing_Game_CW
             if (!File.Exists(FILEPATH))
             {
                 File.Create(FILEPATH).Close();
-                Message.ShowInfo("User File Not Found", "New user data file created.");
+                MsgBox.ShowInfo("User File Not Found", "New user data file created.");
             }
-            var lines = File.ReadAllLines(FILEPATH);
-            foreach (var line in lines)
+            string[] lines = File.ReadAllLines(FILEPATH);
+            foreach (string line in lines)
             {
-                var parts = line.Split(',');
+                string[] parts = line.Split(',');
                 if (parts.Length == 2)
                 {
                     User user = new User(parts[0], parts[1]);
@@ -41,15 +38,15 @@ namespace Racing_Game_CW
         {
             if (!userDict.ContainsKey(username))
             {
-                Message.ShowError("Sign In Failed", "Account does not exist");
+                MsgBox.ShowError("Sign In Failed", "Account does not exist");
                 return false;
             }
             else if (userDict[username].Password != password)
             {
-                Message.ShowError("Sign In Failed", "Username and password do not match");
+                MsgBox.ShowError("Sign In Failed", "Username and password do not match");
                 return false;
             }
-            Message.ShowInfo("Success", "Signed in");
+            MsgBox.ShowInfo("Success", "Signed in");
             return true;
         }
 
@@ -58,29 +55,29 @@ namespace Racing_Game_CW
         {
             if (!(username.Length >= 5 && username.Length <= 15))
             {
-                Message.ShowError("Invalid Username",
+                MsgBox.ShowError("Invalid Username",
                     "Usernames must be between 5 and 15 characters");
                 return false;
             }
             else if (!(password.Length >= 8 && password.Length <= 30))
             {
-                Message.ShowError("Invalid Password",
+                MsgBox.ShowError("Invalid Password",
                     "Passwords must be between 8 and 30 characters");
                 return false;
             }
             else if (password != confirmPassword)
             {
-                Message.ShowError("Invalid Password",
+                MsgBox.ShowError("Invalid Password",
                     "Passwords do not match");
                 return false;
             }
             else if (userDict.ContainsKey(username))
             {
-                Message.ShowError("Username Unavailable",
+                MsgBox.ShowError("Username Unavailable",
                     "This username is already in use");
             }
             CreateUser(username, password);
-            Message.ShowInfo("Success", "Account successfully created");
+            MsgBox.ShowInfo("Success", "Account successfully created");
             return true;
         }
 

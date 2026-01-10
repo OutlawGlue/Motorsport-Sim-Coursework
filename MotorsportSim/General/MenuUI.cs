@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace Racing_Game_CW
+namespace MotorsportSim.General
 {
     internal class MenuUI
     {
@@ -17,12 +17,18 @@ namespace Racing_Game_CW
         //Form Styles:
         public static void Form(Form frm)
         {
+            //Visual Styles:
             frm.BackColor = TertiaryColour;
             frm.ForeColor = TextColour;
             frm.Font = BodyFont;
-            frm.Size = new Size(1800, 800);
+
+            //Use DPI scaling so forms scale correctly on different displays:
+            frm.AutoScaleMode = AutoScaleMode.Dpi;
+
+            //Form Size and Positioning: (not forced, just using a minimum)
+            frm.MinimumSize = new Size(685, 400);
             frm.StartPosition = FormStartPosition.CenterScreen;
-            frm.WindowState = FormWindowState.Maximized;
+            //frm.WindowState = FormWindowState.Maximized;
         }
 
         //Panel Styles:
@@ -98,6 +104,45 @@ namespace Racing_Game_CW
             cbx.Font = BodyFont;
             cbx.FlatStyle = FlatStyle.Flat;
             cbx.Cursor = Cursors.Hand;
+        }
+
+        public static void DataGridView(DataGridView dgv)
+        {
+            //Base styles:
+            dgv.BackgroundColor = SecondaryColour;
+            dgv.ForeColor = TextColour;
+            dgv.Font = BodyFont;
+            dgv.EnableHeadersVisualStyles = false;
+
+            //Header and cell styles:
+            dgv.ColumnHeadersDefaultCellStyle.BackColor = PrimaryColour;
+            dgv.ColumnHeadersDefaultCellStyle.ForeColor = TextColour;
+            dgv.RowHeadersVisible = false;
+
+            //Grid and layout styles:
+            dgv.GridColor = TertiaryColour;
+            dgv.BorderStyle = BorderStyle.None;
+            dgv.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgv.RowTemplate.Height = 30;
+            dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgv.MultiSelect = false;
+            dgv.ReadOnly = true;
+
+            //Improve readability:
+            dgv.RowsDefaultCellStyle.BackColor = SecondaryColour;
+            dgv.RowsDefaultCellStyle.ForeColor = TextColour;
+            dgv.AlternatingRowsDefaultCellStyle.BackColor = AlternateColour;
+            dgv.AlternatingRowsDefaultCellStyle.ForeColor = TextColour;
+
+            //Selection styles:
+            dgv.ColumnHeadersDefaultCellStyle.SelectionBackColor = PrimaryColour;
+            dgv.ColumnHeadersDefaultCellStyle.SelectionForeColor = TextColour;
+            dgv.DefaultCellStyle.SelectionBackColor = SecondaryColour;
+            dgv.DefaultCellStyle.SelectionForeColor = TextColour;
+
+            //Clear any initial selection:
+            dgv.ClearSelection();
+            dgv.CurrentCell = null;
         }
     }
 }

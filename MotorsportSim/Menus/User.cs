@@ -1,4 +1,4 @@
-﻿namespace Racing_Game_CW
+﻿namespace MotorsportSim.Menus
 {
     internal class User
     {
@@ -22,5 +22,7 @@
             get { return password; }
             set { password = value; }
         }
+
+        //Validation is done in userManager
     }
 }

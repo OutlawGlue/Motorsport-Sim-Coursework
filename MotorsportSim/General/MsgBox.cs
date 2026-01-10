@@ -1,8 +1,8 @@
 ﻿using System.Windows.Forms;
 
-namespace Racing_Game_CW
+namespace MotorsportSim.General
 {
-    internal class Message
+    internal class MsgBox
     {
         public static void ShowError(string errorType, string message)
         {

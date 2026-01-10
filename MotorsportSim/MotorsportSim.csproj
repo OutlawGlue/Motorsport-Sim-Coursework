@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{80D71ECF-DCB1-4418-A4A5-5ECFA3D1BDB9}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Racing_Game_CW</RootNamespace>
-    <AssemblyName>Racing Game CW</AssemblyName>
+    <RootNamespace>MotorsportSim</RootNamespace>
+    <AssemblyName>MotorsportSim</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -46,38 +46,86 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainMenu.cs">
+    <Compile Include="RaceSim\DriverEntry.cs" />
+    <Compile Include="General\ITeamLoader.cs" />
+    <Compile Include="General\TextFileTeamLoader.cs" />
+    <Compile Include="RaceSim\Driver.cs" />
+    <Compile Include="RaceSim\Car.cs" />
+    <Compile Include="Career\CareerSave.cs" />
+    <Compile Include="RaceSim\Race.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainMenu.Designer.cs">
-      <DependentUpon>MainMenu.cs</DependentUpon>
+    <Compile Include="RaceSim\Race.Designer.cs">
+      <DependentUpon>Race.cs</DependentUpon>
     </Compile>
-    <Compile Include="MenuUI.cs" />
-    <Compile Include="Register.cs">
+    <Compile Include="Menus\NewGame.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Register.Designer.cs">
+    <Compile Include="Menus\NewGame.Designer.cs">
+      <DependentUpon>NewGame.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Career\CareerMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Career\CareerMenu.Designer.cs">
+      <DependentUpon>CareerMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Career\CareerManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Career\CareerManager.Designer.cs">
+      <DependentUpon>CareerManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="General\MenuUI.cs" />
+    <Compile Include="QuickRace\QuickRaceSetup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuickRace\QuickRaceSetup.Designer.cs">
+      <DependentUpon>QuickRaceSetup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Menus\Register.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Menus\Register.Designer.cs">
       <DependentUpon>Register.cs</DependentUpon>
     </Compile>
-    <Compile Include="Message.cs" />
-    <Compile Include="SaveManager.cs" />
-    <Compile Include="SignIn.cs">
+    <Compile Include="General\MsgBox.cs" />
+    <Compile Include="Career\SaveManager.cs" />
+    <Compile Include="Menus\SignIn.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SignIn.Designer.cs">
+    <Compile Include="Menus\SignIn.Designer.cs">
       <DependentUpon>SignIn.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="User.cs" />
-    <Compile Include="UserManager.cs" />
-    <EmbeddedResource Include="MainMenu.resx">
-      <DependentUpon>MainMenu.cs</DependentUpon>
+    <Compile Include="QuickRace\RaceSettings.cs" />
+    <Compile Include="RaceSim\RaceSimulation.cs" />
+    <Compile Include="RaceSim\Team.cs" />
+    <Compile Include="RaceSim\Track.cs" />
+    <Compile Include="Menus\User.cs" />
+    <Compile Include="Menus\UserManager.cs" />
+    <Compile Include="RaceSim\Vector.cs" />
+    <EmbeddedResource Include="Menus\NewGame.resx">
+      <DependentUpon>NewGame.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Register.resx">
+    <EmbeddedResource Include="Career\CareerMenu.resx">
+      <DependentUpon>CareerMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Career\CareerManager.resx">
+      <DependentUpon>CareerManager.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuickRace\QuickRaceSetup.resx">
+      <DependentUpon>QuickRaceSetup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RaceSim\Race.resx">
+      <DependentUpon>Race.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Menus\Register.resx">
       <DependentUpon>Register.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SignIn.resx">
+    <EmbeddedResource Include="Menus\SignIn.resx">
       <DependentUpon>SignIn.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -88,6 +136,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

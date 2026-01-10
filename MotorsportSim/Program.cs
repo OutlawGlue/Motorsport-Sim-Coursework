@@ -1,7 +1,9 @@
-﻿using System;
+﻿using MotorsportSim.Menus;
+
+using System;
 using System.Windows.Forms;
 
-namespace Racing_Game_CW
+namespace MotorsportSim
 {
     internal static class Program
     {
