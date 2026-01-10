@@ -11,13 +11,16 @@ namespace MotorsportSim.RaceSim
     {
         private Track track;
         private List<Car> cars;
+        private int carCount;
         private int lapCount;
+        private float raceTime = 0;
 
-        public RaceSimulation(Track track, List<Car> cars, RaceSettings settings)
+        public RaceSimulation(Track givenTrack, List<Car> givenCars, RaceSettings settings)
         {
-            Track = track;
-            Cars = cars;
-            LapCount = settings.LapCount;
+            track = givenTrack;
+            cars = givenCars;
+            carCount = settings.CarCount;
+            lapCount = settings.LapCount;
         }
 
         public Track Track
@@ -36,18 +39,37 @@ namespace MotorsportSim.RaceSim
             set { cars = value; }
         }
 
+        public int CarCount
+        {
+            get { return carCount; }
+        }
+
         public int LapCount
         {
             get { return lapCount; }
             set { lapCount = value; }
         }
 
-        public void UpdateCars()
+        public float RaceTime
         {
-            foreach (var car in cars)
+            get { return raceTime; }
+        }
+
+        public void Update(float deltaT)
+        {
+            raceTime += deltaT;
+
+            foreach (Car car in cars)
             {
-                car.Move();
+                car.Update(raceTime, deltaT);
             }
+        }
+
+        public List<Car> SortCarsOrder()
+        {
+            return cars
+                .OrderByDescending(c => c.RaceProgress())
+                .ToList();
         }
     }
 }

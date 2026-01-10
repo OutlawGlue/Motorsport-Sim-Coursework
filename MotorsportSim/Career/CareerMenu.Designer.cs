@@ -74,7 +74,7 @@
             this.Controls.Add(this.Dgv_constructors);
             this.Controls.Add(this.Dgv_drivers);
             this.Name = "CareerMenu";
-            this.Text = "GameMenu";
+            this.Text = "CareerMenu";
             ((System.ComponentModel.ISupportInitialize)(this.Dgv_drivers)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Dgv_constructors)).EndInit();
             this.ResumeLayout(false);

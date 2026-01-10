@@ -46,6 +46,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="RaceSim\DriverEntry.cs" />
+    <Compile Include="General\ITeamLoader.cs" />
+    <Compile Include="General\TextFileTeamLoader.cs" />
+    <Compile Include="RaceSim\Driver.cs" />
     <Compile Include="RaceSim\Car.cs" />
     <Compile Include="Career\CareerSave.cs" />
     <Compile Include="RaceSim\Race.cs">
@@ -97,6 +101,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuickRace\RaceSettings.cs" />
     <Compile Include="RaceSim\RaceSimulation.cs" />
+    <Compile Include="RaceSim\Team.cs" />
     <Compile Include="RaceSim\Track.cs" />
     <Compile Include="Menus\User.cs" />
     <Compile Include="Menus\UserManager.cs" />
@@ -109,6 +114,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Career\CareerManager.resx">
       <DependentUpon>CareerManager.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="QuickRace\QuickRaceSetup.resx">
       <DependentUpon>QuickRaceSetup.cs</DependentUpon>

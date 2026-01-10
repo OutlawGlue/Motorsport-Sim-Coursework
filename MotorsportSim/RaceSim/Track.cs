@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Windows.Forms.VisualStyles;
 
 namespace MotorsportSim.RaceSim
 {
@@ -14,14 +15,19 @@ namespace MotorsportSim.RaceSim
             private set { waypoints = value; }
         }
 
+        public Vector GetWaypoint(int index)
+        {
+            return waypoints[index];
+        }
+
         public List<Vector> LoadWaypointsFromFile(string filePath)
         {
             List<Vector> loadedWaypoints = new List<Vector>();
 
-            var lines = File.ReadAllLines(filePath);
-            foreach (var line in lines)
+            string[] lines = File.ReadAllLines(filePath);
+            foreach (string line in lines)
             {
-                var parts = line.Split(',');
+                string[] parts = line.Split(',');
                 if (parts.Length == 2 &&
                     float.TryParse(parts[0], out float x) &&
                     float.TryParse(parts[1], out float y))

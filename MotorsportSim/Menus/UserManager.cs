@@ -21,10 +21,10 @@ namespace MotorsportSim.Menus
                 File.Create(FILEPATH).Close();
                 MsgBox.ShowInfo("User File Not Found", "New user data file created.");
             }
-            var lines = File.ReadAllLines(FILEPATH);
-            foreach (var line in lines)
+            string[] lines = File.ReadAllLines(FILEPATH);
+            foreach (string line in lines)
             {
-                var parts = line.Split(',');
+                string[] parts = line.Split(',');
                 if (parts.Length == 2)
                 {
                     User user = new User(parts[0], parts[1]);

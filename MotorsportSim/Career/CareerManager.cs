@@ -56,7 +56,7 @@ namespace MotorsportSim.Career
         {
             _saveManager.SaveLocationAvailable(false);
 
-            var saveValue = Cbx_loadCareer.SelectedItem; //Outputs an object, but itll just be eg."save"
+            string saveValue = Cbx_loadCareer.SelectedItem.ToString(); //Outputs an object, but itll just be eg."save"
             MsgBox.ShowInfo("Load Save", "Loading save: " + saveValue);
 
             CareerMenu careerMenu = new CareerMenu();

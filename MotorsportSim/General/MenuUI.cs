@@ -108,14 +108,18 @@ namespace MotorsportSim.General
 
         public static void DataGridView(DataGridView dgv)
         {
+            //Base styles:
             dgv.BackgroundColor = SecondaryColour;
             dgv.ForeColor = TextColour;
             dgv.Font = BodyFont;
             dgv.EnableHeadersVisualStyles = false;
+
+            //Header and cell styles:
             dgv.ColumnHeadersDefaultCellStyle.BackColor = PrimaryColour;
             dgv.ColumnHeadersDefaultCellStyle.ForeColor = TextColour;
-            dgv.RowHeadersDefaultCellStyle.BackColor = PrimaryColour;
-            dgv.RowHeadersDefaultCellStyle.ForeColor = TextColour;
+            dgv.RowHeadersVisible = false;
+
+            //Grid and layout styles:
             dgv.GridColor = TertiaryColour;
             dgv.BorderStyle = BorderStyle.None;
             dgv.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
@@ -123,6 +127,22 @@ namespace MotorsportSim.General
             dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgv.MultiSelect = false;
             dgv.ReadOnly = true;
+
+            //Improve readability:
+            dgv.RowsDefaultCellStyle.BackColor = SecondaryColour;
+            dgv.RowsDefaultCellStyle.ForeColor = TextColour;
+            dgv.AlternatingRowsDefaultCellStyle.BackColor = AlternateColour;
+            dgv.AlternatingRowsDefaultCellStyle.ForeColor = TextColour;
+
+            //Selection styles:
+            dgv.ColumnHeadersDefaultCellStyle.SelectionBackColor = PrimaryColour;
+            dgv.ColumnHeadersDefaultCellStyle.SelectionForeColor = TextColour;
+            dgv.DefaultCellStyle.SelectionBackColor = SecondaryColour;
+            dgv.DefaultCellStyle.SelectionForeColor = TextColour;
+
+            //Clear any initial selection:
+            dgv.ClearSelection();
+            dgv.CurrentCell = null;
         }
     }
 }
