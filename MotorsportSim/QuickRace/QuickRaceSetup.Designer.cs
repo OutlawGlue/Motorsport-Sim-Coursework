@@ -30,7 +30,7 @@
         {
             this.Cbx_lapCount = new System.Windows.Forms.ComboBox();
             this.Btn_startRace = new System.Windows.Forms.Button();
-            this.Cbx_carCount = new System.Windows.Forms.ComboBox();
+            this.Cbx_teamCount = new System.Windows.Forms.ComboBox();
             this.Cbx_teamIndex = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
@@ -54,11 +54,11 @@
             // 
             // Cbx_carCount
             // 
-            this.Cbx_carCount.FormattingEnabled = true;
-            this.Cbx_carCount.Location = new System.Drawing.Point(407, 176);
-            this.Cbx_carCount.Name = "Cbx_carCount";
-            this.Cbx_carCount.Size = new System.Drawing.Size(121, 28);
-            this.Cbx_carCount.TabIndex = 2;
+            this.Cbx_teamCount.FormattingEnabled = true;
+            this.Cbx_teamCount.Location = new System.Drawing.Point(407, 176);
+            this.Cbx_teamCount.Name = "Cbx_carCount";
+            this.Cbx_teamCount.Size = new System.Drawing.Size(121, 28);
+            this.Cbx_teamCount.TabIndex = 2;
             // 
             // Cbx_teamIndex
             // 
@@ -74,7 +74,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1378, 744);
             this.Controls.Add(this.Cbx_teamIndex);
-            this.Controls.Add(this.Cbx_carCount);
+            this.Controls.Add(this.Cbx_teamCount);
             this.Controls.Add(this.Btn_startRace);
             this.Controls.Add(this.Cbx_lapCount);
             this.Name = "QuickRaceSetup";
@@ -88,7 +88,7 @@
 
         private System.Windows.Forms.ComboBox Cbx_lapCount;
         private System.Windows.Forms.Button Btn_startRace;
-        private System.Windows.Forms.ComboBox Cbx_carCount;
+        private System.Windows.Forms.ComboBox Cbx_teamCount;
         private System.Windows.Forms.ComboBox Cbx_teamIndex;
     }
 }

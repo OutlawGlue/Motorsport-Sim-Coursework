@@ -4,7 +4,7 @@ using System.Drawing;
 
 namespace MotorsportSim.RaceSim
 {
-    internal class Car
+    public class Car
     {
         //Constant attributes:
         private readonly List<Vector> waypoints;
@@ -12,6 +12,7 @@ namespace MotorsportSim.RaceSim
         private readonly Track track;
         private readonly Color colour;
         private readonly int driverNumber;
+        private readonly string driverName;
         private readonly float topSpeed = 1.6f;
         private readonly float acceleration = 0.006f;
         private readonly float deceleration = 0.008f;
@@ -22,34 +23,41 @@ namespace MotorsportSim.RaceSim
         private Vector velocity;
         private float cornerDist;
         private float speed = 0f;
-        private double tyreGrip = 1.0;
         private float lapStartTime = 0f;
         private List<float> lapTimes;
         private int lapNumber = 1;
         private int currentWaypointIndex = 1;
         private int nextWaypointIndex = 0;
         private bool reachedStartLine = true;
+        private Tyre currentTyre;
 
         //Move variables used in multiple methods to here, rather than passing between methods
 
         //Event used to notify race when lap changes
         public event Action<Car, int> LapChanged;
 
-        public Car(Vector startPosition, Color givenColour, int givenDriverNumber, Track givenTrack)
+        public Car(Vector startPosition, Color colour, int driverNumber, string driverName, Track track)
         {
             position = startPosition;
-            colour = givenColour;
-            driverNumber = givenDriverNumber;
-            track = givenTrack;
+            this.colour = colour;
+            this.driverNumber = driverNumber;
+            this.driverName = driverName;
+            this.track = track;
+            //this.currentTyre = startTyre;
 
             velocity = new Vector(0, 0);
-            waypoints = track.Waypoints;
+            waypoints = this.track.Waypoints;
         }
 
         //Getters and setters:
         public int DriverNumber
         {
             get { return driverNumber; }
+        }
+
+        public string DriverName
+        {
+            get { return driverName; }
         }
 
         public int LapNumber
@@ -73,7 +81,7 @@ namespace MotorsportSim.RaceSim
         //Methods:
         public void Update(float raceTime, float deltaT)
         {
-            Move();
+            Move(); //Add to this method using time deltaT, for improved accuracy
         }
 
         public void Move()
@@ -138,13 +146,16 @@ namespace MotorsportSim.RaceSim
 
             //Logic to calculate whether to accelerate or decelerate:
             double cornerSeverity;
+            double grip = 1.0 - currentTyre.Wear;
             float targetSpeed;
             float brakeDistance = 0;
             if (angle <= 160f) //Can be changed to tune behaviour
             {
                 cornerSeverity = 1 - (angle / 180);
-                targetSpeed = topSpeed / (float)(1 + cornerSeverity * 4); //final value is used to tune corner speed
-                brakeDistance = (speed * speed - targetSpeed * targetSpeed) / (2 * deceleration);
+                float gripFactor = (float)(0.5 + 0.5 * grip);
+                targetSpeed = (topSpeed / (float)(1 + cornerSeverity * 4)) * gripFactor; //final value is used to tune corner speed
+                float effectiveDecel = deceleration * (float)(0.5 + 0.5 * grip);
+                brakeDistance = (speed * speed - targetSpeed * targetSpeed) / (2 * effectiveDecel);
             }
 
             //Clamp brakeDistance:
@@ -155,10 +166,13 @@ namespace MotorsportSim.RaceSim
 
             if (cornerDist <= brakeDistance)
             {
+                //If braking:
                 speed -= deceleration;
+                currentTyre.Degrade(1);
             }
             else
             {
+                //If accelerating:
                 speed += acceleration;
             }
 
@@ -170,8 +184,6 @@ namespace MotorsportSim.RaceSim
             {
                 speed = topSpeed;
             }
-
-            //Console.WriteLine($"Speed: {speed}, Accel: {accel}, Angle: {angle}"); //TEST CODE
         }
 
         public float RaceProgress()
@@ -184,6 +196,11 @@ namespace MotorsportSim.RaceSim
             int size = 20;
             g.FillEllipse(new SolidBrush(colour), position.X - size / 2, position.Y - size / 2, size, size);
             g.DrawString(driverNumber.ToString(), SystemFonts.DefaultFont, Brushes.White, position.X - 5, position.Y - 8);
+        }
+
+        public void ChangeTyre(Tyre newTyre)
+        {
+            currentTyre = newTyre;
         }
     }
 }

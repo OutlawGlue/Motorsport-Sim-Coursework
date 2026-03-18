@@ -37,8 +37,14 @@ namespace MotorsportSim.Career
             this.Btn_loadCareer = new System.Windows.Forms.Button();
             this.Btn_newCareer = new System.Windows.Forms.Button();
             this.Lbl_newCareer = new System.Windows.Forms.Label();
-            this.tbx_saveName = new System.Windows.Forms.TextBox();
+            this.Tbx_saveName = new System.Windows.Forms.TextBox();
             this.Lbl_careerName = new System.Windows.Forms.Label();
+            this.Lbl_lapCount = new System.Windows.Forms.Label();
+            this.Cbx_lapCount = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.Cbx_teamCount = new System.Windows.Forms.ComboBox();
+            this.Lbl_managedTeam = new System.Windows.Forms.Label();
+            this.Cbx_managedTeam = new System.Windows.Forms.ComboBox();
             this.Pnl_sideBar.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -125,13 +131,13 @@ namespace MotorsportSim.Career
             this.Lbl_newCareer.TabIndex = 19;
             this.Lbl_newCareer.Text = "New Career";
             // 
-            // tbx_saveName
+            // Tbx_saveName
             // 
-            this.tbx_saveName.Location = new System.Drawing.Point(670, 270);
-            this.tbx_saveName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbx_saveName.Name = "tbx_saveName";
-            this.tbx_saveName.Size = new System.Drawing.Size(300, 26);
-            this.tbx_saveName.TabIndex = 20;
+            this.Tbx_saveName.Location = new System.Drawing.Point(670, 270);
+            this.Tbx_saveName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Tbx_saveName.Name = "Tbx_saveName";
+            this.Tbx_saveName.Size = new System.Drawing.Size(300, 26);
+            this.Tbx_saveName.TabIndex = 20;
             // 
             // Lbl_careerName
             // 
@@ -143,13 +149,82 @@ namespace MotorsportSim.Career
             this.Lbl_careerName.TabIndex = 21;
             this.Lbl_careerName.Text = "Career Name:";
             // 
+            // Lbl_lapCount
+            // 
+            this.Lbl_lapCount.AutoSize = true;
+            this.Lbl_lapCount.Location = new System.Drawing.Point(535, 320);
+            this.Lbl_lapCount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.Lbl_lapCount.Name = "Lbl_lapCount";
+            this.Lbl_lapCount.Size = new System.Drawing.Size(117, 20);
+            this.Lbl_lapCount.TabIndex = 22;
+            this.Lbl_lapCount.Text = "Laps per Race:";
+            // 
+            // Cbx_lapCount
+            // 
+            this.Cbx_lapCount.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.Cbx_lapCount.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Cbx_lapCount.DropDownWidth = 200;
+            this.Cbx_lapCount.FormattingEnabled = true;
+            this.Cbx_lapCount.Location = new System.Drawing.Point(670, 320);
+            this.Cbx_lapCount.Name = "Cbx_lapCount";
+            this.Cbx_lapCount.Size = new System.Drawing.Size(300, 28);
+            this.Cbx_lapCount.TabIndex = 23;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(590, 370);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(61, 20);
+            this.label1.TabIndex = 24;
+            this.label1.Text = "Teams:";
+            // 
+            // Cbx_teamCount
+            // 
+            this.Cbx_teamCount.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.Cbx_teamCount.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Cbx_teamCount.DropDownWidth = 200;
+            this.Cbx_teamCount.FormattingEnabled = true;
+            this.Cbx_teamCount.Location = new System.Drawing.Point(670, 370);
+            this.Cbx_teamCount.Name = "Cbx_teamCount";
+            this.Cbx_teamCount.Size = new System.Drawing.Size(300, 28);
+            this.Cbx_teamCount.TabIndex = 25;
+            // 
+            // Lbl_managedTeam
+            // 
+            this.Lbl_managedTeam.AutoSize = true;
+            this.Lbl_managedTeam.Location = new System.Drawing.Point(540, 420);
+            this.Lbl_managedTeam.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.Lbl_managedTeam.Name = "Lbl_managedTeam";
+            this.Lbl_managedTeam.Size = new System.Drawing.Size(115, 20);
+            this.Lbl_managedTeam.TabIndex = 26;
+            this.Lbl_managedTeam.Text = "Manage Team:";
+            // 
+            // Cbx_managedTeam
+            // 
+            this.Cbx_managedTeam.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.Cbx_managedTeam.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Cbx_managedTeam.DropDownWidth = 200;
+            this.Cbx_managedTeam.FormattingEnabled = true;
+            this.Cbx_managedTeam.Location = new System.Drawing.Point(670, 420);
+            this.Cbx_managedTeam.Name = "Cbx_managedTeam";
+            this.Cbx_managedTeam.Size = new System.Drawing.Size(300, 28);
+            this.Cbx_managedTeam.TabIndex = 27;
+            // 
             // CareerManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1378, 744);
+            this.Controls.Add(this.Cbx_managedTeam);
+            this.Controls.Add(this.Lbl_managedTeam);
+            this.Controls.Add(this.Cbx_teamCount);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.Cbx_lapCount);
+            this.Controls.Add(this.Lbl_lapCount);
             this.Controls.Add(this.Lbl_careerName);
-            this.Controls.Add(this.tbx_saveName);
+            this.Controls.Add(this.Tbx_saveName);
             this.Controls.Add(this.Lbl_newCareer);
             this.Controls.Add(this.Pnl_top);
             this.Controls.Add(this.Pnl_sideBar);
@@ -172,8 +247,14 @@ namespace MotorsportSim.Career
         private System.Windows.Forms.Button Btn_settings;
         private System.Windows.Forms.ComboBox Cbx_loadCareer;
         private System.Windows.Forms.Label Lbl_newCareer;
-        private System.Windows.Forms.TextBox tbx_saveName;
+        private System.Windows.Forms.TextBox Tbx_saveName;
         private System.Windows.Forms.Label Lbl_careerName;
         private System.Windows.Forms.Button Btn_back;
+        private System.Windows.Forms.Label Lbl_lapCount;
+        private System.Windows.Forms.ComboBox Cbx_lapCount;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox Cbx_teamCount;
+        private System.Windows.Forms.Label Lbl_managedTeam;
+        private System.Windows.Forms.ComboBox Cbx_managedTeam;
     }
 }

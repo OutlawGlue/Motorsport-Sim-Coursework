@@ -2,7 +2,7 @@
 
 namespace MotorsportSim.RaceSim
 {
-    internal class Vector
+    public class Vector
     {
         //Attributes:
         private float x;

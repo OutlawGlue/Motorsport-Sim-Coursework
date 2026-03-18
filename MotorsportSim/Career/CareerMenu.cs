@@ -8,7 +8,9 @@ namespace MotorsportSim.Career
 {
     public partial class CareerMenu : Form
     {
-        public CareerMenu()
+        private CareerSave save;
+
+        public CareerMenu(string saveName)
         {
             InitializeComponent();
             MenuUI.Form(this);
@@ -23,28 +25,15 @@ namespace MotorsportSim.Career
             Dgv_drivers.Columns.Add("Points", "Points");
             Dgv_drivers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
-            string path = Path.Combine("GameSaves", "fakesave.txt");
-            if (!File.Exists(path)) return;
-
-            using (StreamReader sr = new StreamReader(path))
-            {
-                string line;
-                while ((line = sr.ReadLine()) != null)
-                {
-                    if (string.IsNullOrWhiteSpace(line)) continue;
-                    string[] parts = line.Split(new[] { ',' }, 2);
-                    string team = parts[0].Trim();
-                    int points = 0;
-                    if (parts.Length > 1) int.TryParse(parts[1].Trim(), out points);
-                    Dgv_drivers.Rows.Add(team, points);
-                }
-            }
+            //Use save manager to load in data
+            SaveManager _saveManager = new SaveManager();
+            save = _saveManager.LoadSave(saveName);
         }
 
         private void Btn_nextRace_Click(object sender, System.EventArgs e)
         {
-            CareerSave save = new CareerSave("My Career"); //TEMPORARY, will already be used before here
-            RaceSettings settings = new RaceSettings(save.LapCount, save.CarCount, save.ManagedTeamIndex);
+            //TEMPORARY, will already be used before here
+            RaceConfig settings = new RaceConfig(save.NextTrack, save.LapCount, save.ManagedTeamIndex, save.Teams);
 
             Race race = new Race(settings);
             this.Close();
