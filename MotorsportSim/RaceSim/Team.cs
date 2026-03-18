@@ -7,20 +7,24 @@ using System.Threading.Tasks;
 
 namespace MotorsportSim.RaceSim
 {
-    internal class Team
+    public class Team
     {
         private string name;
         private Color colour;
         private List<Driver> drivers; //List? Array? If allowing reserve drivers - list
 
-        public Team(string givenName, Color givenColour, List<Driver> givenDrivers)
+        public Team(string name, Color colour, List<Driver> drivers)
         {
-            name = givenName;
-            colour = givenColour;
-            drivers = givenDrivers;
+            this.name = name;
+            this.colour = colour;
+            this.drivers = drivers;
         }
 
         //Add setters if validation isn't elsewhere
+        public string Name
+        {
+            get { return name; }
+        }
 
         public Color Colour
         {

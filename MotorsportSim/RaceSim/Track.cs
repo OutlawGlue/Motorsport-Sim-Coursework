@@ -5,7 +5,7 @@ using System.Windows.Forms.VisualStyles;
 
 namespace MotorsportSim.RaceSim
 {
-    internal class Track
+    public class Track
     {
         private List<Vector> waypoints;
 

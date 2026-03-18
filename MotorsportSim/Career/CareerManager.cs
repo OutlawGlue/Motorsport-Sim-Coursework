@@ -1,8 +1,10 @@
 ﻿using MotorsportSim.General;
 using MotorsportSim.Menus;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
+using MotorsportSim.RaceSim;
 
 namespace MotorsportSim.Career
 {
@@ -22,6 +24,10 @@ namespace MotorsportSim.Career
             MenuUI.Button(Btn_back);
             MenuUI.ComboBox(Cbx_loadCareer);
             MenuUI.HeadingLabel(Lbl_newCareer);
+            MenuUI.TextBox(Tbx_saveName);
+            MenuUI.ComboBox(Cbx_lapCount);
+            MenuUI.ComboBox(Cbx_teamCount);
+            MenuUI.ComboBox(Cbx_managedTeam);
         }
 
         private void MainMenu_Load(object sender, EventArgs e)
@@ -31,6 +37,27 @@ namespace MotorsportSim.Career
             foreach (string file in files)
             {
                 Cbx_loadCareer.Items.Add(Path.GetFileNameWithoutExtension(file));
+            }
+
+            Cbx_lapCount.Items.Clear();
+            int[] laps = { 3, 5, 10, 20 };
+            foreach (int lap in laps)
+            {
+                Cbx_lapCount.Items.Add(lap);
+            }
+
+            Cbx_teamCount.Items.Clear();
+            int[] teams = { 4, 6, 8, 10 };
+            foreach (int team in teams)
+            {
+                Cbx_teamCount.Items.Add(team);
+            }
+
+            Cbx_managedTeam.Items.Clear();
+            List<BasicTeam> teamList = _saveManager.LoadBasicTeamList();
+            foreach (BasicTeam team in teamList)
+            {
+                Cbx_managedTeam.Items.Add(team.TeamName);
             }
         }
 
@@ -45,9 +72,16 @@ namespace MotorsportSim.Career
             bool created;
             do
             {
-                string saveName = tbx_saveName.Text;
-                created = _saveManager.CreateNewSave(saveName);
-                tbx_saveName.Clear();
+                string saveName = Tbx_saveName.Text;
+                int lapCount = int.Parse(Cbx_lapCount.Text);
+                int teamCount = int.Parse(Cbx_teamCount.Text);
+                int managedTeamIndex = Cbx_managedTeam.SelectedIndex;
+
+                List<Team> teams = _saveManager.LoadTeamList(teamCount, managedTeamIndex);
+                DateTime currentDate = DateTime.Now;
+                CareerSave newSave = new CareerSave(saveName, currentDate, lapCount, teams, managedTeamIndex);
+                created = _saveManager.CreateNewSave(saveName, newSave);
+                Tbx_saveName.Clear();
             } while (!created);
         }
 
@@ -57,9 +91,8 @@ namespace MotorsportSim.Career
             _saveManager.SaveLocationAvailable(false);
 
             string saveValue = Cbx_loadCareer.SelectedItem.ToString(); //Outputs an object, but itll just be eg."save"
-            MsgBox.ShowInfo("Load Save", "Loading save: " + saveValue);
 
-            CareerMenu careerMenu = new CareerMenu();
+            CareerMenu careerMenu = new CareerMenu(saveValue);
             this.Close();
             careerMenu.ShowDialog();
         }

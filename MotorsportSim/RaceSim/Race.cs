@@ -1,9 +1,8 @@
 ﻿using MotorsportSim.General;
-using MotorsportSim.QuickRace;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
+using System.IO;
 using System.Windows.Forms;
 
 namespace MotorsportSim.RaceSim
@@ -12,17 +11,35 @@ namespace MotorsportSim.RaceSim
     {
         private Timer timer;
         private Timer leaderboardTimer;
-        private readonly RaceSimulation sim;
+        private bool fullSecond = true;
+        private int raceTimeSeconds = -1;
+        private RaceSim sim;
         private const int WaypointSize = 8;
 
-        public Race(RaceSettings settings)
+        //TEMP:
+        private List<Vector> editorWaypoints = new List<Vector>();
+
+        public Race(RaceConfig raceConfig)
         {
             //Might have a raceUI class, or just all use MenuUI but different methods
             InitializeComponent();
             MenuUI.Form(this);
             MenuUI.Panel(Pnl_sideBar);
+            MenuUI.SecondaryPanel(Pnl_driver1);
+            MenuUI.SecondaryPanel(Pnl_driver2);
+            MenuUI.SecondaryPanel(Pnl_timeControls);
             MenuUI.BodyLabel(Lbl_laps);
             MenuUI.DataGridView(Dgv_standings);
+            MenuUI.BodyLabel(Lbl_driver1name);
+            MenuUI.BodyLabel(Lbl_driver2name);
+            MenuUI.BodyLabel(Lbl_raceTime);
+            MenuUI.Button(Btn_pause);
+
+            EnableDoubleBuffering(Pnl_track);
+            Pnl_track.Paint += Pnl_track_Paint;
+
+            //TEMP: for drawing waypoints. Remove later.
+            //Pnl_track.MouseClick += Pnl_track_MouseClick;
 
             //Setup data grid view:
             Dgv_standings.AutoGenerateColumns = false;
@@ -33,48 +50,18 @@ namespace MotorsportSim.RaceSim
 
             DoubleBuffered = true; //Reduces flickering
 
-            sim = CreateSimulation(settings);
+            CreateSimulation(raceConfig);
             SetupTimers();
         }
 
-        private RaceSimulation CreateSimulation(RaceSettings settings)
+        private void CreateSimulation(RaceConfig raceConfig)
         {
-            //Load the track waypoints in:
-            Track track = new Track();
-            track.LoadWaypointsFromFile("Tracks/Monaco.txt"); //Change to load different tracks later
+            RaceBuilder builder = new RaceBuilder();
+            sim = builder.BuildRace(raceConfig);
+            sim.LeaderLapChanged += LapChanged;
 
-            //Load teams and drivers:
-            ITeamLoader teamLoader = new TextFileTeamLoader("Teams.txt");
-            List<Team> teams = teamLoader.LoadTeams();
-
-            List<DriverEntry> selectedDrivers = teams
-                .SelectMany(t => t.Drivers.Select(d => new DriverEntry(d, t)))
-                .Take(settings.CarCount)
-                .ToList();
-
-            //Get intitial direction from first two waypoints:
-            Vector start = track.GetWaypoint(0);
-            Vector next = track.GetWaypoint(1);
-            Vector direction = (next - start).GetUnitVector();
-            float gridSpacing = 15f; //Distance between cars on grid
-
-            List<Car> cars = new List<Car>();
-
-            for (int d = 0; d < settings.CarCount; d++)
-            {
-                Vector position = start + direction * (-d * gridSpacing);
-
-                cars.Add(new Car(
-                    position,
-                    selectedDrivers[d].Team.Colour,
-                    selectedDrivers[d].Driver.Number,
-                    track));
-            }
-
-            //Check lap change event for leader car:
-            cars[0].LapChanged += (car, lap) => UpdateLap();
-
-            return new RaceSimulation(track, cars, settings);
+            Lbl_driver1name.Text = sim.ManagedCars[0].DriverName;
+            Lbl_driver2name.Text = sim.ManagedCars[1].DriverName;
         }
 
         private void SetupTimers()
@@ -87,13 +74,13 @@ namespace MotorsportSim.RaceSim
             leaderboardTimer.Tick += LeaderboardTimerTick;
             leaderboardTimer.Start();
 
-            UpdateLap();
+            LapChanged(sim.CurrentLap);
         }
 
         private void TimerTick(object sender, EventArgs e)
         {
-            sim.Update(timer.Interval);
-            Invalidate(); //Add a condition to pause race
+            sim.Update(timer.Interval / 1000f);
+            Pnl_track.Invalidate(); //Add a condition to pause race
         }
 
         private void LeaderboardTimerTick(object sender, EventArgs e)
@@ -104,16 +91,78 @@ namespace MotorsportSim.RaceSim
             {
                 Dgv_standings.Rows.Add(i + 1, sortedCars[i].DriverNumber);
             }
+
+            if (fullSecond)
+            {
+                fullSecond = false;
+                raceTimeSeconds++;
+                Lbl_raceTime.Text = TimeSpan
+                    .FromSeconds(raceTimeSeconds)
+                    .ToString(@"mm\:ss");
+            }
+            else
+            {
+                fullSecond = true;
+            }
+
+            //Stop condition:
+            if (sim.RaceFinished())
+            {
+                timer.Stop();
+                leaderboardTimer.Stop();
+            }
         }
 
-        private void UpdateLap()
+        private void LapChanged(int lap)
         {
-            Lbl_laps.Text = $"Lap {sim.Cars[0].LapNumber} / {sim.LapCount}";
+            if (lap <= sim.LapCount)
+            {
+                Lbl_laps.Text = $"Lap {lap} / {sim.LapCount}";
+            }
+            else
+            {
+                Lbl_laps.Text = "Finished!";
+            }
         }
 
-        protected override void OnPaint(PaintEventArgs e)
+        protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            base.OnPaint(e);
+            sim.LeaderLapChanged -= LapChanged;
+            timer?.Stop();
+            timer?.Dispose();
+            leaderboardTimer?.Stop();
+            leaderboardTimer?.Dispose();
+            base.OnFormClosing(e);
+        }
+
+        private void Btn_pause_Click(object sender, EventArgs e)
+        {
+            if (timer.Enabled)
+            {
+                timer.Stop();
+                leaderboardTimer.Stop();
+                Btn_pause.BackgroundImage = Properties.Resources.play;
+            }
+            else
+            {
+                timer.Start();
+                leaderboardTimer.Start();
+                Btn_pause.BackgroundImage = Properties.Resources.pause;
+            }
+        }
+
+        private void EnableDoubleBuffering(Panel pnl)
+        {
+            typeof(Panel)
+                .GetProperty("DoubleBuffered",
+                    System.Reflection.BindingFlags.Instance |
+                    System.Reflection.BindingFlags.NonPublic)
+                .SetValue(pnl, true, null);
+        }
+
+        private void Pnl_track_Paint(object sender, PaintEventArgs e)
+        {
+            //base.OnPaint(e);
             Graphics g = e.Graphics;
             // Draw waypoints
             foreach (Vector waypoint in sim.Waypoints)
@@ -127,11 +176,27 @@ namespace MotorsportSim.RaceSim
             }
         }
 
-        protected override void OnFormClosing(FormClosingEventArgs e)
+        //private void Pnl_track_MouseClick(object sender, MouseEventArgs e)
+        //{
+        //    editorWaypoints.Add(new Vector(e.X, e.Y));
+        //    Pnl_track.Invalidate();
+        //}
+
+        private void SaveWaypoints(string path)
         {
-            timer?.Stop();
-            timer?.Dispose();
-            base.OnFormClosing(e);
+            using (StreamWriter writer = new StreamWriter(path))
+            {
+                foreach (var wp in editorWaypoints)
+                {
+                    writer.WriteLine($"{wp.X},{wp.Y}");
+                }
+            }
+        }
+
+        //TEMPORRARY
+        private void button1_Click(object sender, EventArgs e)
+        {
+            SaveWaypoints("Monaco-wp.txt");
         }
     }
 }

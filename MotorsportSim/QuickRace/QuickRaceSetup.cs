@@ -1,12 +1,14 @@
 ﻿using MotorsportSim.General;
 using MotorsportSim.RaceSim;
-using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace MotorsportSim.QuickRace
 {
     public partial class QuickRaceSetup : Form
     {
+        private List<Team> loadedTeams;
+
         public QuickRaceSetup()
         {
             InitializeComponent();
@@ -17,6 +19,8 @@ namespace MotorsportSim.QuickRace
 
         private void QuickRaceSetup_Load(object sender, System.EventArgs e)
         {
+            ITeamLoader teamLoader = new TextFileTeamLoader("Teams.txt");
+            loadedTeams = teamLoader.LoadTeams();
             //Set up combo boxes:
             Cbx_lapCount.Items.Clear();
             string[] lapOptions = { "3", "5", "10" };
@@ -26,19 +30,18 @@ namespace MotorsportSim.QuickRace
             }
             Cbx_lapCount.SelectedIndex = 0;
 
-            Cbx_carCount.Items.Clear();
+            Cbx_teamCount.Items.Clear();
             string[] countOptions = { "4", "6", "8" };
             foreach (string count in countOptions)
             {
-                Cbx_carCount.Items.Add(count);
+                Cbx_teamCount.Items.Add(count);
             }
-            Cbx_carCount.SelectedIndex = 0;
+            Cbx_teamCount.SelectedIndex = 0;
 
             Cbx_teamIndex.Items.Clear();
-            string[] teamOptions = { "McLaren", "Mercedes", "Red Bull", "Ferrari" }; //Will later be read in from text file, then database
-            foreach (string team in teamOptions)
+            foreach (Team team in loadedTeams)
             {
-                Cbx_teamIndex.Items.Add(team);
+                Cbx_teamIndex.Items.Add(team.Name);
             }
             Cbx_teamIndex.SelectedIndex = 0;
         }
@@ -46,11 +49,11 @@ namespace MotorsportSim.QuickRace
         private void Btn_startRace_Click(object sender, System.EventArgs e)
         {
             //Might not need this section if using default selections
-            if (Cbx_lapCount.SelectedIndex < 0)
-            {
-                MessageBox.Show("Please select a valid number of laps.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+            //if (Cbx_lapCount.SelectedIndex < 0)
+            //{
+            //    MessageBox.Show("Please select a valid number of laps.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    return;
+            //}
 
             //Get selected values:
             string selectedLaps = Cbx_lapCount.SelectedItem.ToString();
@@ -60,19 +63,51 @@ namespace MotorsportSim.QuickRace
                 return;
             }
 
-            string selectedCarCount = Cbx_carCount.SelectedItem.ToString();
-            if (!int.TryParse(selectedCarCount, out int carCount))
+            string selectedTeamCount = Cbx_teamCount.SelectedItem.ToString();
+            if (!int.TryParse(selectedTeamCount, out int teamCount))
             {
-                MessageBox.Show("Please select a valid number of cars.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please select a valid number of teams.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             int teamIndex = Cbx_teamIndex.SelectedIndex; //Assuming index corresponds to team
 
-            RaceSettings settings = new RaceSettings(laps, carCount, teamIndex);
-            Race race = new Race(settings);
+            //Load the track waypoints in:
+            Track track = new Track();
+            track.LoadWaypointsFromFile("Tracks/Monaco.txt"); //Change to load different tracks later
+
+            //Load selected teams and drivers:
+            List<Team> teams = SelectTeams(loadedTeams, teamCount, teamIndex);
+
+            RaceConfig config = new RaceConfig(track, laps, teamIndex, teams);
+
+            Race race = new Race(config);
             this.Close();
             race.ShowDialog();
+            //raceStrategy.ShowDialog();
+        }
+
+        private List<Team> SelectTeams(List<Team> loadedTeams, int teamCount, int teamIndex)
+        {
+            List<Team> selectedTeams = new List<Team>();
+
+            if (teamIndex < teamCount)
+            {
+                for (int i = 0; i < teamCount; i++)
+                {
+                    selectedTeams.Add(loadedTeams[i]);
+                }
+            }
+            else
+            {
+                for (int i = 0; i < teamCount - 1; i++)
+                {
+                    selectedTeams.Add(loadedTeams[i]);
+                }
+                selectedTeams.Add(loadedTeams[teamIndex]);
+            }
+
+            return selectedTeams;
         }
     }
 }
