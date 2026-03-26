@@ -12,9 +12,10 @@ namespace MotorsportSim.RaceSim
         private List<Car> managedCars;
         private int carCount;
         private int lapCount;
-        private float raceTime = 0;
+        private TimeSpan raceTime = TimeSpan.Zero;
         private double waterLevel = 0.0;
         private int currentLap = 1;
+        private bool isPaused = false;
 
         public event Action<int> LeaderLapChanged;
 
@@ -66,23 +67,30 @@ namespace MotorsportSim.RaceSim
             set { lapCount = value; }
         }
 
-        public float RaceTime
-        {
-            get { return raceTime; }
-        }
-
         public int CurrentLap
         {
             get { return currentLap; }
         }
 
+        public bool IsPaused
+        {
+            get { return isPaused; }
+        }
+
+        public string GetFormattedRaceTime()
+        {
+            return raceTime.ToString(@"mm\:ss");
+        }
+
         public void Update(float deltaT)
         {
-            raceTime += deltaT;
+            if (isPaused) return;
+
+            raceTime += TimeSpan.FromSeconds(deltaT);
 
             foreach (Car car in cars)
             {
-                car.Update(raceTime, deltaT);
+                car.Update((float)raceTime.TotalSeconds, deltaT);
             }
         }
 
@@ -112,6 +120,16 @@ namespace MotorsportSim.RaceSim
                 currentLap = leader.LapNumber;
                 LeaderLapChanged?.Invoke(currentLap);
             }
+        }
+
+        public void Pause()
+        {
+            isPaused = true;
+        }
+
+        public void Resume()
+        {
+            isPaused = false;
         }
     }
 }

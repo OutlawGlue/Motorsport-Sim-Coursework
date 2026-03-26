@@ -9,11 +9,9 @@ namespace MotorsportSim.RaceSim
 {
     public partial class Race : Form
     {
-        private Timer timer;
+        private Timer simTimer;
         private Timer leaderboardTimer;
-        private bool fullSecond = true;
-        private int raceTimeSeconds = -1;
-        private RaceSim sim;
+        private RaceSim raceSim;
         private const int WaypointSize = 8;
 
         //TEMP:
@@ -57,67 +55,55 @@ namespace MotorsportSim.RaceSim
         private void CreateSimulation(RaceConfig raceConfig)
         {
             RaceBuilder builder = new RaceBuilder();
-            sim = builder.BuildRace(raceConfig);
-            sim.LeaderLapChanged += LapChanged;
+            raceSim = builder.BuildRace(raceConfig);
+            raceSim.LeaderLapChanged += LapChanged;
 
-            Lbl_driver1name.Text = sim.ManagedCars[0].DriverName;
-            Lbl_driver2name.Text = sim.ManagedCars[1].DriverName;
+            Lbl_driver1name.Text = raceSim.ManagedCars[0].DriverName;
+            Lbl_driver2name.Text = raceSim.ManagedCars[1].DriverName;
         }
 
         private void SetupTimers()
         {
-            timer = new Timer { Interval = 16 }; // roughly 60 FPS (16)
-            timer.Tick += TimerTick;
-            timer.Start();
+            simTimer = new Timer { Interval = 16 }; // roughly 60 FPS (16)
+            simTimer.Tick += TimerTick;
+            simTimer.Start();
 
             leaderboardTimer = new Timer { Interval = 500 }; // Update leaderboard every 0.5 seconds
             leaderboardTimer.Tick += LeaderboardTimerTick;
             leaderboardTimer.Start();
 
-            LapChanged(sim.CurrentLap);
+            LapChanged(raceSim.CurrentLap);
         }
 
         private void TimerTick(object sender, EventArgs e)
         {
-            sim.Update(timer.Interval / 1000f);
+            raceSim.Update(simTimer.Interval / 1000f);
+            Lbl_raceTime.Text = raceSim.GetFormattedRaceTime();
             Pnl_track.Invalidate(); //Add a condition to pause race
         }
 
         private void LeaderboardTimerTick(object sender, EventArgs e)
         {
-            List<Car> sortedCars = sim.SortCarsOrder();
+            List<Car> sortedCars = raceSim.SortCarsOrder();
             Dgv_standings.Rows.Clear();
             for (int i = 0; i < sortedCars.Count; i++)
             {
                 Dgv_standings.Rows.Add(i + 1, sortedCars[i].DriverNumber);
             }
 
-            if (fullSecond)
-            {
-                fullSecond = false;
-                raceTimeSeconds++;
-                Lbl_raceTime.Text = TimeSpan
-                    .FromSeconds(raceTimeSeconds)
-                    .ToString(@"mm\:ss");
-            }
-            else
-            {
-                fullSecond = true;
-            }
-
             //Stop condition:
-            if (sim.RaceFinished())
+            if (raceSim.RaceFinished())
             {
-                timer.Stop();
+                simTimer.Stop();
                 leaderboardTimer.Stop();
             }
         }
 
         private void LapChanged(int lap)
         {
-            if (lap <= sim.LapCount)
+            if (lap <= raceSim.LapCount)
             {
-                Lbl_laps.Text = $"Lap {lap} / {sim.LapCount}";
+                Lbl_laps.Text = $"Lap {lap} / {raceSim.LapCount}";
             }
             else
             {
@@ -127,9 +113,9 @@ namespace MotorsportSim.RaceSim
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            sim.LeaderLapChanged -= LapChanged;
-            timer?.Stop();
-            timer?.Dispose();
+            raceSim.LeaderLapChanged -= LapChanged;
+            simTimer?.Stop();
+            simTimer?.Dispose();
             leaderboardTimer?.Stop();
             leaderboardTimer?.Dispose();
             base.OnFormClosing(e);
@@ -137,16 +123,14 @@ namespace MotorsportSim.RaceSim
 
         private void Btn_pause_Click(object sender, EventArgs e)
         {
-            if (timer.Enabled)
+            if (raceSim.IsPaused)
             {
-                timer.Stop();
-                leaderboardTimer.Stop();
+                raceSim.Pause();
                 Btn_pause.BackgroundImage = Properties.Resources.play;
             }
             else
             {
-                timer.Start();
-                leaderboardTimer.Start();
+                raceSim.Resume();
                 Btn_pause.BackgroundImage = Properties.Resources.pause;
             }
         }
@@ -165,12 +149,12 @@ namespace MotorsportSim.RaceSim
             //base.OnPaint(e);
             Graphics g = e.Graphics;
             // Draw waypoints
-            foreach (Vector waypoint in sim.Waypoints)
+            foreach (Vector waypoint in raceSim.Waypoints)
             {
                 g.FillEllipse(Brushes.Green, waypoint.X - WaypointSize / 2, waypoint.Y - WaypointSize / 2, WaypointSize, WaypointSize);
             }
             // Draw cars
-            foreach (Car car in sim.Cars)
+            foreach (Car car in raceSim.Cars)
             {
                 car.ShowCar(g);
             }
