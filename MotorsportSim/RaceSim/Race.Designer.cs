@@ -36,10 +36,13 @@
             this.Pnl_driver2 = new System.Windows.Forms.Panel();
             this.Lbl_driver2name = new System.Windows.Forms.Label();
             this.Pnl_timeControls = new System.Windows.Forms.Panel();
+            this.Lbl_raceTime = new System.Windows.Forms.Label();
+            this.Btn_pause = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.Pnl_track = new System.Windows.Forms.Panel();
-            this.Btn_pause = new System.Windows.Forms.Button();
-            this.Lbl_raceTime = new System.Windows.Forms.Label();
+            this.Btn_slow = new System.Windows.Forms.Button();
+            this.Btn_fast = new System.Windows.Forms.Button();
+            this.Lbl_speed = new System.Windows.Forms.Label();
             this.Pnl_sideBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Dgv_standings)).BeginInit();
             this.Pnl_driver1.SuspendLayout();
@@ -111,12 +114,39 @@
             // 
             // Pnl_timeControls
             // 
+            this.Pnl_timeControls.Controls.Add(this.Lbl_speed);
+            this.Pnl_timeControls.Controls.Add(this.Btn_fast);
+            this.Pnl_timeControls.Controls.Add(this.Btn_slow);
             this.Pnl_timeControls.Controls.Add(this.Lbl_raceTime);
             this.Pnl_timeControls.Controls.Add(this.Btn_pause);
-            this.Pnl_timeControls.Location = new System.Drawing.Point(900, 920);
+            this.Pnl_timeControls.Location = new System.Drawing.Point(900, 870);
             this.Pnl_timeControls.Name = "Pnl_timeControls";
-            this.Pnl_timeControls.Size = new System.Drawing.Size(200, 100);
+            this.Pnl_timeControls.Size = new System.Drawing.Size(200, 150);
             this.Pnl_timeControls.TabIndex = 5;
+            // 
+            // Lbl_raceTime
+            // 
+            this.Lbl_raceTime.AutoSize = true;
+            this.Lbl_raceTime.Location = new System.Drawing.Point(71, 10);
+            this.Lbl_raceTime.Name = "Lbl_raceTime";
+            this.Lbl_raceTime.Size = new System.Drawing.Size(49, 20);
+            this.Lbl_raceTime.TabIndex = 8;
+            this.Lbl_raceTime.Text = "00:00";
+            // 
+            // Btn_pause
+            // 
+            this.Btn_pause.BackgroundImage = global::MotorsportSim.Properties.Resources.pause;
+            this.Btn_pause.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.Btn_pause.FlatAppearance.BorderSize = 0;
+            this.Btn_pause.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.Btn_pause.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.Btn_pause.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn_pause.Location = new System.Drawing.Point(75, 100);
+            this.Btn_pause.Name = "Btn_pause";
+            this.Btn_pause.Size = new System.Drawing.Size(50, 50);
+            this.Btn_pause.TabIndex = 4;
+            this.Btn_pause.UseVisualStyleBackColor = false;
+            this.Btn_pause.Click += new System.EventHandler(this.Btn_pause_Click);
             // 
             // button1
             // 
@@ -137,29 +167,46 @@
             this.Pnl_track.Size = new System.Drawing.Size(1500, 800);
             this.Pnl_track.TabIndex = 6;
             // 
-            // Btn_pause
+            // Btn_slow
             // 
-            this.Btn_pause.BackgroundImage = global::MotorsportSim.Properties.Resources.pause;
-            this.Btn_pause.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.Btn_pause.FlatAppearance.BorderSize = 0;
-            this.Btn_pause.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.Btn_pause.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.Btn_pause.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Btn_pause.Location = new System.Drawing.Point(75, 50);
-            this.Btn_pause.Name = "Btn_pause";
-            this.Btn_pause.Size = new System.Drawing.Size(50, 50);
-            this.Btn_pause.TabIndex = 4;
-            this.Btn_pause.UseVisualStyleBackColor = false;
-            this.Btn_pause.Click += new System.EventHandler(this.Btn_pause_Click);
+            this.Btn_slow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.Btn_slow.FlatAppearance.BorderSize = 0;
+            this.Btn_slow.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.Btn_slow.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.Btn_slow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn_slow.Location = new System.Drawing.Point(5, 100);
+            this.Btn_slow.Name = "Btn_slow";
+            this.Btn_slow.Size = new System.Drawing.Size(50, 50);
+            this.Btn_slow.TabIndex = 9;
+            this.Btn_slow.Text = "D";
+            this.Btn_slow.UseVisualStyleBackColor = false;
+            this.Btn_slow.Click += new System.EventHandler(this.Btn_slow_Click);
             // 
-            // Lbl_raceTime
+            // Btn_fast
             // 
-            this.Lbl_raceTime.AutoSize = true;
-            this.Lbl_raceTime.Location = new System.Drawing.Point(71, 3);
-            this.Lbl_raceTime.Name = "Lbl_raceTime";
-            this.Lbl_raceTime.Size = new System.Drawing.Size(49, 20);
-            this.Lbl_raceTime.TabIndex = 8;
-            this.Lbl_raceTime.Text = "00:00";
+            this.Btn_fast.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.Btn_fast.FlatAppearance.BorderSize = 0;
+            this.Btn_fast.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.Btn_fast.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.Btn_fast.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn_fast.Location = new System.Drawing.Point(140, 100);
+            this.Btn_fast.Name = "Btn_fast";
+            this.Btn_fast.Size = new System.Drawing.Size(50, 50);
+            this.Btn_fast.TabIndex = 10;
+            this.Btn_fast.Text = "I";
+            this.Btn_fast.UseVisualStyleBackColor = false;
+            this.Btn_fast.Click += new System.EventHandler(this.Btn_fast_Click);
+            // 
+            // Lbl_speed
+            // 
+            this.Lbl_speed.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.Lbl_speed.AutoSize = true;
+            this.Lbl_speed.Location = new System.Drawing.Point(85, 70);
+            this.Lbl_speed.Name = "Lbl_speed";
+            this.Lbl_speed.Size = new System.Drawing.Size(25, 20);
+            this.Lbl_speed.TabIndex = 8;
+            this.Lbl_speed.Text = "1x";
+            this.Lbl_speed.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // Race
             // 
@@ -200,5 +247,8 @@
         private System.Windows.Forms.Label Lbl_driver1name;
         private System.Windows.Forms.Label Lbl_driver2name;
         private System.Windows.Forms.Label Lbl_raceTime;
+        private System.Windows.Forms.Button Btn_fast;
+        private System.Windows.Forms.Button Btn_slow;
+        private System.Windows.Forms.Label Lbl_speed;
     }
 }

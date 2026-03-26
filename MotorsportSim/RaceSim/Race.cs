@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace MotorsportSim.RaceSim
 {
@@ -11,8 +12,12 @@ namespace MotorsportSim.RaceSim
     {
         private Timer simTimer;
         private Timer leaderboardTimer;
+        private Stopwatch simWatch;
+        private long lastTickTime;
         private RaceSim raceSim;
         private const int WaypointSize = 8;
+        private float[] speeds = { 0.5f, 1.0f, 2.0f };
+        private int speedIndex = 1;
 
         //TEMP:
         private List<Vector> editorWaypoints = new List<Vector>();
@@ -32,6 +37,8 @@ namespace MotorsportSim.RaceSim
             MenuUI.BodyLabel(Lbl_driver2name);
             MenuUI.BodyLabel(Lbl_raceTime);
             MenuUI.Button(Btn_pause);
+            MenuUI.Button(Btn_slow);
+            MenuUI.Button(Btn_fast);
 
             EnableDoubleBuffering(Pnl_track);
             Pnl_track.Paint += Pnl_track_Paint;
@@ -64,20 +71,28 @@ namespace MotorsportSim.RaceSim
 
         private void SetupTimers()
         {
-            simTimer = new Timer { Interval = 16 }; // roughly 60 FPS (16)
+            simTimer = new Timer { Interval = 16 }; //Roughly 60 FPS (16)
             simTimer.Tick += TimerTick;
             simTimer.Start();
 
-            leaderboardTimer = new Timer { Interval = 500 }; // Update leaderboard every 0.5 seconds
+            leaderboardTimer = new Timer { Interval = 500 }; //Update leaderboard every 0.5 seconds
             leaderboardTimer.Tick += LeaderboardTimerTick;
             leaderboardTimer.Start();
+
+            simWatch = Stopwatch.StartNew();
+            lastTickTime = simWatch.ElapsedMilliseconds;
 
             LapChanged(raceSim.CurrentLap);
         }
 
         private void TimerTick(object sender, EventArgs e)
         {
-            raceSim.Update(simTimer.Interval / 1000f);
+            long currentTime = simWatch.ElapsedMilliseconds;
+            float deltaT = (currentTime - lastTickTime) / 1000f;
+            deltaT = Math.Min(deltaT, 0.05f); //Max 50ms
+            lastTickTime = currentTime;
+
+            raceSim.Update(deltaT);
             Lbl_raceTime.Text = raceSim.GetFormattedRaceTime();
             Pnl_track.Invalidate(); //Add a condition to pause race
         }
@@ -94,8 +109,8 @@ namespace MotorsportSim.RaceSim
             //Stop condition:
             if (raceSim.RaceFinished())
             {
-                simTimer.Stop();
-                leaderboardTimer.Stop();
+                raceSim.Pause();
+                Btn_pause.Enabled = false;
             }
         }
 
@@ -125,13 +140,13 @@ namespace MotorsportSim.RaceSim
         {
             if (raceSim.IsPaused)
             {
-                raceSim.Pause();
-                Btn_pause.BackgroundImage = Properties.Resources.play;
+                raceSim.Resume();
+                Btn_pause.BackgroundImage = Properties.Resources.pause;
             }
             else
             {
-                raceSim.Resume();
-                Btn_pause.BackgroundImage = Properties.Resources.pause;
+                raceSim.Pause();
+                Btn_pause.BackgroundImage = Properties.Resources.play;
             }
         }
 
@@ -181,6 +196,20 @@ namespace MotorsportSim.RaceSim
         private void button1_Click(object sender, EventArgs e)
         {
             SaveWaypoints("Monaco-wp.txt");
+        }
+
+        private void Btn_fast_Click(object sender, EventArgs e)
+        {
+            speedIndex = (speedIndex + 1) % speeds.Length;
+            raceSim.SetSpeed(speeds[speedIndex]);
+            Lbl_speed.Text = speeds[speedIndex].ToString() + "x";
+        }
+
+        private void Btn_slow_Click(object sender, EventArgs e)
+        {
+            speedIndex = (speedIndex - 1) % speeds.Length;
+            raceSim.SetSpeed(speeds[speedIndex]);
+            Lbl_speed.Text = speeds[speedIndex].ToString() + "x";
         }
     }
 }

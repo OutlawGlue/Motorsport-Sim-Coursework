@@ -13,9 +13,9 @@ namespace MotorsportSim.RaceSim
         private readonly Color colour;
         private readonly int driverNumber;
         private readonly string driverName;
-        private readonly float topSpeed = 1.6f;
-        private readonly float acceleration = 0.006f;
-        private readonly float deceleration = 0.008f;
+        private readonly float topSpeed = 60f;
+        private readonly float acceleration = 10f;
+        private readonly float deceleration = 16f;
 
         //Dynamic attributes:
         private Vector position;
@@ -81,10 +81,10 @@ namespace MotorsportSim.RaceSim
         //Methods:
         public void Update(float raceTime, float deltaT)
         {
-            Move(); //Add to this method using time deltaT, for improved accuracy
+            Move(deltaT); //Add to this method using time deltaT, for improved accuracy
         }
 
-        public void Move()
+        public void Move(float deltaT)
         {
             Vector target = waypoints[currentWaypointIndex];
             Vector distance = target - position;
@@ -113,7 +113,7 @@ namespace MotorsportSim.RaceSim
             cornerDist = distance.GetMagnitude();
 
             //Update position
-            position += velocity;
+            position += velocity * deltaT;
 
             // Detect crossing start line:
             if (currentWaypointIndex == 1 && !reachedStartLine)
@@ -167,13 +167,13 @@ namespace MotorsportSim.RaceSim
             if (cornerDist <= brakeDistance)
             {
                 //If braking:
-                speed -= deceleration;
-                currentTyre.Degrade(1);
+                speed -= deceleration * deltaT;
+                currentTyre.Degrade(1); //SHOULD BE DELTAT TO MATCH.
             }
             else
             {
                 //If accelerating:
-                speed += acceleration;
+                speed += acceleration * deltaT;
             }
 
             if (speed < 0)

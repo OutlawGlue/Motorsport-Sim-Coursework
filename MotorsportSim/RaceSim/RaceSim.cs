@@ -13,6 +13,8 @@ namespace MotorsportSim.RaceSim
         private int carCount;
         private int lapCount;
         private TimeSpan raceTime = TimeSpan.Zero;
+        private float speedFactor = 1.0f;
+
         private double waterLevel = 0.0;
         private int currentLap = 1;
         private bool isPaused = false;
@@ -77,6 +79,11 @@ namespace MotorsportSim.RaceSim
             get { return isPaused; }
         }
 
+        public void SetSpeed(float speed)
+        {
+            speedFactor = speed;
+        }
+
         public string GetFormattedRaceTime()
         {
             return raceTime.ToString(@"mm\:ss");
@@ -86,11 +93,13 @@ namespace MotorsportSim.RaceSim
         {
             if (isPaused) return;
 
-            raceTime += TimeSpan.FromSeconds(deltaT);
+            float scaledDeltaT = deltaT * speedFactor;
+
+            raceTime += TimeSpan.FromSeconds(scaledDeltaT);
 
             foreach (Car car in cars)
             {
-                car.Update((float)raceTime.TotalSeconds, deltaT);
+                car.Update((float)raceTime.TotalSeconds, scaledDeltaT);
             }
         }
 
@@ -103,12 +112,7 @@ namespace MotorsportSim.RaceSim
 
         public bool RaceFinished()
         {
-            if (currentLap > lapCount && cars[carCount - 1].LapNumber > lapCount)
-            {
-                return true;
-            }
-
-            return false;
+            return cars.All(car => car.LapNumber > lapCount);
         }
 
         private void LapChanged(Car car, int lap)
