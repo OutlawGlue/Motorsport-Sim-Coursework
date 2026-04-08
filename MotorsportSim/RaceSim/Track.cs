@@ -7,7 +7,18 @@ namespace MotorsportSim.RaceSim
 {
     public class Track
     {
+        private int index;
         private List<Vector> waypoints;
+
+        public Track(int index)
+        {
+            this.index = index;
+        }
+
+        public int Index
+        {
+            get { return index; }
+        }
 
         public List<Vector> Waypoints
         {

@@ -49,9 +49,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Career\RaceResult.cs" />
     <Compile Include="Career\RaceWeekend.cs" />
     <Compile Include="Career\BasicTeam.cs" />
+    <Compile Include="Menus\PasswordHasher.cs" />
     <Compile Include="RaceSim\CarParts\CarPart.cs" />
     <Compile Include="RaceSim\CarParts\Engine.cs" />
     <Compile Include="RaceSim\DriverEntry.cs" />
@@ -117,6 +117,7 @@
     <Compile Include="QuickRace\RaceSettings.cs" />
     <Compile Include="RaceSim\RaceBuilder.cs" />
     <Compile Include="RaceSim\RaceConfig.cs" />
+    <Compile Include="Career\DriverResult.cs" />
     <Compile Include="RaceSim\RaceSim.cs" />
     <Compile Include="RaceSim\TrackLoader.cs" />
     <Compile Include="RaceSim\Tyre.cs" />

@@ -5,6 +5,8 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using System.Diagnostics;
+using MotorsportSim.Career;
+using System.Linq;
 
 namespace MotorsportSim.RaceSim
 {
@@ -16,15 +18,16 @@ namespace MotorsportSim.RaceSim
         private long lastTickTime;
         private RaceSim raceSim;
         private const int WaypointSize = 8;
-        private float[] speeds = { 0.5f, 1.0f, 2.0f };
+        private float[] speeds = { 0.5f, 1.0f, 2.0f, 4.0f };
         private int speedIndex = 1;
+        private CareerSave save;
+        private int trackIndex;
 
         //TEMP:
         private List<Vector> editorWaypoints = new List<Vector>();
 
-        public Race(RaceConfig raceConfig)
+        public Race(RaceConfig raceConfig, CareerSave save = null)
         {
-            //Might have a raceUI class, or just all use MenuUI but different methods
             InitializeComponent();
             MenuUI.Form(this);
             MenuUI.Panel(Pnl_sideBar);
@@ -35,6 +38,8 @@ namespace MotorsportSim.RaceSim
             MenuUI.DataGridView(Dgv_standings);
             MenuUI.BodyLabel(Lbl_driver1name);
             MenuUI.BodyLabel(Lbl_driver2name);
+            MenuUI.BodyLabel(Lbl_driver1laptime);
+            MenuUI.BodyLabel(Lbl_driver2laptime);
             MenuUI.BodyLabel(Lbl_raceTime);
             MenuUI.Button(Btn_pause);
             MenuUI.Button(Btn_slow);
@@ -55,6 +60,8 @@ namespace MotorsportSim.RaceSim
 
             DoubleBuffered = true; //Reduces flickering
 
+            this.save = save;
+            this.trackIndex = raceConfig.Track.Index;
             CreateSimulation(raceConfig);
             SetupTimers();
         }
@@ -95,6 +102,9 @@ namespace MotorsportSim.RaceSim
             raceSim.Update(deltaT);
             Lbl_raceTime.Text = raceSim.GetFormattedRaceTime();
             Pnl_track.Invalidate(); //Add a condition to pause race
+
+            Lbl_driver1laptime.Text = raceSim.ManagedCars[0].GetFormattedLapTime();
+            Lbl_driver2laptime.Text = raceSim.ManagedCars[1].GetFormattedLapTime();
         }
 
         private void LeaderboardTimerTick(object sender, EventArgs e)
@@ -109,8 +119,30 @@ namespace MotorsportSim.RaceSim
             //Stop condition:
             if (raceSim.RaceFinished())
             {
+                simTimer.Stop();
+                leaderboardTimer.Stop();
                 raceSim.Pause();
                 Btn_pause.Enabled = false;
+
+                if (save != null)
+                {
+                    //Build DriverResults:
+                    List<DriverResult> allDriverResults = new List<DriverResult>();
+
+                    foreach (Car car in sortedCars)
+                    {
+                        DriverResult driverResult = new DriverResult(
+                            car.DriverName, car.DriverNumber, car.LapTimes, raceSim.Cars.IndexOf(car));
+
+                        allDriverResults.Add(driverResult);
+                    }
+
+                    MsgBox.ShowInfo("Race Complete", "Press OK to continue");
+
+                    //Add the results to the save:
+                    RaceWeekend raceWeekend = new RaceWeekend(trackIndex, true, allDriverResults);
+                    save.AddResult(raceWeekend);
+                }
             }
         }
 
@@ -163,12 +195,12 @@ namespace MotorsportSim.RaceSim
         {
             //base.OnPaint(e);
             Graphics g = e.Graphics;
-            // Draw waypoints
+            //Draw waypoints:
             foreach (Vector waypoint in raceSim.Waypoints)
             {
                 g.FillEllipse(Brushes.Green, waypoint.X - WaypointSize / 2, waypoint.Y - WaypointSize / 2, WaypointSize, WaypointSize);
             }
-            // Draw cars
+            //Draw cars:
             foreach (Car car in raceSim.Cars)
             {
                 car.ShowCar(g);
@@ -200,14 +232,20 @@ namespace MotorsportSim.RaceSim
 
         private void Btn_fast_Click(object sender, EventArgs e)
         {
-            speedIndex = (speedIndex + 1) % speeds.Length;
+            speedIndex++;
+            if (speedIndex >= speeds.Length)
+                speedIndex = speeds.Length - 1;
+
             raceSim.SetSpeed(speeds[speedIndex]);
             Lbl_speed.Text = speeds[speedIndex].ToString() + "x";
         }
 
         private void Btn_slow_Click(object sender, EventArgs e)
         {
-            speedIndex = (speedIndex - 1) % speeds.Length;
+            speedIndex--;
+            if (speedIndex < 0)
+                speedIndex = 0;
+
             raceSim.SetSpeed(speeds[speedIndex]);
             Lbl_speed.Text = speeds[speedIndex].ToString() + "x";
         }

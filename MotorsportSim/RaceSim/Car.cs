@@ -13,9 +13,9 @@ namespace MotorsportSim.RaceSim
         private readonly Color colour;
         private readonly int driverNumber;
         private readonly string driverName;
-        private readonly float topSpeed = 60f;
+        private readonly float topSpeed = 70f;
         private readonly float acceleration = 10f;
-        private readonly float deceleration = 16f;
+        private readonly float deceleration = 20f;
 
         //Dynamic attributes:
         private Vector position;
@@ -24,7 +24,8 @@ namespace MotorsportSim.RaceSim
         private float cornerDist;
         private float speed = 0f;
         private float lapStartTime = 0f;
-        private List<float> lapTimes;
+        private List<float> lapTimes = new List<float>();
+        private float currentLap = 0f;
         private int lapNumber = 1;
         private int currentWaypointIndex = 1;
         private int nextWaypointIndex = 0;
@@ -43,7 +44,6 @@ namespace MotorsportSim.RaceSim
             this.driverNumber = driverNumber;
             this.driverName = driverName;
             this.track = track;
-            //this.currentTyre = startTyre;
 
             velocity = new Vector(0, 0);
             waypoints = this.track.Waypoints;
@@ -78,13 +78,19 @@ namespace MotorsportSim.RaceSim
             set { lapTimes = value; }
         }
 
+        public float CurrentLap
+        {
+            get { return currentLap; }
+        }
+
         //Methods:
         public void Update(float raceTime, float deltaT)
         {
-            Move(deltaT); //Add to this method using time deltaT, for improved accuracy
+            Move(raceTime, deltaT);
+            currentLap += deltaT;
         }
 
-        public void Move(float deltaT)
+        public void Move(float raceTime, float deltaT)
         {
             Vector target = waypoints[currentWaypointIndex];
             Vector distance = target - position;
@@ -115,11 +121,17 @@ namespace MotorsportSim.RaceSim
             //Update position
             position += velocity * deltaT;
 
-            // Detect crossing start line:
+            //Detect crossing start line:
             if (currentWaypointIndex == 1 && !reachedStartLine)
             {
                 lapNumber++;
                 reachedStartLine = true;
+
+                float lapTime = raceTime - lapStartTime;
+                lapTimes.Add(lapTime);
+
+                lapStartTime = raceTime;
+                currentLap = 0;
 
                 LapChanged?.Invoke(this, lapNumber);
             }
@@ -168,7 +180,7 @@ namespace MotorsportSim.RaceSim
             {
                 //If braking:
                 speed -= deceleration * deltaT;
-                currentTyre.Degrade(1); //SHOULD BE DELTAT TO MATCH.
+                currentTyre.Degrade(1); //SHOULD BE DELTAT TO MATCH. ???
             }
             else
             {
@@ -201,6 +213,12 @@ namespace MotorsportSim.RaceSim
         public void ChangeTyre(Tyre newTyre)
         {
             currentTyre = newTyre;
+        }
+
+        public string GetFormattedLapTime()
+        {
+            TimeSpan time = TimeSpan.FromSeconds(currentLap);
+            return time.ToString(@"m\:ss");
         }
     }
 }

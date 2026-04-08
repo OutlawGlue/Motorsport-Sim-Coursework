@@ -32,6 +32,7 @@
             this.Btn_startRace = new System.Windows.Forms.Button();
             this.Cbx_teamCount = new System.Windows.Forms.ComboBox();
             this.Cbx_teamIndex = new System.Windows.Forms.ComboBox();
+            this.Pnl_top = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
             // Cbx_lapCount
@@ -52,11 +53,11 @@
             this.Btn_startRace.UseVisualStyleBackColor = true;
             this.Btn_startRace.Click += new System.EventHandler(this.Btn_startRace_Click);
             // 
-            // Cbx_carCount
+            // Cbx_teamCount
             // 
             this.Cbx_teamCount.FormattingEnabled = true;
             this.Cbx_teamCount.Location = new System.Drawing.Point(407, 176);
-            this.Cbx_teamCount.Name = "Cbx_carCount";
+            this.Cbx_teamCount.Name = "Cbx_teamCount";
             this.Cbx_teamCount.Size = new System.Drawing.Size(121, 28);
             this.Cbx_teamCount.TabIndex = 2;
             // 
@@ -68,11 +69,20 @@
             this.Cbx_teamIndex.Size = new System.Drawing.Size(121, 28);
             this.Cbx_teamIndex.TabIndex = 3;
             // 
+            // Pnl_top
+            // 
+            this.Pnl_top.BackColor = System.Drawing.SystemColors.Control;
+            this.Pnl_top.Location = new System.Drawing.Point(0, 0);
+            this.Pnl_top.Name = "Pnl_top";
+            this.Pnl_top.Size = new System.Drawing.Size(1380, 135);
+            this.Pnl_top.TabIndex = 20;
+            // 
             // QuickRaceSetup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1378, 744);
+            this.Controls.Add(this.Pnl_top);
             this.Controls.Add(this.Cbx_teamIndex);
             this.Controls.Add(this.Cbx_teamCount);
             this.Controls.Add(this.Btn_startRace);
@@ -90,5 +100,6 @@
         private System.Windows.Forms.Button Btn_startRace;
         private System.Windows.Forms.ComboBox Cbx_teamCount;
         private System.Windows.Forms.ComboBox Cbx_teamIndex;
+        private System.Windows.Forms.Panel Pnl_top;
     }
 }

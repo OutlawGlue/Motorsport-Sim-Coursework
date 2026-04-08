@@ -32,12 +32,46 @@ namespace MotorsportSim.Career
 
         private void MainMenu_Load(object sender, EventArgs e)
         {
+            LoadBoxes();
+        }
+
+        //For creating a new save:
+        private void Btn_newSave_Click(object sender, EventArgs e)
+        {
+            //Make sure there is a folder to save files in:
+            _saveManager.SaveLocationAvailable(true);
+
+            bool created;
+            do
+            {
+                string saveName = Tbx_saveName.Text;
+                int lapCount = int.Parse(Cbx_lapCount.Text);
+                int teamCount = int.Parse(Cbx_teamCount.Text);
+                int managedTeamIndex = Cbx_managedTeam.SelectedIndex;
+
+                List<Team> teams = _saveManager.LoadTeamList(teamCount, managedTeamIndex);
+                DateTime currentDate = DateTime.Now;
+                CareerSave newSave = new CareerSave(saveName, currentDate, lapCount, teams, managedTeamIndex);
+                created = _saveManager.CreateNewSave(saveName, newSave); //Handles MsgBox
+                Tbx_saveName.Clear();
+            } while (!created);
+
+            LoadSaves();
+        }
+
+        private void LoadSaves()
+        {
             Cbx_loadCareer.Items.Clear();
             string[] files = _saveManager.LoadSaveList();
             foreach (string file in files)
             {
                 Cbx_loadCareer.Items.Add(Path.GetFileNameWithoutExtension(file));
             }
+        }
+
+        private void LoadBoxes()
+        {
+            LoadSaves();
 
             Cbx_lapCount.Items.Clear();
             int[] laps = { 3, 5, 10, 20 };
@@ -61,30 +95,6 @@ namespace MotorsportSim.Career
             }
         }
 
-        //For creating a new save:
-        private void Btn_newSave_Click(object sender, EventArgs e)
-        {
-            //Validate the save name first (could do all these processes in saveManager)
-
-            //Make sure there is a folder to save files in:
-            _saveManager.SaveLocationAvailable(true);
-
-            bool created;
-            do
-            {
-                string saveName = Tbx_saveName.Text;
-                int lapCount = int.Parse(Cbx_lapCount.Text);
-                int teamCount = int.Parse(Cbx_teamCount.Text);
-                int managedTeamIndex = Cbx_managedTeam.SelectedIndex;
-
-                List<Team> teams = _saveManager.LoadTeamList(teamCount, managedTeamIndex);
-                DateTime currentDate = DateTime.Now;
-                CareerSave newSave = new CareerSave(saveName, currentDate, lapCount, teams, managedTeamIndex);
-                created = _saveManager.CreateNewSave(saveName, newSave);
-                Tbx_saveName.Clear();
-            } while (!created);
-        }
-
         //For loading a current save:
         private void Btn_loadSave_Click(object sender, EventArgs e)
         {
@@ -92,7 +102,7 @@ namespace MotorsportSim.Career
 
             string saveValue = Cbx_loadCareer.SelectedItem.ToString(); //Outputs an object, but itll just be eg."save"
 
-            CareerMenu careerMenu = new CareerMenu(saveValue);
+            CareerMenu careerMenu = new CareerMenu(saveValue, _saveManager);
             this.Close();
             careerMenu.ShowDialog();
         }

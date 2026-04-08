@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace MotorsportSim.Career
 {
-    internal class CareerSave
+    public class CareerSave
     {
         private string careerName;
         private DateTime lastUpdated;
@@ -22,7 +22,7 @@ namespace MotorsportSim.Career
             currentRound = 0;
             schedule = new List<RaceWeekend>(); //temp, allow user to choose in future
             this.lapCount = lapCount;
-            this.teams = teams; // TEMPORARY HARDCODED VALUE
+            this.teams = teams;
             this.managedTeamIndex = managedTeamIndex;
         }
 
@@ -42,12 +42,6 @@ namespace MotorsportSim.Career
         {
             get { return currentRound; }
             set { currentRound = value; }
-        }
-
-        public List<RaceWeekend> Schedule
-        {
-            get { return schedule; }
-            set { schedule = value; }
         }
 
         public Track NextTrack
@@ -77,6 +71,11 @@ namespace MotorsportSim.Career
         {
             get { return managedTeamIndex; }
             set { managedTeamIndex = value; }
+        }
+
+        public void AddResult(RaceWeekend raceWeekend)
+        {
+            schedule.Add(raceWeekend);
         }
     }
 }

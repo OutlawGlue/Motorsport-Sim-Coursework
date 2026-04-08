@@ -11,7 +11,7 @@ namespace MotorsportSim.RaceSim
     {
         private string name;
         private int number;
-        private List<TyreStint> tyreHistory; //This could be my own data structure. List that has lapNumber and tyre compound.
+        private List<TyreStint> tyreHistory;
 
         public Driver(string name, int number)
         {

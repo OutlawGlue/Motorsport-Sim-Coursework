@@ -73,7 +73,8 @@ namespace MotorsportSim.QuickRace
             int teamIndex = Cbx_teamIndex.SelectedIndex; //Assuming index corresponds to team
 
             //Load the track waypoints in:
-            Track track = new Track();
+            int index = 0; //TEMPORARY HARDCODE
+            Track track = new Track(index);
             track.LoadWaypointsFromFile("Tracks/Monaco.txt"); //Change to load different tracks later
 
             //Load selected teams and drivers:

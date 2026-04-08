@@ -32,17 +32,19 @@
             this.Pnl_sideBar = new System.Windows.Forms.Panel();
             this.Dgv_standings = new System.Windows.Forms.DataGridView();
             this.Pnl_driver1 = new System.Windows.Forms.Panel();
+            this.Lbl_driver1laptime = new System.Windows.Forms.Label();
             this.Lbl_driver1name = new System.Windows.Forms.Label();
             this.Pnl_driver2 = new System.Windows.Forms.Panel();
+            this.Lbl_driver2laptime = new System.Windows.Forms.Label();
             this.Lbl_driver2name = new System.Windows.Forms.Label();
             this.Pnl_timeControls = new System.Windows.Forms.Panel();
+            this.Lbl_speed = new System.Windows.Forms.Label();
+            this.Btn_fast = new System.Windows.Forms.Button();
+            this.Btn_slow = new System.Windows.Forms.Button();
             this.Lbl_raceTime = new System.Windows.Forms.Label();
             this.Btn_pause = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.Pnl_track = new System.Windows.Forms.Panel();
-            this.Btn_slow = new System.Windows.Forms.Button();
-            this.Btn_fast = new System.Windows.Forms.Button();
-            this.Lbl_speed = new System.Windows.Forms.Label();
             this.Pnl_sideBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Dgv_standings)).BeginInit();
             this.Pnl_driver1.SuspendLayout();
@@ -80,11 +82,20 @@
             // 
             // Pnl_driver1
             // 
+            this.Pnl_driver1.Controls.Add(this.Lbl_driver1laptime);
             this.Pnl_driver1.Controls.Add(this.Lbl_driver1name);
             this.Pnl_driver1.Location = new System.Drawing.Point(350, 870);
             this.Pnl_driver1.Name = "Pnl_driver1";
             this.Pnl_driver1.Size = new System.Drawing.Size(400, 150);
             this.Pnl_driver1.TabIndex = 2;
+            // 
+            // Lbl_driver1laptime
+            // 
+            this.Lbl_driver1laptime.Location = new System.Drawing.Point(20, 100);
+            this.Lbl_driver1laptime.Name = "Lbl_driver1laptime";
+            this.Lbl_driver1laptime.Size = new System.Drawing.Size(80, 30);
+            this.Lbl_driver1laptime.TabIndex = 9;
+            this.Lbl_driver1laptime.Text = "0:00";
             // 
             // Lbl_driver1name
             // 
@@ -97,11 +108,20 @@
             // 
             // Pnl_driver2
             // 
+            this.Pnl_driver2.Controls.Add(this.Lbl_driver2laptime);
             this.Pnl_driver2.Controls.Add(this.Lbl_driver2name);
             this.Pnl_driver2.Location = new System.Drawing.Point(1250, 870);
             this.Pnl_driver2.Name = "Pnl_driver2";
             this.Pnl_driver2.Size = new System.Drawing.Size(400, 150);
             this.Pnl_driver2.TabIndex = 3;
+            // 
+            // Lbl_driver2laptime
+            // 
+            this.Lbl_driver2laptime.Location = new System.Drawing.Point(20, 100);
+            this.Lbl_driver2laptime.Name = "Lbl_driver2laptime";
+            this.Lbl_driver2laptime.Size = new System.Drawing.Size(80, 30);
+            this.Lbl_driver2laptime.TabIndex = 10;
+            this.Lbl_driver2laptime.Text = "0:00";
             // 
             // Lbl_driver2name
             // 
@@ -123,6 +143,47 @@
             this.Pnl_timeControls.Name = "Pnl_timeControls";
             this.Pnl_timeControls.Size = new System.Drawing.Size(200, 150);
             this.Pnl_timeControls.TabIndex = 5;
+            // 
+            // Lbl_speed
+            // 
+            this.Lbl_speed.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.Lbl_speed.AutoSize = true;
+            this.Lbl_speed.Location = new System.Drawing.Point(85, 70);
+            this.Lbl_speed.Name = "Lbl_speed";
+            this.Lbl_speed.Size = new System.Drawing.Size(25, 20);
+            this.Lbl_speed.TabIndex = 8;
+            this.Lbl_speed.Text = "1x";
+            this.Lbl_speed.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // Btn_fast
+            // 
+            this.Btn_fast.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.Btn_fast.FlatAppearance.BorderSize = 0;
+            this.Btn_fast.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.Btn_fast.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.Btn_fast.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn_fast.Location = new System.Drawing.Point(140, 100);
+            this.Btn_fast.Name = "Btn_fast";
+            this.Btn_fast.Size = new System.Drawing.Size(50, 50);
+            this.Btn_fast.TabIndex = 10;
+            this.Btn_fast.Text = "I";
+            this.Btn_fast.UseVisualStyleBackColor = false;
+            this.Btn_fast.Click += new System.EventHandler(this.Btn_fast_Click);
+            // 
+            // Btn_slow
+            // 
+            this.Btn_slow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.Btn_slow.FlatAppearance.BorderSize = 0;
+            this.Btn_slow.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.Btn_slow.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.Btn_slow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn_slow.Location = new System.Drawing.Point(5, 100);
+            this.Btn_slow.Name = "Btn_slow";
+            this.Btn_slow.Size = new System.Drawing.Size(50, 50);
+            this.Btn_slow.TabIndex = 9;
+            this.Btn_slow.Text = "D";
+            this.Btn_slow.UseVisualStyleBackColor = false;
+            this.Btn_slow.Click += new System.EventHandler(this.Btn_slow_Click);
             // 
             // Lbl_raceTime
             // 
@@ -167,47 +228,6 @@
             this.Pnl_track.Size = new System.Drawing.Size(1500, 800);
             this.Pnl_track.TabIndex = 6;
             // 
-            // Btn_slow
-            // 
-            this.Btn_slow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.Btn_slow.FlatAppearance.BorderSize = 0;
-            this.Btn_slow.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.Btn_slow.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.Btn_slow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Btn_slow.Location = new System.Drawing.Point(5, 100);
-            this.Btn_slow.Name = "Btn_slow";
-            this.Btn_slow.Size = new System.Drawing.Size(50, 50);
-            this.Btn_slow.TabIndex = 9;
-            this.Btn_slow.Text = "D";
-            this.Btn_slow.UseVisualStyleBackColor = false;
-            this.Btn_slow.Click += new System.EventHandler(this.Btn_slow_Click);
-            // 
-            // Btn_fast
-            // 
-            this.Btn_fast.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.Btn_fast.FlatAppearance.BorderSize = 0;
-            this.Btn_fast.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.Btn_fast.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.Btn_fast.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Btn_fast.Location = new System.Drawing.Point(140, 100);
-            this.Btn_fast.Name = "Btn_fast";
-            this.Btn_fast.Size = new System.Drawing.Size(50, 50);
-            this.Btn_fast.TabIndex = 10;
-            this.Btn_fast.Text = "I";
-            this.Btn_fast.UseVisualStyleBackColor = false;
-            this.Btn_fast.Click += new System.EventHandler(this.Btn_fast_Click);
-            // 
-            // Lbl_speed
-            // 
-            this.Lbl_speed.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.Lbl_speed.AutoSize = true;
-            this.Lbl_speed.Location = new System.Drawing.Point(85, 70);
-            this.Lbl_speed.Name = "Lbl_speed";
-            this.Lbl_speed.Size = new System.Drawing.Size(25, 20);
-            this.Lbl_speed.TabIndex = 8;
-            this.Lbl_speed.Text = "1x";
-            this.Lbl_speed.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
             // Race
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -250,5 +270,7 @@
         private System.Windows.Forms.Button Btn_fast;
         private System.Windows.Forms.Button Btn_slow;
         private System.Windows.Forms.Label Lbl_speed;
+        private System.Windows.Forms.Label Lbl_driver1laptime;
+        private System.Windows.Forms.Label Lbl_driver2laptime;
     }
 }

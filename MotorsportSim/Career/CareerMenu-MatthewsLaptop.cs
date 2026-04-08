@@ -1,5 +1,7 @@
 ﻿using MotorsportSim.General;
+using MotorsportSim.QuickRace;
 using MotorsportSim.RaceSim;
+using System.IO;
 using System.Windows.Forms;
 
 namespace MotorsportSim.Career
@@ -8,7 +10,7 @@ namespace MotorsportSim.Career
     {
         private CareerSave save;
 
-        public CareerMenu(string saveName, SaveManager _saveManager)
+        public CareerMenu(string saveName)
         {
             InitializeComponent();
             MenuUI.Form(this);
@@ -23,16 +25,17 @@ namespace MotorsportSim.Career
             Dgv_drivers.Columns.Add("Points", "Points");
             Dgv_drivers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
-            //Use save manager to load in data:
+            //Use save manager to load in data
+            SaveManager _saveManager = new SaveManager();
             save = _saveManager.LoadSave(saveName);
         }
 
         private void Btn_nextRace_Click(object sender, System.EventArgs e)
         {
             //TEMPORARY, will already be used before here
-            RaceConfig settings = new RaceConfig(save.NextTrack, save.LapCount, save.ManagedTeamIndex, save.Teams);
+            RaceConfig raceConfig = new RaceConfig(save.NextTrack, save.LapCount, save.ManagedTeamIndex, save.Teams);
 
-            Race race = new Race(settings, save);
+            Race race = new Race(raceConfig);
             this.Close();
             race.ShowDialog();
             //Later it should go to race setup then actual race,

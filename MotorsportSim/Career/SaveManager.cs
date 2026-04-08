@@ -1,5 +1,4 @@
 ﻿using MotorsportSim.General;
-using static MotorsportSim.RaceSim.Team;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
@@ -9,7 +8,7 @@ using System.Drawing;
 
 namespace MotorsportSim.Career
 {
-    internal class SaveManager
+    public class SaveManager
     {
         private const string FOLDER = "GameSaves";
 

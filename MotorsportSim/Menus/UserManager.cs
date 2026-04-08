@@ -38,14 +38,18 @@ namespace MotorsportSim.Menus
         {
             if (!userDict.ContainsKey(username))
             {
-                MsgBox.ShowError("Sign In Failed", "Account does not exist");
+                MsgBox.ShowError("Sign In Failed", "Invalid credentials");
                 return false;
             }
-            else if (userDict[username].Password != password)
+
+            string storedHash = userDict[username].Password;
+
+            if (!PasswordHasher.VerifyPassword(password, storedHash))
             {
-                MsgBox.ShowError("Sign In Failed", "Username and password do not match");
+                MsgBox.ShowError("Sign In Failed", "Invalid credentials");
                 return false;
             }
+
             MsgBox.ShowInfo("Success", "Signed in");
             return true;
         }
@@ -59,36 +63,51 @@ namespace MotorsportSim.Menus
                     "Usernames must be between 5 and 15 characters");
                 return false;
             }
-            else if (!(password.Length >= 8 && password.Length <= 30))
+
+            if (!(password.Length >= 8 && password.Length <= 30))
             {
                 MsgBox.ShowError("Invalid Password",
                     "Passwords must be between 8 and 30 characters");
                 return false;
             }
-            else if (password != confirmPassword)
+
+            if (password != confirmPassword)
             {
                 MsgBox.ShowError("Invalid Password",
                     "Passwords do not match");
                 return false;
             }
-            else if (userDict.ContainsKey(username))
+
+            if (userDict.ContainsKey(username))
             {
                 MsgBox.ShowError("Username Unavailable",
                     "This username is already in use");
+                return false;
             }
+
+            //Prevent csv errors:
+            if (username.Contains(","))
+            {
+                MsgBox.ShowError("Invalid Username", "Username cannot contain commas");
+                return false;
+            }
+
             CreateUser(username, password);
+
             MsgBox.ShowInfo("Success", "Account successfully created");
             return true;
         }
 
         private void CreateUser(string username, string password)
         {
-            User newUser = new User(username, password);
+            string hashedPassword = PasswordHasher.HashPassword(password);
+
+            User newUser = new User(username, hashedPassword);
             userDict.Add(username, newUser);
 
             using (StreamWriter sw = File.AppendText(FILEPATH))
             {
-                sw.WriteLine($"{username},{password}");
+                sw.WriteLine($"{username},{hashedPassword}");
             }
         }
     }
