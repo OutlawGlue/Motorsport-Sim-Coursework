@@ -8,6 +8,7 @@ namespace MotorsportSim.Menus
     {
         private const string FILEPATH = "users.txt";
         private Dictionary<string, User> userDict = new Dictionary<string, User>();
+        private string user;
 
         public UserManager()
         {
@@ -51,6 +52,7 @@ namespace MotorsportSim.Menus
             }
 
             MsgBox.ShowInfo("Success", "Signed in");
+            user = username;
             return true;
         }
 
@@ -95,6 +97,7 @@ namespace MotorsportSim.Menus
             CreateUser(username, password);
 
             MsgBox.ShowInfo("Success", "Account successfully created");
+            user = username;
             return true;
         }
 
@@ -109,6 +112,11 @@ namespace MotorsportSim.Menus
             {
                 sw.WriteLine($"{username},{hashedPassword}");
             }
+        }
+
+        public string GetCurrentUser()
+        {
+            return user;
         }
     }
 }

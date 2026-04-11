@@ -10,9 +10,9 @@ namespace MotorsportSim.Career
 {
     public partial class CareerManager : Form
     {
-        private readonly SaveManager _saveManager = new SaveManager();
+        private readonly SaveManager _saveManager;
 
-        public CareerManager()
+        public CareerManager(string username)
         {
             InitializeComponent();
             MenuUI.Form(this);
@@ -28,6 +28,12 @@ namespace MotorsportSim.Career
             MenuUI.ComboBox(Cbx_lapCount);
             MenuUI.ComboBox(Cbx_teamCount);
             MenuUI.ComboBox(Cbx_managedTeam);
+            MenuUI.BodyLabel(Lbl_careerName);
+            MenuUI.BodyLabel(Lbl_lapCount);
+            MenuUI.BodyLabel(Lbl_teams);
+            MenuUI.BodyLabel(Lbl_managedTeam);
+
+            _saveManager = new SaveManager(username);
         }
 
         private void MainMenu_Load(object sender, EventArgs e)
@@ -41,22 +47,22 @@ namespace MotorsportSim.Career
             //Make sure there is a folder to save files in:
             _saveManager.SaveLocationAvailable(true);
 
-            bool created;
+            bool created; string saveName;
             do
             {
-                string saveName = Tbx_saveName.Text;
+                saveName = Tbx_saveName.Text;
                 int lapCount = int.Parse(Cbx_lapCount.Text);
                 int teamCount = int.Parse(Cbx_teamCount.Text);
                 int managedTeamIndex = Cbx_managedTeam.SelectedIndex;
 
                 List<Team> teams = _saveManager.LoadTeamList(teamCount, managedTeamIndex);
-                DateTime currentDate = DateTime.Now;
-                CareerSave newSave = new CareerSave(saveName, currentDate, lapCount, teams, managedTeamIndex);
+                CareerSave newSave = new CareerSave(saveName, lapCount, teams, managedTeamIndex);
                 created = _saveManager.CreateNewSave(saveName, newSave); //Handles MsgBox
                 Tbx_saveName.Clear();
             } while (!created);
 
             LoadSaves();
+            LoadGame(saveName);
         }
 
         private void LoadSaves()
@@ -98,13 +104,7 @@ namespace MotorsportSim.Career
         //For loading a current save:
         private void Btn_loadSave_Click(object sender, EventArgs e)
         {
-            _saveManager.SaveLocationAvailable(false);
-
-            string saveValue = Cbx_loadCareer.SelectedItem.ToString(); //Outputs an object, but itll just be eg."save"
-
-            CareerMenu careerMenu = new CareerMenu(saveValue, _saveManager);
-            this.Close();
-            careerMenu.ShowDialog();
+            LoadGame();
         }
 
         private void Btn_settings_Click(object sender, EventArgs e)
@@ -116,9 +116,25 @@ namespace MotorsportSim.Career
 
         private void Btn_back_Click(object sender, EventArgs e)
         {
-            NewGame newGame = new NewGame();
             this.Close();
-            newGame.ShowDialog();
+        }
+
+        private void LoadGame(string saveValue = null)
+        {
+            _saveManager.SaveLocationAvailable(false);
+
+            if (saveValue == null)
+            {
+                //IE re loading an existing save:
+                saveValue = Cbx_loadCareer.SelectedItem.ToString(); //Outputs an object, but itll just be eg."save"
+            }
+
+            this.Hide();
+
+            CareerMenu careerMenu = new CareerMenu(saveValue, _saveManager);
+            careerMenu.ShowDialog();
+
+            this.Close();
         }
     }
 }

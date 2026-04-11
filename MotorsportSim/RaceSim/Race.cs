@@ -30,17 +30,39 @@ namespace MotorsportSim.RaceSim
         {
             InitializeComponent();
             MenuUI.Form(this);
-            MenuUI.Panel(Pnl_sideBar);
-            MenuUI.SecondaryPanel(Pnl_driver1);
-            MenuUI.SecondaryPanel(Pnl_driver2);
-            MenuUI.SecondaryPanel(Pnl_timeControls);
-            MenuUI.BodyLabel(Lbl_laps);
             MenuUI.DataGridView(Dgv_standings);
-            MenuUI.BodyLabel(Lbl_driver1name);
-            MenuUI.BodyLabel(Lbl_driver2name);
-            MenuUI.BodyLabel(Lbl_driver1laptime);
-            MenuUI.BodyLabel(Lbl_driver2laptime);
+
+            //Panels:
+            MenuUI.Panel(Pnl_sideBar);
+            MenuUI.Panel(Pnl_raceTime);
+            MenuUI.SecondaryPanel(Pnl_timeControls);
+
+            MenuUI.Panel(Pnl_driver1);
+            MenuUI.SecondaryPanel(Pnl_driver1Time);
+            MenuUI.SecondaryPanel(Pnl_driver1Tyres);
+
+            MenuUI.Panel(Pnl_driver2);
+            MenuUI.SecondaryPanel(Pnl_driver2Time);
+            MenuUI.SecondaryPanel(Pnl_driver2Tyres);
+
+
+            //Labels:
+            MenuUI.BodyLabel(Lbl_laps);
             MenuUI.BodyLabel(Lbl_raceTime);
+
+            MenuUI.HeadingLabel(Lbl_driver1name);
+            MenuUI.HeadingLabel(Lbl_driver1timetitle);
+            MenuUI.BodyLabel(Lbl_driver1laptime);
+            MenuUI.HeadingLabel(Lbl_driver1tyretitle);
+            MenuUI.BodyLabel(Lbl_driver1tyrewear);
+
+            MenuUI.HeadingLabel(Lbl_driver2name);
+            MenuUI.HeadingLabel(Lbl_driver2timetitle);
+            MenuUI.BodyLabel(Lbl_driver2laptime);
+            MenuUI.HeadingLabel(Lbl_driver2tyretitle);
+            MenuUI.BodyLabel(Lbl_driver2tyrewear);
+
+            //Buttons:
             MenuUI.Button(Btn_pause);
             MenuUI.Button(Btn_slow);
             MenuUI.Button(Btn_fast);
@@ -116,6 +138,10 @@ namespace MotorsportSim.RaceSim
                 Dgv_standings.Rows.Add(i + 1, sortedCars[i].DriverNumber);
             }
 
+            //Get tyre wear:
+            Lbl_driver1tyrewear.Text = raceSim.ManagedCars[0].GetFormattedTyreWear();
+            Lbl_driver2tyrewear.Text = raceSim.ManagedCars[1].GetFormattedTyreWear();
+
             //Stop condition:
             if (raceSim.RaceFinished())
             {
@@ -129,20 +155,23 @@ namespace MotorsportSim.RaceSim
                     //Build DriverResults:
                     List<DriverResult> allDriverResults = new List<DriverResult>();
 
-                    foreach (Car car in sortedCars)
+                    for (int i = 0; i < sortedCars.Count; i++)
                     {
-                        DriverResult driverResult = new DriverResult(
-                            car.DriverName, car.DriverNumber, car.LapTimes, raceSim.Cars.IndexOf(car));
+                        Car car = sortedCars[i];
+
+                        DriverResult driverResult = 
+                            new DriverResult(car.DriverName, car.DriverNumber, car.LapTimes, i + 1);
 
                         allDriverResults.Add(driverResult);
                     }
-
-                    MsgBox.ShowInfo("Race Complete", "Press OK to continue");
 
                     //Add the results to the save:
                     RaceWeekend raceWeekend = new RaceWeekend(trackIndex, true, allDriverResults);
                     save.AddResult(raceWeekend);
                 }
+
+                MsgBox.ShowInfo("Race Complete", "Press OK to continue");
+                this.Close();
             }
         }
 
@@ -249,5 +278,6 @@ namespace MotorsportSim.RaceSim
             raceSim.SetSpeed(speeds[speedIndex]);
             Lbl_speed.Text = speeds[speedIndex].ToString() + "x";
         }
+
     }
 }

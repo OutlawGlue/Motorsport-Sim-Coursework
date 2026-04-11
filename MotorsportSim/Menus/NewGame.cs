@@ -8,7 +8,8 @@ namespace MotorsportSim.Menus
 {
     public partial class NewGame : Form
     {
-        public NewGame()
+        private string username;
+        public NewGame(string username)
         {
             InitializeComponent();
             MenuUI.Form(this);
@@ -16,27 +17,35 @@ namespace MotorsportSim.Menus
             MenuUI.BodyButton(Btn_career);
             MenuUI.BodyButton(Btn_quickRace);
             MenuUI.BodyButton(Btn_back);
+
+            this.username = username;
         }
 
         private void Btn_back_Click(object sender, EventArgs e)
         {
             SignIn signIn = new SignIn();
             this.Close();
-            signIn.ShowDialog();
+            signIn.Show();
         }
 
         private void Btn_career_Click(object sender, EventArgs e)
         {
-            CareerManager careerManager = new CareerManager();
-            this.Close();
+            this.Hide();
+
+            CareerManager careerManager = new CareerManager(username);
             careerManager.ShowDialog();
+
+            this.Show();
         }
 
         private void Btn_quickRace_Click(object sender, EventArgs e)
         {
+            this.Hide();
+
             QuickRaceSetup quickRaceSetup = new QuickRaceSetup();
-            this.Close();
             quickRaceSetup.ShowDialog();
+
+            this.Show();
         }
     }
 }

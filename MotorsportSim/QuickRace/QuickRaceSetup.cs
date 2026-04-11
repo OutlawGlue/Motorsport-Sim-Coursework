@@ -13,7 +13,15 @@ namespace MotorsportSim.QuickRace
         {
             InitializeComponent();
             MenuUI.Form(this);
+            MenuUI.Panel(Pnl_top);
+            MenuUI.HeadingLabel(Lbl_newQuickRace);
             MenuUI.ComboBox(Cbx_lapCount);
+            MenuUI.ComboBox(Cbx_teamCount);
+            MenuUI.ComboBox(Cbx_teamIndex);
+            MenuUI.BodyLabel(Lbl_lapCount);
+            MenuUI.BodyLabel(Lbl_teamCount);
+            MenuUI.BodyLabel(Lbl_teamIndex);
+            MenuUI.BodyButton(Btn_back);
             MenuUI.BodyButton(Btn_startRace);
         }
 
@@ -48,13 +56,6 @@ namespace MotorsportSim.QuickRace
 
         private void Btn_startRace_Click(object sender, System.EventArgs e)
         {
-            //Might not need this section if using default selections
-            //if (Cbx_lapCount.SelectedIndex < 0)
-            //{
-            //    MessageBox.Show("Please select a valid number of laps.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    return;
-            //}
-
             //Get selected values:
             string selectedLaps = Cbx_lapCount.SelectedItem.ToString();
             if (!int.TryParse(selectedLaps, out int laps))
@@ -82,10 +83,12 @@ namespace MotorsportSim.QuickRace
 
             RaceConfig config = new RaceConfig(track, laps, teamIndex, teams);
 
+            this.Hide();
+
             Race race = new Race(config);
-            this.Close();
             race.ShowDialog();
-            //raceStrategy.ShowDialog();
+
+            this.Close();
         }
 
         private List<Team> SelectTeams(List<Team> loadedTeams, int teamCount, int teamIndex)
@@ -109,6 +112,11 @@ namespace MotorsportSim.QuickRace
             }
 
             return selectedTeams;
+        }
+
+        private void Btn_back_Click(object sender, System.EventArgs e)
+        {
+            this.Close();
         }
     }
 }

@@ -78,19 +78,14 @@ namespace MotorsportSim.RaceSim
             set { lapTimes = value; }
         }
 
-        public float CurrentLap
-        {
-            get { return currentLap; }
-        }
-
         //Methods:
-        public void Update(float raceTime, float deltaT)
+        public void Update(float raceTime, float deltaT, float simSpeed)
         {
             Move(raceTime, deltaT);
             currentLap += deltaT;
         }
 
-        public void Move(float raceTime, float deltaT)
+        public void Move(float raceTime, float deltaT, float simSpeed)
         {
             Vector target = waypoints[currentWaypointIndex];
             Vector distance = target - position;
@@ -180,7 +175,7 @@ namespace MotorsportSim.RaceSim
             {
                 //If braking:
                 speed -= deceleration * deltaT;
-                currentTyre.Degrade(1); //SHOULD BE DELTAT TO MATCH. ???
+                currentTyre.Degrade(1 * Convert.ToInt16(simSpeed)); //SHOULD BE DELTAT TO MATCH. ???
             }
             else
             {
@@ -219,6 +214,12 @@ namespace MotorsportSim.RaceSim
         {
             TimeSpan time = TimeSpan.FromSeconds(currentLap);
             return time.ToString(@"m\:ss");
+        }
+
+        public string GetFormattedTyreWear()
+        {
+            double wear = currentTyre.Wear;
+            return wear.ToString("P0");
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MotorsportSim.Career
 {
-    internal class BasicTeam
+    public class BasicTeam
     {
         private string teamName;
         private int teamIndex;

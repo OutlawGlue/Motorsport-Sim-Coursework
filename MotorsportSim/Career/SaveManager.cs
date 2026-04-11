@@ -5,22 +5,40 @@ using System.IO;
 using System.Text.RegularExpressions;
 using MotorsportSim.RaceSim;
 using System.Drawing;
+using MotorsportSim.Menus;
 
 namespace MotorsportSim.Career
 {
     public class SaveManager
     {
-        private const string FOLDER = "GameSaves";
+        private string folderPath;
+        private string username;
+
+        public SaveManager(string username) 
+        {
+            GetUserFolder(username);
+        }
+
+        public string Username
+        {
+            get { return username; }
+        }
+
+        private string GetUserFolder(string username)
+        {
+            folderPath = Path.Combine("Users", username);
+            return folderPath;
+        }
 
         public void SaveLocationAvailable(bool createNew)
         {
-            if (!Directory.Exists(FOLDER))
+            if (!Directory.Exists(folderPath))
             {
                 if (createNew)
                 {
                     try
                     {
-                        Directory.CreateDirectory(FOLDER);
+                        Directory.CreateDirectory(folderPath);
                     }
                     catch
                     {
@@ -41,7 +59,8 @@ namespace MotorsportSim.Career
 
         public string[] LoadSaveList()
         {
-            string[] saves = Directory.GetFiles(FOLDER);
+            SaveLocationAvailable(true);
+            string[] saves = Directory.GetFiles(folderPath);
             return saves;
         }
 
@@ -134,15 +153,15 @@ namespace MotorsportSim.Career
 
         public void SaveCareer(CareerSave save)
         {
-            string path = FOLDER + "/" + save.CareerName;
+            string fullPath = folderPath + "/" + save.CareerName + ".json";
             string saveJSON = JsonConvert.SerializeObject(save, Formatting.Indented);
-            File.WriteAllText(path, saveJSON);
+            File.WriteAllText(fullPath, saveJSON);
         }
 
         public CareerSave LoadSave(string saveName)
         {
-            string path = FOLDER + "/" + saveName + ".json";
-            string json = File.ReadAllText(path);
+            string fullPath = folderPath + "/" + saveName + ".json";
+            string json = File.ReadAllText(fullPath);
             CareerSave save = JsonConvert.DeserializeObject<CareerSave>(json);
 
             return save;
@@ -158,7 +177,7 @@ namespace MotorsportSim.Career
                 return false;
             }
 
-            string filePath = Path.Combine(FOLDER, saveName + ".json");
+            string filePath = Path.Combine(folderPath, saveName + ".json");
 
             if (File.Exists(filePath))
             {
@@ -169,9 +188,12 @@ namespace MotorsportSim.Career
 
             saveData.CareerName = saveName;
 
-            string json = JsonConvert.SerializeObject(saveData, Formatting.Indented);
+            //Don't write all data here
+            //string json = JsonConvert.SerializeObject(saveData, Formatting.Indented);
 
-            File.WriteAllText(filePath, json);
+            //File.WriteAllText(filePath, json);
+
+            SaveCareer(saveData); //This should only write some data
 
             MsgBox.ShowInfo("Save Created",
                 "New save file created successfully.");

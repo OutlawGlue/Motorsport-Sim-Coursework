@@ -99,7 +99,7 @@ namespace MotorsportSim.RaceSim
 
             foreach (Car car in cars)
             {
-                car.Update((float)raceTime.TotalSeconds, scaledDeltaT);
+                car.Update((float)raceTime.TotalSeconds, scaledDeltaT, speedFactor);
             }
         }
 

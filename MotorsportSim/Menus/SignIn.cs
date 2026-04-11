@@ -34,7 +34,7 @@ namespace MotorsportSim.Menus
                 Tbx_username.Clear();
                 Tbx_password.Clear();
 
-                NewGame menu = new NewGame();
+                NewGame menu = new NewGame(username);
                 this.Hide();
                 menu.ShowDialog();
             }

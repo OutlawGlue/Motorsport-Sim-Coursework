@@ -49,12 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Career\DriverStanding.cs" />
     <Compile Include="Career\RaceWeekend.cs" />
     <Compile Include="Career\BasicTeam.cs" />
     <Compile Include="Menus\PasswordHasher.cs" />
     <Compile Include="RaceSim\CarParts\CarPart.cs" />
     <Compile Include="RaceSim\CarParts\Engine.cs" />
-    <Compile Include="RaceSim\DriverEntry.cs" />
     <Compile Include="General\ITeamLoader.cs" />
     <Compile Include="General\TextFileTeamLoader.cs" />
     <Compile Include="RaceSim\Driver.cs" />
@@ -199,6 +199,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\Debug\Icons\play.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Icons\slow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Icons\speed.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

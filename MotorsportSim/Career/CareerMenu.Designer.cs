@@ -31,6 +31,7 @@
             this.Dgv_drivers = new System.Windows.Forms.DataGridView();
             this.Dgv_constructors = new System.Windows.Forms.DataGridView();
             this.Btn_nextRace = new System.Windows.Forms.Button();
+            this.Btn_back = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Dgv_drivers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Dgv_constructors)).BeginInit();
             this.SuspendLayout();
@@ -65,11 +66,22 @@
             this.Btn_nextRace.UseVisualStyleBackColor = true;
             this.Btn_nextRace.Click += new System.EventHandler(this.Btn_nextRace_Click);
             // 
+            // Btn_back
+            // 
+            this.Btn_back.Location = new System.Drawing.Point(50, 397);
+            this.Btn_back.Name = "Btn_back";
+            this.Btn_back.Size = new System.Drawing.Size(400, 300);
+            this.Btn_back.TabIndex = 3;
+            this.Btn_back.Text = "Back";
+            this.Btn_back.UseVisualStyleBackColor = true;
+            this.Btn_back.Click += new System.EventHandler(this.Btn_back_Click);
+            // 
             // CareerMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1378, 744);
+            this.Controls.Add(this.Btn_back);
             this.Controls.Add(this.Btn_nextRace);
             this.Controls.Add(this.Dgv_constructors);
             this.Controls.Add(this.Dgv_drivers);
@@ -86,5 +98,6 @@
         private System.Windows.Forms.DataGridView Dgv_drivers;
         private System.Windows.Forms.DataGridView Dgv_constructors;
         private System.Windows.Forms.Button Btn_nextRace;
+        private System.Windows.Forms.Button Btn_back;
     }
 }

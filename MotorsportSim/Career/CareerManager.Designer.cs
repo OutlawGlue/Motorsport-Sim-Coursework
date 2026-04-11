@@ -41,7 +41,7 @@ namespace MotorsportSim.Career
             this.Lbl_careerName = new System.Windows.Forms.Label();
             this.Lbl_lapCount = new System.Windows.Forms.Label();
             this.Cbx_lapCount = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.Lbl_teams = new System.Windows.Forms.Label();
             this.Cbx_teamCount = new System.Windows.Forms.ComboBox();
             this.Lbl_managedTeam = new System.Windows.Forms.Label();
             this.Cbx_managedTeam = new System.Windows.Forms.ComboBox();
@@ -170,15 +170,15 @@ namespace MotorsportSim.Career
             this.Cbx_lapCount.Size = new System.Drawing.Size(300, 28);
             this.Cbx_lapCount.TabIndex = 23;
             // 
-            // label1
+            // Lbl_teams
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(590, 370);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(61, 20);
-            this.label1.TabIndex = 24;
-            this.label1.Text = "Teams:";
+            this.Lbl_teams.AutoSize = true;
+            this.Lbl_teams.Location = new System.Drawing.Point(590, 370);
+            this.Lbl_teams.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.Lbl_teams.Name = "Lbl_teams";
+            this.Lbl_teams.Size = new System.Drawing.Size(61, 20);
+            this.Lbl_teams.TabIndex = 24;
+            this.Lbl_teams.Text = "Teams:";
             // 
             // Cbx_teamCount
             // 
@@ -220,7 +220,7 @@ namespace MotorsportSim.Career
             this.Controls.Add(this.Cbx_managedTeam);
             this.Controls.Add(this.Lbl_managedTeam);
             this.Controls.Add(this.Cbx_teamCount);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.Lbl_teams);
             this.Controls.Add(this.Cbx_lapCount);
             this.Controls.Add(this.Lbl_lapCount);
             this.Controls.Add(this.Lbl_careerName);
@@ -252,7 +252,7 @@ namespace MotorsportSim.Career
         private System.Windows.Forms.Button Btn_back;
         private System.Windows.Forms.Label Lbl_lapCount;
         private System.Windows.Forms.ComboBox Cbx_lapCount;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label Lbl_teams;
         private System.Windows.Forms.ComboBox Cbx_teamCount;
         private System.Windows.Forms.Label Lbl_managedTeam;
         private System.Windows.Forms.ComboBox Cbx_managedTeam;
