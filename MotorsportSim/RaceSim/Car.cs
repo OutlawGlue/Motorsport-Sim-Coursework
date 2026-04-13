@@ -81,7 +81,7 @@ namespace MotorsportSim.RaceSim
         //Methods:
         public void Update(float raceTime, float deltaT, float simSpeed)
         {
-            Move(raceTime, deltaT);
+            Move(raceTime, deltaT, simSpeed);
             currentLap += deltaT;
         }
 
