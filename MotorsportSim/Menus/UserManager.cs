@@ -66,21 +66,21 @@ namespace MotorsportSim.Menus
                 return false;
             }
 
-            if (!(password.Length >= 8 && password.Length <= 30))
+            else if (!(password.Length >= 8 && password.Length <= 30))
             {
                 MsgBox.ShowError("Invalid Password",
                     "Passwords must be between 8 and 30 characters");
                 return false;
             }
 
-            if (password != confirmPassword)
+            else if (password != confirmPassword)
             {
                 MsgBox.ShowError("Invalid Password",
                     "Passwords do not match");
                 return false;
             }
 
-            if (userDict.ContainsKey(username))
+            else if (userDict.ContainsKey(username))
             {
                 MsgBox.ShowError("Username Unavailable",
                     "This username is already in use");
@@ -88,9 +88,27 @@ namespace MotorsportSim.Menus
             }
 
             //Prevent csv errors:
-            if (username.Contains(","))
+            else if (username.Contains(","))
             {
                 MsgBox.ShowError("Invalid Username", "Username cannot contain commas");
+                return false;
+            }
+
+            else if (username.Contains(" "))
+            {
+                MsgBox.ShowError("Invalid Username", "Username cannot contain spaces");
+                return false;
+            }
+
+            else if (password.Contains(","))
+            {
+                MsgBox.ShowError("Invalid Password", "Password cannot contain commas");
+                return false;
+            }
+
+            else if (password.Contains(" "))
+            {
+                MsgBox.ShowError("Invalid Password", "Password cannot contain spaces");
                 return false;
             }
 

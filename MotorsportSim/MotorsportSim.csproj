@@ -50,8 +50,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Career\DriverStanding.cs" />
-    <Compile Include="Career\RaceWeekend.cs" />
+    <Compile Include="Career\Season.cs" />
+    <Compile Include="General\RaceWeekend.cs" />
     <Compile Include="Career\BasicTeam.cs" />
+    <Compile Include="General\ResultsLoader.cs" />
     <Compile Include="Menus\PasswordHasher.cs" />
     <Compile Include="RaceSim\CarParts\CarPart.cs" />
     <Compile Include="RaceSim\CarParts\Engine.cs" />
@@ -205,6 +207,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\Debug\Icons\speed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\TrackImages\Monaco.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

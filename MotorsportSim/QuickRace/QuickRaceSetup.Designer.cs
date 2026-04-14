@@ -38,11 +38,13 @@
             this.Cbx_teamCount = new System.Windows.Forms.ComboBox();
             this.Cbx_teamIndex = new System.Windows.Forms.ComboBox();
             this.Btn_back = new System.Windows.Forms.Button();
+            this.Lbl_track = new System.Windows.Forms.Label();
+            this.Cbx_track = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // Btn_startRace
             // 
-            this.Btn_startRace.Location = new System.Drawing.Point(690, 460);
+            this.Btn_startRace.Location = new System.Drawing.Point(690, 520);
             this.Btn_startRace.Name = "Btn_startRace";
             this.Btn_startRace.Size = new System.Drawing.Size(200, 100);
             this.Btn_startRace.TabIndex = 1;
@@ -79,7 +81,7 @@
             // Lbl_newQuickRace
             // 
             this.Lbl_newQuickRace.AutoSize = true;
-            this.Lbl_newQuickRace.Location = new System.Drawing.Point(670, 240);
+            this.Lbl_newQuickRace.Location = new System.Drawing.Point(640, 220);
             this.Lbl_newQuickRace.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Lbl_newQuickRace.Name = "Lbl_newQuickRace";
             this.Lbl_newQuickRace.Size = new System.Drawing.Size(126, 20);
@@ -131,7 +133,7 @@
             // 
             // Btn_back
             // 
-            this.Btn_back.Location = new System.Drawing.Point(450, 460);
+            this.Btn_back.Location = new System.Drawing.Point(450, 520);
             this.Btn_back.Name = "Btn_back";
             this.Btn_back.Size = new System.Drawing.Size(200, 100);
             this.Btn_back.TabIndex = 29;
@@ -139,11 +141,33 @@
             this.Btn_back.UseVisualStyleBackColor = true;
             this.Btn_back.Click += new System.EventHandler(this.Btn_back_Click);
             // 
+            // Lbl_track
+            // 
+            this.Lbl_track.AutoSize = true;
+            this.Lbl_track.Location = new System.Drawing.Point(515, 460);
+            this.Lbl_track.Name = "Lbl_track";
+            this.Lbl_track.Size = new System.Drawing.Size(52, 20);
+            this.Lbl_track.TabIndex = 30;
+            this.Lbl_track.Text = "Track:";
+            // 
+            // Cbx_track
+            // 
+            this.Cbx_track.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.Cbx_track.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Cbx_track.DropDownWidth = 200;
+            this.Cbx_track.FormattingEnabled = true;
+            this.Cbx_track.Location = new System.Drawing.Point(590, 460);
+            this.Cbx_track.Name = "Cbx_track";
+            this.Cbx_track.Size = new System.Drawing.Size(300, 28);
+            this.Cbx_track.TabIndex = 31;
+            // 
             // QuickRaceSetup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1378, 744);
+            this.Controls.Add(this.Cbx_track);
+            this.Controls.Add(this.Lbl_track);
             this.Controls.Add(this.Btn_back);
             this.Controls.Add(this.Cbx_teamIndex);
             this.Controls.Add(this.Cbx_teamCount);
@@ -173,5 +197,7 @@
         private System.Windows.Forms.ComboBox Cbx_teamCount;
         private System.Windows.Forms.ComboBox Cbx_teamIndex;
         private System.Windows.Forms.Button Btn_back;
+        private System.Windows.Forms.Label Lbl_track;
+        private System.Windows.Forms.ComboBox Cbx_track;
     }
 }

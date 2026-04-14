@@ -202,12 +202,12 @@ namespace MotorsportSim.RaceSim
             if (raceSim.IsPaused)
             {
                 raceSim.Resume();
-                Btn_pause.BackgroundImage = Properties.Resources.pause;
+                Btn_pause.BackgroundImage = Properties.Resources.play;
             }
             else
             {
                 raceSim.Pause();
-                Btn_pause.BackgroundImage = Properties.Resources.play;
+                Btn_pause.BackgroundImage = Properties.Resources.pause;
             }
         }
 

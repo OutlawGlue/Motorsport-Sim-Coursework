@@ -18,9 +18,11 @@ namespace MotorsportSim.QuickRace
             MenuUI.ComboBox(Cbx_lapCount);
             MenuUI.ComboBox(Cbx_teamCount);
             MenuUI.ComboBox(Cbx_teamIndex);
+            MenuUI.ComboBox(Cbx_track);
             MenuUI.BodyLabel(Lbl_lapCount);
             MenuUI.BodyLabel(Lbl_teamCount);
             MenuUI.BodyLabel(Lbl_teamIndex);
+            MenuUI.BodyLabel(Lbl_track);
             MenuUI.BodyButton(Btn_back);
             MenuUI.BodyButton(Btn_startRace);
         }
@@ -52,6 +54,15 @@ namespace MotorsportSim.QuickRace
                 Cbx_teamIndex.Items.Add(team.Name);
             }
             Cbx_teamIndex.SelectedIndex = 0;
+
+            Cbx_track.Items.Clear();
+            TrackLoader loader = new TrackLoader();
+            List<string> tracks = loader.LoadAll();
+            foreach (string track in tracks)
+            {
+                Cbx_track.Items.Add(track);
+            }
+            Cbx_track.SelectedIndex = 0;
         }
 
         private void Btn_startRace_Click(object sender, System.EventArgs e)

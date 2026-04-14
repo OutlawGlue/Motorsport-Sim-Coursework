@@ -59,7 +59,7 @@ namespace MotorsportSim.Career
 
         public string[] LoadSaveList()
         {
-            SaveLocationAvailable(true);
+            SaveLocationAvailable(true); //Create a new directory if needed
             string[] saves = Directory.GetFiles(folderPath);
             return saves;
         }

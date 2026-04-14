@@ -1,9 +1,11 @@
-﻿using System;
+﻿using MotorsportSim.Career;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.IO;
 
 namespace MotorsportSim.RaceSim
 {
@@ -16,6 +18,18 @@ namespace MotorsportSim.RaceSim
             track.LoadWaypointsFromFile("Tracks/Monaco.txt"); //Later use index.
 
             return track;
+        }
+
+        public List<string> LoadAll()
+        {
+            List<string> tracks = new List<string>();
+            string[] files = Directory.GetFiles("Tracks");
+            foreach (string file in files)
+            {
+                tracks.Add(Path.GetFileNameWithoutExtension(file));
+            }
+
+            return tracks;
         }
     }
 }
