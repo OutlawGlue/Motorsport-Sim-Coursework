@@ -17,6 +17,7 @@ namespace MotorsportSim.Career
             MenuUI.Form(this);
             MenuUI.BodyButton(Btn_nextRace);
             MenuUI.BodyButton(Btn_back);
+            MenuUI.BodyButton(Btn_results);
             MenuUI.DataGridView(Dgv_drivers);
             MenuUI.DataGridView(Dgv_constructors);
 
@@ -120,6 +121,12 @@ namespace MotorsportSim.Career
         private void Btn_back_Click(object sender, System.EventArgs e)
         {
             this.Close();
+        }
+
+        private void Btn_results_Click(object sender, System.EventArgs e)
+        {
+            Results results = new Results(save);
+            results.ShowDialog();
         }
     }
 }

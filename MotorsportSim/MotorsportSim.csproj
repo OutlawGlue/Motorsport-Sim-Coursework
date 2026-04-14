@@ -50,10 +50,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Career\DriverStanding.cs" />
+    <Compile Include="Career\Results.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Career\Results.Designer.cs">
+      <DependentUpon>Results.cs</DependentUpon>
+    </Compile>
     <Compile Include="Career\Season.cs" />
     <Compile Include="General\RaceWeekend.cs" />
     <Compile Include="Career\BasicTeam.cs" />
-    <Compile Include="General\ResultsLoader.cs" />
     <Compile Include="Menus\PasswordHasher.cs" />
     <Compile Include="RaceSim\CarParts\CarPart.cs" />
     <Compile Include="RaceSim\CarParts\Engine.cs" />
@@ -129,6 +134,9 @@
     <Compile Include="Menus\UserManager.cs" />
     <Compile Include="RaceSim\TyreStint.cs" />
     <Compile Include="RaceSim\Vector.cs" />
+    <EmbeddedResource Include="Career\Results.resx">
+      <DependentUpon>Results.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Menus\NewGame.resx">
       <DependentUpon>NewGame.cs</DependentUpon>
     </EmbeddedResource>

@@ -126,11 +126,11 @@ namespace MotorsportSim.Career
             currentSeasonIndex = seasons.Count - 1;
         }
 
-        public List<RaceWeekend> GetSeasonResults(int year)
+        public RaceWeekend GetSeasonResult(int year, int race)
         {
             try
             {
-                return seasons[year].Schedule;
+                return seasons[year].Schedule[race];
             }
             catch (Exception)
             {

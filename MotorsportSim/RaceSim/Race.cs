@@ -150,27 +150,33 @@ namespace MotorsportSim.RaceSim
                 raceSim.Pause();
                 Btn_pause.Enabled = false;
 
+                //Build DriverResults:
+                List<DriverResult> allDriverResults = new List<DriverResult>();
+
+                for (int i = 0; i < sortedCars.Count; i++)
+                {
+                    Car car = sortedCars[i];
+
+                    DriverResult driverResult =
+                        new DriverResult(car.DriverName, car.DriverNumber, car.LapTimes, i + 1);
+
+                    allDriverResults.Add(driverResult);
+                }
+
+                MsgBox.ShowInfo("Race Complete", "Press OK to continue");
+
                 if (save != null)
                 {
-                    //Build DriverResults:
-                    List<DriverResult> allDriverResults = new List<DriverResult>();
-
-                    for (int i = 0; i < sortedCars.Count; i++)
-                    {
-                        Car car = sortedCars[i];
-
-                        DriverResult driverResult = 
-                            new DriverResult(car.DriverName, car.DriverNumber, car.LapTimes, i + 1);
-
-                        allDriverResults.Add(driverResult);
-                    }
-
                     //Add the results to the save:
                     RaceWeekend raceWeekend = new RaceWeekend(trackIndex, true, allDriverResults);
                     save.AddResult(raceWeekend);
                 }
+                else
+                {
+                    Results results = new Results(allDriverResults);
+                    results.ShowDialog();
+                }
 
-                MsgBox.ShowInfo("Race Complete", "Press OK to continue");
                 this.Close();
             }
         }
