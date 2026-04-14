@@ -57,6 +57,7 @@ namespace MotorsportSim.Career
 
                 List<Team> teams = _saveManager.LoadTeamList(teamCount, managedTeamIndex);
                 CareerSave newSave = new CareerSave(saveName, lapCount, teams, managedTeamIndex);
+                newSave.StartSeason();
                 created = _saveManager.CreateNewSave(saveName, newSave); //Handles MsgBox
                 Tbx_saveName.Clear();
             } while (!created);

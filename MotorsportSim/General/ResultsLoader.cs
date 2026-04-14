@@ -9,10 +9,9 @@ namespace MotorsportSim.General
 {
     internal class ResultsLoader
     {
-        private List<RaceWeekend> results;
-        public ResultsLoader(CareerSave save) 
+        public List<RaceWeekend> LoadResults(CareerSave save, int year) 
         {
-            //results = save.
+            return save.GetSeasonResults(year);
         }
     }
 }

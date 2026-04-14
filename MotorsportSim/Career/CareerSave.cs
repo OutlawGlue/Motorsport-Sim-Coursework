@@ -3,42 +3,38 @@ using System.Linq;
 using MotorsportSim.RaceSim;
 using System.Collections.Generic;
 using MotorsportSim.General;
+using System.Windows.Forms;
 
 namespace MotorsportSim.Career
 {
     public class CareerSave
     {
         private string careerName;
-        private int currentRound;
-        private List<RaceWeekend> schedule;
-        private List<DriverStanding> driverStandings;
+        private List<Season> seasons;
+        private int currentSeasonIndex;
         private int lapCount; // constant across all tracks in career for time saving (set on career creation), easy future update
         private List<Team> teams;
         private int managedTeamIndex;
 
         //Use this constructor when creating a new save, not when loading an existing save
-        public CareerSave(string careerName, int lapCount, List<Team> teams, int managedTeamIndex)
+        public CareerSave(string careerName, int lapCount, List<Team> teams, int managedTeamIndex, int raceCount = 3)
         {
             this.careerName = careerName;
-            currentRound = 0;
-            schedule = new List<RaceWeekend>(); //temp, allow user to choose in future
-            driverStandings = new List<DriverStanding>();
+            seasons = new List<Season>();
+            currentSeasonIndex = 0; //load from text file later
+            
             this.lapCount = lapCount;
             this.teams = teams;
             this.managedTeamIndex = managedTeamIndex;
         }
 
         //Validation should be done when career is set up, so no setters needed here
+
+        //All constant data for file writing: (ie stored in save, not season)
         public string CareerName
         {
             get { return careerName; }
             set { careerName = value; }
-        }
-
-        public int CurrentRound
-        {
-            get { return currentRound; }
-            set { currentRound = value; }
         }
 
         public int LapCount
@@ -60,34 +56,30 @@ namespace MotorsportSim.Career
             set { managedTeamIndex = value; }
         }
 
-        public List<RaceWeekend> Schedule
+        public List<Season> Seasons
         {
-            get { return schedule; }
-        }
-
-        public List<DriverStanding> DriverStandings
-        {
-            get { return driverStandings; }
-            set { driverStandings = value; }
+            get { return seasons; }
         }
 
         public void AddResult(RaceWeekend raceWeekend)
         {
-            schedule.Add(raceWeekend);
+            seasons[currentSeasonIndex].Schedule.Add(raceWeekend);
             CalculateStandings(raceWeekend);
             //Add code to update driverstandings
         }
 
         public void InitialiseStandings()
         {
-            if (DriverStandings != null && DriverStandings.Count > 0)
+            List<DriverStanding> tempDS = seasons[currentSeasonIndex].DriverStandings;
+
+            if (tempDS != null && tempDS.Count > 0)
                 return;
 
             foreach (Team team in Teams)
             {
                 foreach (Driver driver in team.Drivers)
                 {
-                    DriverStandings.Add(
+                    tempDS.Add(
                         new DriverStanding(driver.Number, 0));
                 }
             }
@@ -97,17 +89,69 @@ namespace MotorsportSim.Career
         {
             int[] pointsTable = { 25, 18, 15, 12, 10, 8, 6, 4, 2, 1 };
 
+            Season currentSeason = seasons[currentSeasonIndex];
+
             foreach (DriverResult result in raceWeekend.Result)
             {
                 int pos = result.Position;
 
-                int points = pointsTable[pos - 1];
+                //Only award points for top 10:
+                int points = (pos <= pointsTable.Length) ? pointsTable[pos - 1] : 0;
 
-                DriverStanding standing = 
-                    driverStandings.First(d => d.DriverNumber == result.DriverNumber);
+                DriverStanding tempStanding = currentSeason.DriverStandings
+                    .FirstOrDefault(d => d.DriverNumber == result.DriverNumber);
 
-                standing.Points += points;
+                //If no driver:
+                if (tempStanding == null)
+                {
+                    MsgBox.ShowError("Null Driver", "There was no driver standing found.");
+                    continue;
+                }
+
+                tempStanding.Points += points;
             }
+        }
+
+        public void StartSeason()
+        {
+            //Prevent duplicate empty seasons issue:
+            if (seasons.Count > 0 && seasons.Last().CurrentRound == 0)
+                return;
+
+            int nextYear = (seasons.Count > 0) ? seasons.Last().Year + 1 : 1;
+
+            Season newSeason = new Season(nextYear);
+
+            seasons.Add(newSeason);
+            currentSeasonIndex = seasons.Count - 1;
+        }
+
+        public List<RaceWeekend> GetSeasonResults(int year)
+        {
+            try
+            {
+                return seasons[year].Schedule;
+            }
+            catch (Exception)
+            {
+                MsgBox.ShowError("Season Not Found", $"Season {year} not found.");
+                return null;
+            }
+        }
+
+        public int GetCurrentRound()
+        {
+            return seasons[currentSeasonIndex].CurrentRound;
+        }
+
+        public void NextRound()
+        {
+            seasons[currentSeasonIndex].CurrentRound++;
+        }
+
+        public List<DriverStanding> GetDriverStandings()
+        {
+            return seasons[currentSeasonIndex].DriverStandings;
         }
     }
 }

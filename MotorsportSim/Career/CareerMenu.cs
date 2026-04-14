@@ -48,7 +48,7 @@ namespace MotorsportSim.Career
         {
             //Load into next race:
             TrackLoader loader = new TrackLoader();
-            Track nextTrack = loader.LoadTrack(save.CurrentRound);
+            Track nextTrack = loader.LoadTrack(save.GetCurrentRound());
 
             RaceConfig settings = new RaceConfig(nextTrack, save.LapCount, save.ManagedTeamIndex, save.Teams);
 
@@ -58,7 +58,7 @@ namespace MotorsportSim.Career
 
             this.Show();
 
-            save.CurrentRound++;
+            save.NextRound();
             PopulateTables();
             UpdateSaveFile();
             //Code saving everything from race, and being able to continue in your career.
@@ -72,13 +72,13 @@ namespace MotorsportSim.Career
 
         private void PopulateTables()
         {
-            if (save.DriverStandings == null)
+            if (save.GetDriverStandings() == null)
                 return;
 
             //Drivers:
             Dgv_drivers.Rows.Clear();
 
-            foreach (DriverStanding standing in save.DriverStandings.OrderByDescending(s => s.Points))
+            foreach (DriverStanding standing in save.GetDriverStandings().OrderByDescending(s => s.Points))
             {
                 Driver driver = save.Teams
                     .SelectMany(t => t.Drivers)
@@ -99,7 +99,7 @@ namespace MotorsportSim.Career
 
                 foreach (Driver driver in team.Drivers)
                 {
-                    DriverStanding standing = save.DriverStandings
+                    DriverStanding standing = save.GetDriverStandings()
                         .FirstOrDefault(s => s.DriverNumber == driver.Number);
 
                     if (standing != null)
