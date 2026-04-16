@@ -33,8 +33,10 @@
             this.Btn_nextRace = new System.Windows.Forms.Button();
             this.Btn_back = new System.Windows.Forms.Button();
             this.Btn_results = new System.Windows.Forms.Button();
+            this.Pbx_nextRace = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.Dgv_drivers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Dgv_constructors)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Pbx_nextRace)).BeginInit();
             this.SuspendLayout();
             // 
             // Dgv_drivers
@@ -63,7 +65,7 @@
             this.Btn_nextRace.Name = "Btn_nextRace";
             this.Btn_nextRace.Size = new System.Drawing.Size(400, 300);
             this.Btn_nextRace.TabIndex = 2;
-            this.Btn_nextRace.Text = "Next Race";
+            this.Btn_nextRace.Text = "Next Race:";
             this.Btn_nextRace.UseVisualStyleBackColor = true;
             this.Btn_nextRace.Click += new System.EventHandler(this.Btn_nextRace_Click);
             // 
@@ -87,11 +89,22 @@
             this.Btn_results.UseVisualStyleBackColor = true;
             this.Btn_results.Click += new System.EventHandler(this.Btn_results_Click);
             // 
+            // Pbx_nextRace
+            // 
+            this.Pbx_nextRace.BackgroundImage = global::MotorsportSim.Properties.Resources.Monaco;
+            this.Pbx_nextRace.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.Pbx_nextRace.Location = new System.Drawing.Point(475, 50);
+            this.Pbx_nextRace.Name = "Pbx_nextRace";
+            this.Pbx_nextRace.Size = new System.Drawing.Size(400, 300);
+            this.Pbx_nextRace.TabIndex = 5;
+            this.Pbx_nextRace.TabStop = false;
+            // 
             // CareerMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1378, 744);
+            this.Controls.Add(this.Pbx_nextRace);
             this.Controls.Add(this.Btn_results);
             this.Controls.Add(this.Btn_back);
             this.Controls.Add(this.Btn_nextRace);
@@ -101,6 +114,7 @@
             this.Text = "CareerMenu";
             ((System.ComponentModel.ISupportInitialize)(this.Dgv_drivers)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Dgv_constructors)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Pbx_nextRace)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -112,5 +126,6 @@
         private System.Windows.Forms.Button Btn_nextRace;
         private System.Windows.Forms.Button Btn_back;
         private System.Windows.Forms.Button Btn_results;
+        private System.Windows.Forms.PictureBox Pbx_nextRace;
     }
 }

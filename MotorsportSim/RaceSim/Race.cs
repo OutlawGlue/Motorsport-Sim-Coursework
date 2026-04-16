@@ -170,6 +170,7 @@ namespace MotorsportSim.RaceSim
                     //Add the results to the save:
                     RaceWeekend raceWeekend = new RaceWeekend(trackIndex, true, allDriverResults);
                     save.AddResult(raceWeekend);
+                    save.NextRound();
                 }
                 else
                 {

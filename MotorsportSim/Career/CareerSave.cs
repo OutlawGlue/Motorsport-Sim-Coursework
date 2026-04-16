@@ -63,7 +63,7 @@ namespace MotorsportSim.Career
 
         public void AddResult(RaceWeekend raceWeekend)
         {
-            seasons[currentSeasonIndex].Schedule.Add(raceWeekend);
+            seasons[currentSeasonIndex].UpdateSchedule(raceWeekend);
             CalculateStandings(raceWeekend);
             //Add code to update driverstandings
         }
@@ -120,7 +120,7 @@ namespace MotorsportSim.Career
 
             int nextYear = (seasons.Count > 0) ? seasons.Last().Year + 1 : 1;
 
-            Season newSeason = new Season(nextYear);
+            Season newSeason = new Season(nextYear, 3); //TEMP HARDCODE
 
             seasons.Add(newSeason);
             currentSeasonIndex = seasons.Count - 1;
@@ -152,6 +152,12 @@ namespace MotorsportSim.Career
         public List<DriverStanding> GetDriverStandings()
         {
             return seasons[currentSeasonIndex].DriverStandings;
+        }
+
+        public string GetNextRaceName()
+        {
+            Season season = seasons[currentSeasonIndex];
+            return season.Schedule[season.CurrentRound].TrackName;
         }
     }
 }

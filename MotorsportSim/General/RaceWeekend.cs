@@ -19,7 +19,7 @@ namespace MotorsportSim.General
         private List<DriverResult> result;
 
         //For completed races, when loading in from text file.
-        public RaceWeekend(int trackIndex, bool isCompleted, List<DriverResult> result)
+        public RaceWeekend(int trackIndex, bool isCompleted, List<DriverResult> result = null)
         {
             this.trackIndex = trackIndex;
             this.isCompleted = isCompleted;
@@ -27,10 +27,6 @@ namespace MotorsportSim.General
             if (isCompleted)
             {
                 this.result = result;
-            }
-            else
-            {
-                this.result = null;
             }
 
             string[] tracks = Directory.GetFiles("Tracks");

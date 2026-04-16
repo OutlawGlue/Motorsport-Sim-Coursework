@@ -12,22 +12,15 @@ namespace MotorsportSim.Career
     public class SaveManager
     {
         private string folderPath;
-        private string username;
 
         public SaveManager(string username) 
         {
-            GetUserFolder(username);
-        }
-
-        public string Username
-        {
-            get { return username; }
+             folderPath = GetUserFolder(username);
         }
 
         private string GetUserFolder(string username)
         {
-            folderPath = Path.Combine("Users", username);
-            return folderPath;
+            return Path.Combine("Users", username);
         }
 
         public void SaveLocationAvailable(bool createNew)
@@ -43,7 +36,7 @@ namespace MotorsportSim.Career
                     catch
                     {
                         MsgBox.ShowError("Save Folder Error",
-                            "A file with the name 'GameSaves' already exists.");
+                            "A file for the user already exists.");
                         return;
                     }
 

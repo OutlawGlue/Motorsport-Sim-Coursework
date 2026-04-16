@@ -15,7 +15,6 @@ namespace MotorsportSim.RaceSim
         private readonly double minWater;
         private readonly double maxWater;
         private float wear = 0f;
-        private int temperature; //Current temperature of the tyre.
 
         public Tyre(char compound, double maxGrip, float wearRate, double minWater, double maxWater)
         {

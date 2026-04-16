@@ -3,6 +3,7 @@ using MotorsportSim.RaceSim;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace MotorsportSim.Career
 {
@@ -42,7 +43,7 @@ namespace MotorsportSim.Career
 
             //Load data into dgv's:
             PopulateTables();
-            
+            LoadNextTrack();
         }
 
         private void Btn_nextRace_Click(object sender, System.EventArgs e)
@@ -62,7 +63,6 @@ namespace MotorsportSim.Career
             save.NextRound();
             PopulateTables();
             UpdateSaveFile();
-            //Code saving everything from race, and being able to continue in your career.
         }
 
         private void UpdateSaveFile()
@@ -116,6 +116,14 @@ namespace MotorsportSim.Career
             {
                 Dgv_constructors.Rows.Add(team.Key, team.Value);
             }
+        }
+
+        private void LoadNextTrack()
+        {
+            string nextRace = save.GetNextRaceName();
+            Btn_nextRace.Text = $"Next Race:\n{nextRace}";
+
+            Pbx_nextRace.BackgroundImage = Image.FromFile($"TrackImages/{nextRace}.png");
         }
 
         private void Btn_back_Click(object sender, System.EventArgs e)

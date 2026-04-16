@@ -60,8 +60,6 @@
     <Compile Include="General\RaceWeekend.cs" />
     <Compile Include="Career\BasicTeam.cs" />
     <Compile Include="Menus\PasswordHasher.cs" />
-    <Compile Include="RaceSim\CarParts\CarPart.cs" />
-    <Compile Include="RaceSim\CarParts\Engine.cs" />
     <Compile Include="General\ITeamLoader.cs" />
     <Compile Include="General\TextFileTeamLoader.cs" />
     <Compile Include="RaceSim\Driver.cs" />
