@@ -7,8 +7,6 @@ namespace MotorsportSim.RaceSim
     public class Car
     {
         //Constant attributes:
-        private readonly List<Vector> waypoints;
-
         private readonly Track track;
         private readonly Color colour;
         private readonly int driverNumber;
@@ -16,8 +14,11 @@ namespace MotorsportSim.RaceSim
         private readonly float topSpeed = 70f;
         private readonly float acceleration = 10f;
         private readonly float deceleration = 20f;
+        private bool isAI = true;
 
         //Dynamic attributes:
+        private List<Vector> waypoints;
+
         private Vector position;
 
         private Vector velocity;
@@ -32,10 +33,24 @@ namespace MotorsportSim.RaceSim
         private bool reachedStartLine = true;
         private Tyre currentTyre;
 
+        private Tyre nextTyre;
+        private CarState state = CarState.Racing;
+
+        private float pitTimer = 0f;
+        private const float PIT_DURATION = 3f;
+
+        private static Random rng = new Random();
+
         //Move variables used in multiple methods to here, rather than passing between methods
 
         //Event used to notify race when lap changes
         public event Action<Car, int> LapChanged;
+
+        //Driving states:
+        public enum CarState
+        {
+            Racing, Pitting, InPits, PitStop, LeavingPits
+        }
 
         public Car(Vector startPosition, Color colour, int driverNumber, string driverName, Track track)
         {
@@ -46,7 +61,7 @@ namespace MotorsportSim.RaceSim
             this.track = track;
 
             velocity = new Vector(0, 0);
-            waypoints = this.track.Waypoints;
+            waypoints = this.track.MainWaypoints;
         }
 
         //Getters and setters:
@@ -78,21 +93,75 @@ namespace MotorsportSim.RaceSim
             set { lapTimes = value; }
         }
 
+        public bool IsAI
+        {
+            set { isAI = value; }
+        }
+
+        public CarState State
+        {
+            get { return state; }
+        }
+
         //Methods:
         public void Update(float raceTime, float deltaT, float simSpeed)
         {
+            switch (state)
+            {
+                case CarState.Racing:
+                    waypoints = track.MainWaypoints;
+
+                    if (isAI) // however you track this
+                    {
+                        TryAIPit(3);
+                    }
+
+                    CheckPitEntry();
+                    break;
+
+                case CarState.Pitting:
+                    //waypoints = track.PitWaypoints;
+                    CheckPitEntry();
+                    break;
+
+                case CarState.InPits:
+                    waypoints = track.PitWaypoints;
+                    CheckForPitBox();  
+                    break;
+
+                case CarState.PitStop:
+                    HandlePitStop(deltaT); 
+                    return; // stop movement while stationary
+
+                case CarState.LeavingPits:
+                    waypoints = track.MainWaypoints;
+
+                    if (Vector.Distance(position, track.PitExit) < 5f)
+                    {
+                        state = CarState.Racing;
+                        currentWaypointIndex = 0;
+                    }
+                    break;
+            }
+
             Move(raceTime, deltaT, simSpeed);
             currentLap += deltaT;
         }
 
         public void Move(float raceTime, float deltaT, float simSpeed)
         {
+            if (waypoints == null || waypoints.Count == 0)
+                return;
+
+            if (currentWaypointIndex < 0 || currentWaypointIndex >= waypoints.Count)
+                currentWaypointIndex = 0;
+
             Vector target = waypoints[currentWaypointIndex];
             Vector distance = target - position;
             cornerDist = distance.GetMagnitude();
 
             Vector unitDistance = distance.GetUnitVector();
-            velocity = unitDistance * speed; //Currently speed is constant, but will be updated later
+            velocity = unitDistance * speed;
 
             //Check distance to corner, update waypoint if close enough. Remember max speed = 2f
             if (cornerDist < 3f)
@@ -193,6 +262,54 @@ namespace MotorsportSim.RaceSim
             }
         }
 
+        //Pitting logic:
+        private void CheckPitEntry()
+        {
+            if (state == CarState.Pitting && Vector.Distance(position, track.PitEntry) < 5f)
+            {
+                waypoints = track.PitWaypoints;
+                currentWaypointIndex = 0;
+                state = CarState.InPits;
+
+                EnterPits();
+            }
+        }
+
+        public void RequestPit(Tyre nextTyre)
+        {
+            this.nextTyre = nextTyre;
+            state = CarState.Pitting;
+        }
+
+        private void CheckForPitBox()
+        {
+            if (Vector.Distance(position, track.GetPitWayPoint(1)) < 5f)
+            {
+                speed = 0;
+                state = CarState.PitStop;
+            }
+        }
+
+        private void HandlePitStop(float deltaT)
+        {
+            pitTimer += deltaT;
+
+            if (pitTimer >= PIT_DURATION)
+            {
+                ChangeTyre(nextTyre);
+                pitTimer = 0;
+                state = CarState.LeavingPits;
+                lapNumber++;
+            }
+        }
+
+        private void EnterPits()
+        {
+            waypoints = track.PitWaypoints;
+            currentWaypointIndex = 0;
+            state = CarState.InPits;
+        }
+
         public float RaceProgress()
         {
             return (lapNumber * waypoints.Count) + currentWaypointIndex - (cornerDist / 100f);
@@ -220,6 +337,27 @@ namespace MotorsportSim.RaceSim
         {
             double wear = currentTyre.Wear;
             return wear.ToString("P0");
+        }
+
+        public void TryAIPit(int totalLaps)
+        {
+            if (state != CarState.Racing)
+                return;
+
+            // Don’t pit near race end
+            if (lapNumber >= totalLaps - 1)
+                return;
+
+            double wear = currentTyre.Wear;
+
+            // Simple threshold with randomness
+            float threshold = 0.4f + (float)(rng.NextDouble() * 0.1 - 0.05);
+            // ~0.35 to 0.45
+
+            if (wear >= threshold)
+            {
+                RequestPit(new Tyre('M', 0.9, 0.02f * totalLaps, 0.0, 1.0));
+            }
         }
     }
 }

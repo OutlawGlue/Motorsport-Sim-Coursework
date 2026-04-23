@@ -37,11 +37,13 @@
             this.Lbl_driver1timetitle = new System.Windows.Forms.Label();
             this.Lbl_driver1laptime = new System.Windows.Forms.Label();
             this.Pnl_driver1Tyres = new System.Windows.Forms.Panel();
+            this.Btn_driver1pit = new System.Windows.Forms.Button();
             this.Lbl_driver1tyretitle = new System.Windows.Forms.Label();
             this.Lbl_driver1tyrewear = new System.Windows.Forms.Label();
             this.Lbl_driver1name = new System.Windows.Forms.Label();
             this.Pnl_driver2 = new System.Windows.Forms.Panel();
             this.Pnl_driver2Tyres = new System.Windows.Forms.Panel();
+            this.Btn_driver2pit = new System.Windows.Forms.Button();
             this.Lbl_driver2tyretitle = new System.Windows.Forms.Label();
             this.Lbl_driver2tyrewear = new System.Windows.Forms.Label();
             this.Pnl_driver2Time = new System.Windows.Forms.Panel();
@@ -134,6 +136,7 @@
             // 
             // Pnl_driver1Tyres
             // 
+            this.Pnl_driver1Tyres.Controls.Add(this.Btn_driver1pit);
             this.Pnl_driver1Tyres.Controls.Add(this.Lbl_driver1tyretitle);
             this.Pnl_driver1Tyres.Controls.Add(this.Lbl_driver1tyrewear);
             this.Pnl_driver1Tyres.Location = new System.Drawing.Point(202, 30);
@@ -141,19 +144,29 @@
             this.Pnl_driver1Tyres.Size = new System.Drawing.Size(193, 113);
             this.Pnl_driver1Tyres.TabIndex = 10;
             // 
+            // Btn_driver1pit
+            // 
+            this.Btn_driver1pit.Location = new System.Drawing.Point(46, 65);
+            this.Btn_driver1pit.Name = "Btn_driver1pit";
+            this.Btn_driver1pit.Size = new System.Drawing.Size(100, 40);
+            this.Btn_driver1pit.TabIndex = 10;
+            this.Btn_driver1pit.Text = "Pit Stop";
+            this.Btn_driver1pit.UseVisualStyleBackColor = true;
+            this.Btn_driver1pit.Click += new System.EventHandler(this.Btn_driver1pit_Click);
+            // 
             // Lbl_driver1tyretitle
             // 
-            this.Lbl_driver1tyretitle.Location = new System.Drawing.Point(5, 30);
+            this.Lbl_driver1tyretitle.Location = new System.Drawing.Point(30, 30);
             this.Lbl_driver1tyretitle.Name = "Lbl_driver1tyretitle";
-            this.Lbl_driver1tyretitle.Size = new System.Drawing.Size(185, 30);
+            this.Lbl_driver1tyretitle.Size = new System.Drawing.Size(60, 30);
             this.Lbl_driver1tyretitle.TabIndex = 8;
-            this.Lbl_driver1tyretitle.Text = "Current Tyre Wear:";
+            this.Lbl_driver1tyretitle.Text = "Wear:";
             // 
             // Lbl_driver1tyrewear
             // 
-            this.Lbl_driver1tyrewear.Location = new System.Drawing.Point(85, 70);
+            this.Lbl_driver1tyrewear.Location = new System.Drawing.Point(100, 30);
             this.Lbl_driver1tyrewear.Name = "Lbl_driver1tyrewear";
-            this.Lbl_driver1tyrewear.Size = new System.Drawing.Size(50, 30);
+            this.Lbl_driver1tyrewear.Size = new System.Drawing.Size(50, 25);
             this.Lbl_driver1tyrewear.TabIndex = 9;
             this.Lbl_driver1tyrewear.Text = "0%";
             // 
@@ -178,6 +191,7 @@
             // 
             // Pnl_driver2Tyres
             // 
+            this.Pnl_driver2Tyres.Controls.Add(this.Btn_driver2pit);
             this.Pnl_driver2Tyres.Controls.Add(this.Lbl_driver2tyretitle);
             this.Pnl_driver2Tyres.Controls.Add(this.Lbl_driver2tyrewear);
             this.Pnl_driver2Tyres.Location = new System.Drawing.Point(202, 30);
@@ -185,19 +199,29 @@
             this.Pnl_driver2Tyres.Size = new System.Drawing.Size(193, 113);
             this.Pnl_driver2Tyres.TabIndex = 12;
             // 
+            // Btn_driver2pit
+            // 
+            this.Btn_driver2pit.Location = new System.Drawing.Point(46, 65);
+            this.Btn_driver2pit.Name = "Btn_driver2pit";
+            this.Btn_driver2pit.Size = new System.Drawing.Size(100, 40);
+            this.Btn_driver2pit.TabIndex = 11;
+            this.Btn_driver2pit.Text = "Pit Stop";
+            this.Btn_driver2pit.UseVisualStyleBackColor = true;
+            this.Btn_driver2pit.Click += new System.EventHandler(this.Btn_driver2pit_Click);
+            // 
             // Lbl_driver2tyretitle
             // 
-            this.Lbl_driver2tyretitle.Location = new System.Drawing.Point(5, 30);
+            this.Lbl_driver2tyretitle.Location = new System.Drawing.Point(30, 30);
             this.Lbl_driver2tyretitle.Name = "Lbl_driver2tyretitle";
-            this.Lbl_driver2tyretitle.Size = new System.Drawing.Size(185, 30);
+            this.Lbl_driver2tyretitle.Size = new System.Drawing.Size(60, 30);
             this.Lbl_driver2tyretitle.TabIndex = 8;
-            this.Lbl_driver2tyretitle.Text = "Current Tyre Wear:";
+            this.Lbl_driver2tyretitle.Text = "Wear:";
             // 
             // Lbl_driver2tyrewear
             // 
-            this.Lbl_driver2tyrewear.Location = new System.Drawing.Point(85, 70);
+            this.Lbl_driver2tyrewear.Location = new System.Drawing.Point(100, 30);
             this.Lbl_driver2tyrewear.Name = "Lbl_driver2tyrewear";
-            this.Lbl_driver2tyrewear.Size = new System.Drawing.Size(50, 30);
+            this.Lbl_driver2tyrewear.Size = new System.Drawing.Size(50, 25);
             this.Lbl_driver2tyrewear.TabIndex = 9;
             this.Lbl_driver2tyrewear.Text = "0%";
             // 
@@ -292,7 +316,7 @@
             // 
             // Btn_slow
             // 
-            this.Btn_slow.BackgroundImage = global::MotorsportSim.Properties.Resources.slow;
+            this.Btn_slow.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Btn_slow.BackgroundImage")));
             this.Btn_slow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.Btn_slow.FlatAppearance.BorderSize = 0;
             this.Btn_slow.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
@@ -308,7 +332,7 @@
             // 
             // Btn_pause
             // 
-            this.Btn_pause.BackgroundImage = global::MotorsportSim.Properties.Resources.play;
+            this.Btn_pause.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Btn_pause.BackgroundImage")));
             this.Btn_pause.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.Btn_pause.FlatAppearance.BorderSize = 0;
             this.Btn_pause.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
@@ -333,8 +357,7 @@
             // 
             // Pnl_track
             // 
-            this.Pnl_track.BackgroundImage = global::MotorsportSim.Properties.Resources.Monaco;
-            this.Pnl_track.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.Pnl_track.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.Pnl_track.Location = new System.Drawing.Point(250, 20);
             this.Pnl_track.Name = "Pnl_track";
             this.Pnl_track.Size = new System.Drawing.Size(1400, 800);
@@ -400,5 +423,7 @@
         private System.Windows.Forms.Label Lbl_driver2tyretitle;
         private System.Windows.Forms.Label Lbl_driver2tyrewear;
         private System.Windows.Forms.Panel Pnl_raceTime;
+        private System.Windows.Forms.Button Btn_driver1pit;
+        private System.Windows.Forms.Button Btn_driver2pit;
     }
 }

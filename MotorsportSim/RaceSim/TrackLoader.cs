@@ -15,7 +15,9 @@ namespace MotorsportSim.RaceSim
         {
             //Load the track waypoints in:
             Track track = new Track(trackIndex);
-            track.LoadWaypointsFromFile("Tracks/Monaco.txt"); //Later use index.
+            track.LoadWaypointsFromFile("Tracks/Monaco.txt");
+            track.InitialisePit();
+            //Later use index.
 
             return track;
         }

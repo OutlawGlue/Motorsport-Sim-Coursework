@@ -31,10 +31,15 @@ namespace MotorsportSim.RaceSim
             carCount = raceConfig.CarCount;
             lapCount = raceConfig.Laps;
 
+            managedCars[0].IsAI = false;
+            managedCars[1].IsAI = false;
+
             foreach (Car car in cars)
             {
                 car.LapChanged += LapChanged;
             }
+
+            
         }
 
         public Track Track
@@ -44,7 +49,7 @@ namespace MotorsportSim.RaceSim
 
         public List<Vector> Waypoints
         {
-            get { return track.Waypoints; }
+            get { return track.MainWaypoints; }
         }
 
         public List<Car> Cars

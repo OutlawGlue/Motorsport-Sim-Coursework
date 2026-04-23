@@ -47,6 +47,11 @@ namespace MotorsportSim.RaceSim
             return (float)Math.Sqrt(X * X + Y * Y);
         }
 
+        public static float Distance(Vector a, Vector b)
+        {
+            return (a - b).GetMagnitude();
+        }
+
         public Vector GetUnitVector()
         {
             float magnitude = GetMagnitude();
@@ -64,6 +69,15 @@ namespace MotorsportSim.RaceSim
             float angle = (float)Math.Atan2(unitDistance.Y, unitDistance.X);
             Console.WriteLine("Angle to target: " + angle);
             return angle;
+        }
+
+        public Vector GetMean(Vector first, Vector second)
+        {
+            Vector mean = first + second;
+            mean.x /= 2;
+            mean.y /= 2;
+
+            return mean;
         }
     }
 }

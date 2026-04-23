@@ -15,15 +15,15 @@ namespace MotorsportSim.RaceSim.Management
     {
         private int selectedCompound;
         private Car target;
+        private int lapCount;
 
-        public RaceStrategy(Car target)
+        public RaceStrategy(Car target, int lapCount)
         {
             InitializeComponent();
             MenuUI.Form(this);
             MenuUI.HeadingLabel(Lbl_car);
             MenuUI.Panel(Pnl_tyres);
-            //Add all radio buttons, new MenuUI method needed
-            MenuUI.Button(Btn_save);
+            MenuUI.BodyButton(Btn_save);
 
             this.target = target;
 
@@ -32,6 +32,8 @@ namespace MotorsportSim.RaceSim.Management
             Rbtn_hard.CheckedChanged += TyreSelectionChanged;
             Rbtn_inter.CheckedChanged += TyreSelectionChanged;
             Rbtn_wet.CheckedChanged += TyreSelectionChanged;
+
+            Lbl_car.Text = $"{target.DriverName}'s pit call.";
         }
 
         private void TyreSelectionChanged(object sender, EventArgs e)
@@ -43,7 +45,7 @@ namespace MotorsportSim.RaceSim.Management
             }
         }
 
-        private void btn_save_Click(object sender, EventArgs e)
+        private void Btn_save_Click(object sender, EventArgs e)
         {
             char tyreLetter = 'S';
             switch (selectedCompound)
@@ -55,7 +57,9 @@ namespace MotorsportSim.RaceSim.Management
                 case 4: tyreLetter = 'W'; break;
             }
 
-            new StrategyCall(target, 'P', tyreLetter);
+            new StrategyCall(target, 'P', tyreLetter, lapCount, false);
+
+            this.Close();
         }
     }
 }

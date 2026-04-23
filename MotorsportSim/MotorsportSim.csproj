@@ -96,7 +96,7 @@
     <Compile Include="Career\CareerManager.Designer.cs">
       <DependentUpon>CareerManager.cs</DependentUpon>
     </Compile>
-    <Compile Include="General\MenuUI.cs" />
+    <Compile Include="MenuInterfaces\MenuUI.cs" />
     <Compile Include="QuickRace\QuickRaceSetup.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -109,7 +109,7 @@
     <Compile Include="Menus\Register.Designer.cs">
       <DependentUpon>Register.cs</DependentUpon>
     </Compile>
-    <Compile Include="General\MsgBox.cs" />
+    <Compile Include="MenuInterfaces\MsgBox.cs" />
     <Compile Include="Career\SaveManager.cs" />
     <Compile Include="Menus\SignIn.cs">
       <SubType>Form</SubType>
@@ -217,5 +217,9 @@
   <ItemGroup>
     <None Include="bin\Debug\TrackImages\Monaco.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\TrackImages\Spasvg.png" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

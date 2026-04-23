@@ -10,7 +10,8 @@ namespace MotorsportSim.RaceSim
         {
             Track track = config.Track;
 
-            track.LoadWaypointsFromFile("Tracks/Monaco.txt"); //Change to load different tracks later
+            track.LoadWaypointsFromFile("Tracks/Monaco.txt");
+            track.InitialisePit(); //Change to load different tracks later
 
             //Get intitial direction from first two waypoints:
             Vector start = track.GetWaypoint(0);
@@ -34,7 +35,7 @@ namespace MotorsportSim.RaceSim
                     config.Teams[team].Drivers[driver].Name,
                     track);
 
-                    new StrategyCall(tempCar, 'P', 'S'); //Default = start on soft tyres
+                    new StrategyCall(tempCar, 'P', 'S', config.Laps); //Default = start on soft tyres
 
                     cars.Add(tempCar);
                     gridPos++;

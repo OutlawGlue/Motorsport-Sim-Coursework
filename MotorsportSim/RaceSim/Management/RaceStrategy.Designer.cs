@@ -47,7 +47,7 @@
             this.Rbtn_hard.Appearance = System.Windows.Forms.Appearance.Button;
             this.Rbtn_hard.ImageIndex = 2;
             this.Rbtn_hard.ImageList = this.iml_tyres;
-            this.Rbtn_hard.Location = new System.Drawing.Point(600, 25);
+            this.Rbtn_hard.Location = new System.Drawing.Point(550, 25);
             this.Rbtn_hard.Name = "Rbtn_hard";
             this.Rbtn_hard.Size = new System.Drawing.Size(200, 200);
             this.Rbtn_hard.TabIndex = 4;
@@ -69,7 +69,7 @@
             this.Rbtn_inter.Appearance = System.Windows.Forms.Appearance.Button;
             this.Rbtn_inter.ImageIndex = 3;
             this.Rbtn_inter.ImageList = this.iml_tyres;
-            this.Rbtn_inter.Location = new System.Drawing.Point(850, 25);
+            this.Rbtn_inter.Location = new System.Drawing.Point(800, 25);
             this.Rbtn_inter.Name = "Rbtn_inter";
             this.Rbtn_inter.Size = new System.Drawing.Size(200, 200);
             this.Rbtn_inter.TabIndex = 3;
@@ -81,7 +81,7 @@
             this.Rbtn_wet.Appearance = System.Windows.Forms.Appearance.Button;
             this.Rbtn_wet.ImageIndex = 4;
             this.Rbtn_wet.ImageList = this.iml_tyres;
-            this.Rbtn_wet.Location = new System.Drawing.Point(1100, 25);
+            this.Rbtn_wet.Location = new System.Drawing.Point(1050, 25);
             this.Rbtn_wet.Name = "Rbtn_wet";
             this.Rbtn_wet.Size = new System.Drawing.Size(200, 200);
             this.Rbtn_wet.TabIndex = 2;
@@ -93,7 +93,7 @@
             this.Rbtn_medium.Appearance = System.Windows.Forms.Appearance.Button;
             this.Rbtn_medium.ImageIndex = 1;
             this.Rbtn_medium.ImageList = this.iml_tyres;
-            this.Rbtn_medium.Location = new System.Drawing.Point(350, 25);
+            this.Rbtn_medium.Location = new System.Drawing.Point(300, 25);
             this.Rbtn_medium.Name = "Rbtn_medium";
             this.Rbtn_medium.Size = new System.Drawing.Size(200, 200);
             this.Rbtn_medium.TabIndex = 1;
@@ -105,41 +105,40 @@
             this.Rbtn_soft.Appearance = System.Windows.Forms.Appearance.Button;
             this.Rbtn_soft.ImageIndex = 0;
             this.Rbtn_soft.ImageList = this.iml_tyres;
-            this.Rbtn_soft.Location = new System.Drawing.Point(100, 25);
+            this.Rbtn_soft.Location = new System.Drawing.Point(50, 25);
             this.Rbtn_soft.Name = "Rbtn_soft";
             this.Rbtn_soft.Size = new System.Drawing.Size(200, 200);
             this.Rbtn_soft.TabIndex = 0;
             this.Rbtn_soft.TabStop = true;
             this.Rbtn_soft.UseVisualStyleBackColor = true;
             // 
-            // pnl_tyres
+            // Pnl_tyres
             // 
             this.Pnl_tyres.Controls.Add(this.Rbtn_soft);
             this.Pnl_tyres.Controls.Add(this.Rbtn_wet);
             this.Pnl_tyres.Controls.Add(this.Rbtn_inter);
             this.Pnl_tyres.Controls.Add(this.Rbtn_hard);
             this.Pnl_tyres.Controls.Add(this.Rbtn_medium);
-            this.Pnl_tyres.Location = new System.Drawing.Point(0, 200);
-            this.Pnl_tyres.Name = "pnl_tyres";
+            this.Pnl_tyres.Location = new System.Drawing.Point(0, 150);
+            this.Pnl_tyres.Name = "Pnl_tyres";
             this.Pnl_tyres.Size = new System.Drawing.Size(1400, 250);
             this.Pnl_tyres.TabIndex = 5;
             // 
             // Btn_save
             // 
-            this.Btn_save.Location = new System.Drawing.Point(994, 606);
+            this.Btn_save.Location = new System.Drawing.Point(600, 450);
             this.Btn_save.Name = "Btn_save";
-            this.Btn_save.Size = new System.Drawing.Size(75, 37);
+            this.Btn_save.Size = new System.Drawing.Size(100, 40);
             this.Btn_save.TabIndex = 6;
             this.Btn_save.Text = "Save";
             this.Btn_save.UseVisualStyleBackColor = true;
-            this.Btn_save.Click += new System.EventHandler(this.btn_save_Click);
+            this.Btn_save.Click += new System.EventHandler(this.Btn_save_Click);
             // 
-            // lbl_car
+            // Lbl_car
             // 
-            this.Lbl_car.AutoSize = true;
-            this.Lbl_car.Location = new System.Drawing.Point(96, 94);
-            this.Lbl_car.Name = "lbl_car";
-            this.Lbl_car.Size = new System.Drawing.Size(38, 20);
+            this.Lbl_car.Location = new System.Drawing.Point(100, 100);
+            this.Lbl_car.Name = "Lbl_car";
+            this.Lbl_car.Size = new System.Drawing.Size(300, 30);
             this.Lbl_car.TabIndex = 7;
             this.Lbl_car.Text = "Car ";
             // 
@@ -148,7 +147,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1378, 744);
+            this.ClientSize = new System.Drawing.Size(1298, 544);
             this.Controls.Add(this.Lbl_car);
             this.Controls.Add(this.Btn_save);
             this.Controls.Add(this.Pnl_tyres);
@@ -156,7 +155,6 @@
             this.Text = "Race Strategy";
             this.Pnl_tyres.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

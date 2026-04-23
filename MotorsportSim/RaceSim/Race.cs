@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using MotorsportSim.Career;
 using System.Linq;
+using MotorsportSim.RaceSim.Management;
 
 namespace MotorsportSim.RaceSim
 {
@@ -67,10 +68,13 @@ namespace MotorsportSim.RaceSim
             MenuUI.Button(Btn_slow);
             MenuUI.Button(Btn_fast);
 
-            EnableDoubleBuffering(Pnl_track);
-            Pnl_track.Paint += Pnl_track_Paint;
+            MenuUI.BodyButton(Btn_driver1pit);
+            MenuUI.BodyButton(Btn_driver2pit);
 
-            //TEMP: for drawing waypoints. Remove later.
+            EnableDoubleBuffering(Pnl_track);
+            Pnl_track.Paint += Pnl_track_Paint; //COMMENT FOR WAYPOINTS
+
+            //TEMP: FOR WAYPOINTS
             //Pnl_track.MouseClick += Pnl_track_MouseClick;
 
             //Setup data grid view:
@@ -84,8 +88,10 @@ namespace MotorsportSim.RaceSim
 
             this.save = save;
             this.trackIndex = raceConfig.Track.Index;
+
             CreateSimulation(raceConfig);
-            SetupTimers();
+            SetupTimers(); //COMMENT FOR WAYPOINTS
+            LoadNextTrack(raceConfig.Track);
         }
 
         private void CreateSimulation(RaceConfig raceConfig)
@@ -114,6 +120,11 @@ namespace MotorsportSim.RaceSim
             LapChanged(raceSim.CurrentLap);
         }
 
+        private void LoadNextTrack(Track track)
+        {
+            Pnl_track.BackgroundImage = Image.FromFile(track.ImagePath); // already a full path
+        }
+
         private void TimerTick(object sender, EventArgs e)
         {
             long currentTime = simWatch.ElapsedMilliseconds;
@@ -138,9 +149,13 @@ namespace MotorsportSim.RaceSim
                 Dgv_standings.Rows.Add(i + 1, sortedCars[i].DriverNumber);
             }
 
-            //Get tyre wear:
+            //Update managed cars info:
             Lbl_driver1tyrewear.Text = raceSim.ManagedCars[0].GetFormattedTyreWear();
             Lbl_driver2tyrewear.Text = raceSim.ManagedCars[1].GetFormattedTyreWear();
+
+            UpdatePitButton(Btn_driver1pit, raceSim.ManagedCars[0]);
+            UpdatePitButton(Btn_driver2pit, raceSim.ManagedCars[1]);
+        
 
             //Stop condition:
             if (raceSim.RaceFinished())
@@ -209,11 +224,13 @@ namespace MotorsportSim.RaceSim
             if (raceSim.IsPaused)
             {
                 raceSim.Resume();
+                leaderboardTimer.Start();
                 Btn_pause.BackgroundImage = Properties.Resources.play;
             }
             else
             {
                 raceSim.Pause();
+                leaderboardTimer.Stop();
                 Btn_pause.BackgroundImage = Properties.Resources.pause;
             }
         }
@@ -227,6 +244,7 @@ namespace MotorsportSim.RaceSim
                 .SetValue(pnl, true, null);
         }
 
+        //TEMPORARY WHILE GETTING WAYPOINTS, COMMENT
         private void Pnl_track_Paint(object sender, PaintEventArgs e)
         {
             //base.OnPaint(e);
@@ -243,6 +261,7 @@ namespace MotorsportSim.RaceSim
             }
         }
 
+        //FOR ADDING WAYPOINTS:
         //private void Pnl_track_MouseClick(object sender, MouseEventArgs e)
         //{
         //    editorWaypoints.Add(new Vector(e.X, e.Y));
@@ -263,7 +282,7 @@ namespace MotorsportSim.RaceSim
         //TEMPORRARY
         private void button1_Click(object sender, EventArgs e)
         {
-            SaveWaypoints("Monaco-wp.txt");
+            SaveWaypoints("Spa-wp.txt");
         }
 
         private void Btn_fast_Click(object sender, EventArgs e)
@@ -286,5 +305,54 @@ namespace MotorsportSim.RaceSim
             Lbl_speed.Text = speeds[speedIndex].ToString() + "x";
         }
 
+        private void Btn_driver1pit_Click(object sender, EventArgs e)
+        {
+            Car car = raceSim.ManagedCars[0];
+
+            if (car.State == Car.CarState.Racing)
+            {
+                PitStop(car);
+                UpdatePitButton(Btn_driver1pit, car);
+            }
+        }
+
+        private void Btn_driver2pit_Click(object sender, EventArgs e)
+        {
+            //Bring up menu for pitting driver 2
+            PitStop(raceSim.ManagedCars[1]);
+        }
+
+        private void PitStop(Car car)
+        {
+            raceSim.Pause();
+            leaderboardTimer.Stop();
+
+            RaceStrategy strategy = new RaceStrategy(car, raceSim.LapCount);
+            strategy.Show();
+
+            raceSim.Resume();
+            leaderboardTimer.Start();
+        }
+
+        private void UpdatePitButton(Button btn, Car car)
+        {
+            switch (car.State)
+            {
+                case Car.CarState.Racing:
+                    btn.Text = "Pit";
+                    btn.Enabled = true;
+                    MenuUI.BodyButton(btn);
+                    break;
+
+                case Car.CarState.Pitting:
+                case Car.CarState.InPits:
+                case Car.CarState.PitStop:
+                case Car.CarState.LeavingPits:
+                    btn.Text = "Pitting...";
+                    btn.Enabled = false;
+                    MenuUI.Button(btn);
+                    break;
+            }
+        }
     }
 }
