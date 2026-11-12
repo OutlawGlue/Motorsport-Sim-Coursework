@@ -7,8 +7,3 @@ A simplified motorsport management game where you control a team across a season
 - Drivers & Constructors championships
 - Multi-season progression
 - Simple, accessible design
-
-## Status
-In development (A-Level coursework).
-
-When completed, I will upload my writeup document and improve this README.
